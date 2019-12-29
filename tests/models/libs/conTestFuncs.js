@@ -45,6 +45,7 @@ const checkModelAssociations = (testedModel, associationModelPairsArray) => {
 }
 
 const checkModelCRUD = (Model, createOptions) => {
+  createOptions = createOptions || {}
   context('action', () => {
     let data = null
 
