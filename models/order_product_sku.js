@@ -1,6 +1,12 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   const Order_product_sku = sequelize.define('Order_product_sku', {
+    id: {
+      allowNull: false,
+      autoIncrement: true,
+      primaryKey: true,
+      type: DataTypes.INTEGER
+    },
     quantity: DataTypes.INTEGER,
     orderId: {
       type: DataTypes.INTEGER,
