@@ -8,7 +8,13 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      name: {
+      main_category: {
+        type: Sequelize.STRING
+      },
+      sub_category: {
+        type: Sequelize.STRING
+      },
+      sub_sub_category: {
         type: Sequelize.STRING
       },
       created_at: {

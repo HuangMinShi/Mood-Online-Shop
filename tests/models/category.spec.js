@@ -11,7 +11,9 @@ const {
 } = require('./libs/conTestFuncs')
 
 const properties = [
-  'name',
+  'mainCategory',
+  'subCategory',
+  'subSubCategory'
 ]
 const associations = [
   ['hasMany', 'Product']
