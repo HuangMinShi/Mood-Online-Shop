@@ -22,7 +22,7 @@ const properties = [
   'role'
 ]
 const associations = [
-  ['belongsToMany', 'Product_sku'],
+  ['belongsToMany', 'ProductSku'],
   ['hasMany', 'Order']
 ]
 const createOptions = {

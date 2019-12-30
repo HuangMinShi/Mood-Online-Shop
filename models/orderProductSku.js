@@ -1,6 +1,6 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
-  const Cart_product_sku = sequelize.define('Cart_product_sku', {
+  const OrderProductSku = sequelize.define('OrderProductSku', {
     id: {
       allowNull: false,
       autoIncrement: true,
@@ -8,23 +8,23 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER
     },
     quantity: DataTypes.INTEGER,
-    userId: {
+    orderId: {
       type: DataTypes.INTEGER,
       references: {
-        model: 'Users',
+        model: 'Orders',
         key: 'id'
       }
     },
-    product_skuId: {
+    productSkuId: {
       type: DataTypes.INTEGER,
       references: {
-        model: 'Product_skus',
+        model: 'ProductSkus',
         key: 'id'
       }
     },
   }, {});
-  Cart_product_sku.associate = function (models) {
-
+  OrderProductSku.associate = function (models) {
+    // associations can be defined here
   };
-  return Cart_product_sku;
+  return OrderProductSku;
 };

@@ -14,24 +14,24 @@ const properties = [
   'sn',
   'status',
   'amount',
-  'order_name',
-  'order_address',
-  'order_email',
-  'order_phone',
+  'orderName',
+  'orderAddress',
+  'orderEmail',
+  'orderPhone',
   'invoice',
   'note',
-  'receive_name',
-  'receive_address',
-  'receive_email',
-  'receive_phone',
+  'receiveName',
+  'receiveAddress',
+  'receiveEmail',
+  'receivePhone',
   'userId',
-  'shipping_methodId'
+  'shippingMethodId'
 ]
 const associations = [
-  ['belongsToMany', 'Product_sku'],
+  ['belongsToMany', 'ProductSku'],
   ['belongsTo', 'User'],
-  ['hasMany', 'Payment_log'],
-  ['belongsTo', 'Shipping_method']
+  ['hasMany', 'PaymentLog'],
+  ['belongsTo', 'ShippingMethod']
 ]
 
 describe('# Order Model', () => {

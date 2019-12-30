@@ -18,10 +18,10 @@ const properties = [
 const associations = [
   ['belongsTo', 'Category'],
   ['hasMany', 'Image'],
-  ['hasMany', 'Product_sku']
+  ['hasMany', 'ProductSku']
 ]
 
-describe('# Category Model', () => {
+describe('# Product Model', () => {
   compareModelName(ProductModel, 'Product')
   checkModelProperties(ProductModel, properties)
   checkModelAssociations(ProductModel, associations)

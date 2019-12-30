@@ -1,10 +1,10 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
-  const Payment_log = sequelize.define('Payment_log', {
+  const PaymentLog = sequelize.define('PaymentLog', {
     params: DataTypes.STRING,
     method: DataTypes.STRING,
     status: DataTypes.STRING,
-    paid_at: DataTypes.DATE,
+    paidAt: DataTypes.DATE,
     amount: DataTypes.FLOAT,
     orderId: {
       type: DataTypes.INTEGER,
@@ -14,8 +14,8 @@ module.exports = (sequelize, DataTypes) => {
       }
     },
   }, {});
-  Payment_log.associate = function (models) {
-    Payment_log.belongsTo(models.Order)
+  PaymentLog.associate = function (models) {
+    PaymentLog.belongsTo(models.Order)
   };
-  return Payment_log;
+  return PaymentLog;
 };

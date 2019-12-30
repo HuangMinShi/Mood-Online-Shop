@@ -17,7 +17,7 @@ module.exports = (sequelize, DataTypes) => {
   Product.associate = function (models) {
     Product.belongsTo(models.Category)
     Product.hasMany(models.Image, { onDelete: 'cascade', hooks: true })
-    Product.hasMany(models.Product_sku, { onDelete: 'cascade', hooks: true })
+    Product.hasMany(models.ProductSku, { onDelete: 'cascade', hooks: true })
   };
   return Product;
 };

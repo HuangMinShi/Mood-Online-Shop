@@ -1,12 +1,12 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
-  const Product_sku_attribute = sequelize.define('Product_sku_attribute', {
+  const ProductSkuAttribute = sequelize.define('ProductSkuAttribute', {
     attribute: DataTypes.STRING,
     value: DataTypes.STRING,
-    product_skuId: {
+    productSkuId: {
       type: DataTypes.INTEGER,
       references: {
-        model: 'Product_skus',
+        model: 'ProductSkus',
         key: 'id'
       },
       onUpdate: 'cascade',
@@ -14,8 +14,8 @@ module.exports = (sequelize, DataTypes) => {
     }
   }, {});
 
-  Product_sku_attribute.associate = function (models) {
-    Product_sku_attribute.belongsTo(models.Product_sku)
+  ProductSkuAttribute.associate = function (models) {
+    ProductSkuAttribute.belongsTo(models.ProductSku)
   };
-  return Product_sku_attribute;
+  return ProductSkuAttribute;
 };

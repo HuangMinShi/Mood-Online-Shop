@@ -1,7 +1,7 @@
 process.env.NODE_ENV = 'test'
 
-const { Product_sku_attribute } = require('../../models')
-const ProductSkuAttributeModel = require('../../models/product_sku_attribute')
+const { ProductSkuAttribute } = require('../../models')
+const ProductSkuAttributeModel = require('../../models/productSkuAttribute')
 
 const {
   checkModelAssociations,
@@ -13,15 +13,15 @@ const {
 const properties = [
   'attribute',
   'value',
-  'product_skuId'
+  'productSkuId'
 ]
 const associations = [
-  ['belongsTo', 'Product_sku']
+  ['belongsTo', 'ProductSku']
 ]
 
-describe('# product_sku_attribute Model', () => {
-  compareModelName(ProductSkuAttributeModel, 'Product_sku_attribute')
+describe('# ProductSkuAttribute Model', () => {
+  compareModelName(ProductSkuAttributeModel, 'ProductSkuAttribute')
   checkModelProperties(ProductSkuAttributeModel, properties)
   checkModelAssociations(ProductSkuAttributeModel, associations)
-  checkModelCRUD(Product_sku_attribute)
+  checkModelCRUD(ProductSkuAttribute)
 })
