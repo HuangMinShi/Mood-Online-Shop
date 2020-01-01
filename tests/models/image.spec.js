@@ -12,6 +12,7 @@ const {
 
 const properties = [
   'url',
+  'color',
   'productId'
 ]
 const associations = [
