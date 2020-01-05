@@ -9,7 +9,7 @@ const vaildator = {
   vaildateInput: (req, res, next) => {
     const errors = []
 
-    //  去除欄位多於空白
+    //  去除欄位多餘空白
     const inputs = trimInputValues(req.body)
     const {
       requiredFields,

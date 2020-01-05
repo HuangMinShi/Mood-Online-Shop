@@ -31,7 +31,7 @@ const checkInput = {
     input = input || ''
     const messages = {
       hasEmptyFields: `${input} 是必填欄位，請確認`,
-      isEmailValid: 'email 無效，請重新輸入 （e.g. user@mail.com）',
+      isEmailValid: 'email 無效，請重新輸入',
       isPasswordCheckCorrect: '兩次密碼不一致，請重新輸入'
     }
     return {

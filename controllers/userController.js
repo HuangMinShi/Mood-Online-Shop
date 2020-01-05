@@ -44,7 +44,9 @@ const userController = {
   },
 
   signOut: (req, res) => {
-    return res.send('signOut')
+    req.logout()
+    req.flash('successMessage', '成功登出')
+    return res.redirect('/users/signin')
   },
 }
 

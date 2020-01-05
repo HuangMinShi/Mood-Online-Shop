@@ -23,6 +23,7 @@ app.use(session({
 }))
 
 app.use((req, res, next) => {
+  res.locals.successMessage = req.flash('successMessage')
   res.locals.errorMessage = req.flash('errorMessage')
   res.locals.errors = req.flash('errors')
   next()

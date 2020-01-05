@@ -19,4 +19,8 @@ router.post('/signin', userController.signIn)
 router.get('/signout', userController.signOut)
 router.get('*', (req, res) => res.render('404'))
 
+router.get('/signout',
+  userController.signOut
+)
+
 module.exports = router

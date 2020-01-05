@@ -2,5 +2,5 @@ const users = require('./users')
 
 module.exports = app => {
   app.use('/users', users)
-  app.use('/', (req, res) => res.send('home page'))
+  app.use('/', (req, res) => res.send('HOME'))
 }
