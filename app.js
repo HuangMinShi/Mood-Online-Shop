@@ -33,8 +33,13 @@ app.use((req, res, next) => {
   next()
 })
 
-app.listen(port, () => {
-  console.log(`App is running on localhost:${port}, env:${env}`)
-})
+if (env !== 'test') {
+  app.listen(port, () => {
+    console.log(`App is running on localhost:${port}, env:${env}`)
+  })
+}
+
 
 require('./routes')(app)
+
+module.exports = app
