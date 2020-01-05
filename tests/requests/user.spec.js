@@ -99,6 +99,21 @@ describe('# User controller', () => {
           done()
         })
     })
+
+    it('[✗] 失敗，使用者已註冊', done => {
+      request(app)
+        .post('/users/signup')
+        .send('name=name&email=email@mail.com&password=password&passwordCheck=password')
+        .expect(302)
+        .end((err, res) => {
+          if (err) {
+            return done(err)
+          }
+
+          res.text.should.be.contain('/')
+          done()
+        })
+    })
   })
 
   after(async () => {
