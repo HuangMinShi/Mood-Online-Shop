@@ -1,23 +1,30 @@
 const express = require('express')
 const router = express.Router()
 
-const {
-  vaildateInput
-} = require('../middlewares/validator')
+const { vaildateInput } = require('../middlewares/validator')
+const { authenticateCredentials } = require('../middlewares/authenticator')
 
 const userController = require('../controllers/userController')
 
-router.get('/signup', userController.signUpPage)
+/* ======== routes ========== */
+
+router.get('/signup',
+  userController.signUpPage
+)
 
 router.post('/signup',
   vaildateInput,
   userController.signUp
 )
 
-router.get('/signin', userController.signInPage)
-router.post('/signin', userController.signIn)
-router.get('/signout', userController.signOut)
-router.get('*', (req, res) => res.render('404'))
+router.get('/signin',
+  userController.signInPage
+)
+
+router.post('/signin',
+  vaildateInput,
+  authenticateCredentials
+)
 
 router.get('/signout',
   userController.signOut

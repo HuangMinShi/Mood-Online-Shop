@@ -1,0 +1,30 @@
+<form action="/users/signin" method="POST" class="col-md-6 mx-auto">
+  <div class="text-center mb-4">
+    <h1 class="h3 mb-3 font-weight-normal">Sign In</h1>
+  </div>
+
+  <div class="form-label-group mb-2">
+    <label for="email">
+      Email
+      <span class="text-danger">*</span>
+    </label>
+    <input type="text" name="email" class="form-control" placeholder="Email" value="{{options.email}}" autofocus
+      required>
+  </div>
+
+  <div class="form-label-group mb-2">
+    <label for="password">
+      Password
+      <span class="text-danger">*</span>
+    </label>
+    <input type="password" name="password" class="form-control" placeholder="Password" value="{{options.password}}"
+      required>
+  </div>
+  <br />
+
+  <button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
+  <div class="text-center my-4">
+    <p><a href="/users/signup">Sign Up</a></p>
+  </div>
+  <p class="text-muted text-center">© 2019-2020</p>
+</form>

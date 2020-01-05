@@ -25,6 +25,10 @@ const checkInput = {
     if (routePath === '/signup') {
       return checkOptions.signUp
     }
+
+    if (routePath === '/signin') {
+      return checkOptions.signIn
+    }
   },
 
   getErrorMessage: (key, input) => {
@@ -51,6 +55,16 @@ const checkOptions = {
     checkItemRequiredParams: {
       isEmailValid: ['email'],
       isPasswordCheckCorrect: ['password', 'passwordCheck']
+    }
+  },
+
+  signIn: {
+    requiredFields: ['email', 'password'],
+    checkItems: {
+      email: checkInput.isEmailValid
+    },
+    checkItemRequiredParams: {
+      isEmailValid: ['email']
     }
   }
 }

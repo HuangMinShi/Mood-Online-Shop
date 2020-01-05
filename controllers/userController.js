@@ -36,11 +36,7 @@ const userController = {
   },
 
   signInPage: (req, res) => {
-    return res.send('signInPage')
-  },
-
-  signIn: (req, res) => {
-    return res.send('signIn')
+    return res.render('signIn')
   },
 
   signOut: (req, res) => {
