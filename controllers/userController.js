@@ -29,7 +29,7 @@ const userController = {
         password: passwordInHash
       })
 
-      return res.redirect('/users/signIn')
+      return res.redirect('/users/signin')
     } catch (err) {
       console.log(err);
     }
