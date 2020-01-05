@@ -1,7 +1,6 @@
 const bcrypt = require('bcryptjs')
-const {
-  User
-} = require('../models')
+
+const { User } = require('../models')
 
 const userController = {
   signUpPage: (req, res) => {
@@ -11,27 +10,29 @@ const userController = {
   signUp: async (req, res) => {
     const inputs = { ...req.body }
 
-    // 重複註冊 ?
-    const user = await User.findOne({
-      where: {
-        email: inputs.email
+    try {
+      const user = await User.findOne({
+        where: { email: inputs.email }
+      })
+
+      //  重複註冊 ?
+      if (user) {
+        req.flash('errorMessage', 'Email 已註冊')
+        return res.redirect('back')
       }
-    })
 
-    if (user) {
-      req.flash('errorMessage', 'Email 已註冊')
-      return res.redirect('back')
+      //  password 加鹽存入資料庫
+      const salt = await bcrypt.genSalt(10)
+      const passwordInHash = await bcrypt.hash(inputs.password, salt)
+      await User.create({
+        ...inputs,
+        password: passwordInHash
+      })
+
+      return res.redirect('/users/signIn')
+    } catch (err) {
+      console.log(err);
     }
-
-    // password 加鹽存入資料庫
-    const salt = await bcrypt.genSalt(10)
-    const passwordInHash = await bcrypt.hash(inputs.password, salt)
-    await User.create({
-      ...inputs,
-      password: passwordInHash
-    })
-
-    return res.redirect('signIn')
   },
 
   signInPage: (req, res) => {
