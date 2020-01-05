@@ -1,22 +1,25 @@
-<form action="/users/signup" method="POST">
+<form action="/users/signup" method="POST" class="col-md-6 mx-auto">
   <div class="text-center mb-4">
     <h1 class="h3 mb-3 font-weight-normal">Sign Up</h1>
   </div>
-  <div class="form-label-group">
+
+  <div class="form-label-group mb-2">
     <label for="name">
       Name
       <span class="text-danger">*</span>
     </label>
     <input type="text" name="name" class="form-control" placeholder="Name" value="{{options.name}}" autofocus required>
   </div>
-  <div class="form-label-group">
+
+  <div class="form-label-group mb-2">
     <label for="email">
       Email
       <span class="text-danger">*</span>
     </label>
     <input type="text" name="email" class="form-control" placeholder="Email" value="{{options.email}}" required>
   </div>
-  <div class="form-label-group">
+
+  <div class="form-label-group mb-2">
     <label for="password">
       Password
       <span class="text-danger">*</span>
@@ -24,7 +27,8 @@
     <input type="password" name="password" class="form-control" placeholder="Password" value="{{options.password}}"
       required>
   </div>
-  <div class="form-label-group">
+
+  <div class="form-label-group mb-2">
     <label for="passwordCheck">
       Password Check
       <span class="text-danger">*</span>
@@ -32,10 +36,12 @@
     <input type="password" name="passwordCheck" class="form-control" placeholder="Password Check"
       value="{{options.passwordCheck}}" required>
   </div>
+
   <br />
+
   <button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
   <div class="text-center my-4">
-    <p><a href="/signin">Sign In</a></p>
+    <p><a href="/users/signin">Sign In</a></p>
   </div>
-  <p class="mb-3 text-muted text-center">© 2019-2020</p>
+  <p class="text-muted text-center">© 2019-2020</p>
 </form>
