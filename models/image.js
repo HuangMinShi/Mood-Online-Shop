@@ -3,7 +3,7 @@ module.exports = (sequelize, DataTypes) => {
   const Image = sequelize.define('Image', {
     url: DataTypes.STRING,
     color: DataTypes.STRING,
-    productId: {
+    ProductId: {
       type: DataTypes.INTEGER,
       references: {
         model: 'Products',

@@ -14,14 +14,14 @@ module.exports = (sequelize, DataTypes) => {
     receiveAddress: DataTypes.STRING,
     receiveEmail: DataTypes.STRING,
     receivePhone: DataTypes.STRING,
-    userId: {
+    UserId: {
       type: DataTypes.INTEGER,
       references: {
         model: 'Users',
         key: 'id'
       }
     },
-    shippingMethodId: {
+    ShippingMethodId: {
       type: DataTypes.INTEGER,
       references: {
         model: 'ShippingMethods',

@@ -6,7 +6,7 @@ module.exports = (sequelize, DataTypes) => {
     status: DataTypes.STRING,
     paidAt: DataTypes.DATE,
     amount: DataTypes.FLOAT,
-    orderId: {
+    OrderId: {
       type: DataTypes.INTEGER,
       references: {
         model: 'Orders',

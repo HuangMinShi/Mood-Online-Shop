@@ -8,14 +8,14 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER
     },
     quantity: DataTypes.INTEGER,
-    orderId: {
+    OrderId: {
       type: DataTypes.INTEGER,
       references: {
         model: 'Orders',
         key: 'id'
       }
     },
-    productSkuId: {
+    ProductSkuId: {
       type: DataTypes.INTEGER,
       references: {
         model: 'ProductSkus',

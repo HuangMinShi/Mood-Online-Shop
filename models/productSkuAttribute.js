@@ -3,7 +3,7 @@ module.exports = (sequelize, DataTypes) => {
   const ProductSkuAttribute = sequelize.define('ProductSkuAttribute', {
     attribute: DataTypes.STRING,
     value: DataTypes.STRING,
-    productSkuId: {
+    ProductSkuId: {
       type: DataTypes.INTEGER,
       references: {
         model: 'ProductSkus',
