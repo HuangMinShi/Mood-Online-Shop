@@ -1,8 +1,5 @@
 process.env.NODE_ENV = 'test'
 
-const { PaymentLog } = require('../../models')
-const PaymentLogModel = require('../../models/paymentLog')
-
 const {
   checkModelAssociations,
   checkModelProperties,
@@ -10,20 +7,24 @@ const {
   checkModelCRUD
 } = require('./libs/conTestFuncs')
 
+const { PaymentLog } = require('../../models')
+const PaymentLogModel = require('../../models/paymentLog')
+
+const name = 'PaymentLog'
 const properties = [
   'params',
   'method',
   'status',
   'paidAt',
   'amount',
-  'orderId'
+  'OrderId'
 ]
 const associations = [
   ['belongsTo', 'Order']
 ]
 
 describe('# PaymentLog Model', () => {
-  compareModelName(PaymentLogModel, 'PaymentLog')
+  compareModelName(PaymentLogModel, name)
   checkModelProperties(PaymentLogModel, properties)
   checkModelAssociations(PaymentLogModel, associations)
   checkModelCRUD(PaymentLog)

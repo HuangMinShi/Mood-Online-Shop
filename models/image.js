@@ -2,15 +2,13 @@
 module.exports = (sequelize, DataTypes) => {
   const Image = sequelize.define('Image', {
     url: DataTypes.STRING,
-    color: DataTypes.STRING,
+    isMain: DataTypes.BOOLEAN,
     ProductId: {
       type: DataTypes.INTEGER,
       references: {
         model: 'Products',
         key: 'id'
-      },
-      onUpdate: 'cascade',
-      onDelete: 'cascade'
+      }
     }
   }, {});
 

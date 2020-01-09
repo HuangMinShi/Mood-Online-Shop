@@ -1,8 +1,5 @@
 process.env.NODE_ENV = 'test'
 
-const { Category } = require('../../models')
-const CategoryModel = require('../../models/category')
-
 const {
   checkModelAssociations,
   checkModelProperties,
@@ -10,6 +7,10 @@ const {
   checkModelCRUD
 } = require('./libs/conTestFuncs')
 
+const { Category } = require('../../models')
+const CategoryModel = require('../../models/category')
+
+const name = 'Category'
 const properties = [
   'mainCategory',
   'subCategory',
@@ -20,7 +21,7 @@ const associations = [
 ]
 
 describe('# Category Model', () => {
-  compareModelName(CategoryModel, 'Category')
+  compareModelName(CategoryModel, name)
   checkModelProperties(CategoryModel, properties)
   checkModelAssociations(CategoryModel, associations)
   checkModelCRUD(Category)

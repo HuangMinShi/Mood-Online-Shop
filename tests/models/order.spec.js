@@ -1,8 +1,5 @@
 process.env.NODE_ENV = 'test'
 
-const { Order } = require('../../models')
-const OrderModel = require('../../models/order')
-
 const {
   checkModelAssociations,
   checkModelProperties,
@@ -10,6 +7,10 @@ const {
   checkModelCRUD
 } = require('./libs/conTestFuncs')
 
+const { Order } = require('../../models')
+const OrderModel = require('../../models/order')
+
+const name = 'Order'
 const properties = [
   'sn',
   'status',
@@ -24,8 +25,8 @@ const properties = [
   'receiveAddress',
   'receiveEmail',
   'receivePhone',
-  'userId',
-  'shippingMethodId'
+  'UserId',
+  'ShippingMethodId'
 ]
 const associations = [
   ['belongsToMany', 'ProductSku'],
@@ -35,7 +36,7 @@ const associations = [
 ]
 
 describe('# Order Model', () => {
-  compareModelName(OrderModel, 'Order')
+  compareModelName(OrderModel, name)
   checkModelProperties(OrderModel, properties)
   checkModelAssociations(OrderModel, associations)
   checkModelCRUD(Order)

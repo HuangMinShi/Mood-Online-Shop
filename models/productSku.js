@@ -2,9 +2,7 @@
 module.exports = (sequelize, DataTypes) => {
   const ProductSku = sequelize.define('ProductSku', {
     sku: DataTypes.STRING,
-    retailPrice: DataTypes.FLOAT,
-    salePrice: DataTypes.FLOAT,
-    cost: DataTypes.FLOAT,
+    size: DataTypes.STRING,
     stock: DataTypes.INTEGER,
     ProductId: {
       type: DataTypes.INTEGER,
@@ -19,15 +17,14 @@ module.exports = (sequelize, DataTypes) => {
 
   ProductSku.associate = function (models) {
     ProductSku.belongsTo(models.Product)
-    ProductSku.hasMany(models.ProductSkuAttribute, { onDelete: 'cascade', hooks: true })
-    ProductSku.belongsToMany(models.User, {
+    ProductSku.belongsToMany(models.Cart, {
       through: models.CartProductSku,
-      foreignKey: 'productSkuId',
-      as: 'productSkuUsers'
+      foreignKey: 'ProductSkuId',
+      as: 'productSkuCarts'
     })
     ProductSku.belongsToMany(models.Order, {
       through: models.OrderProductSku,
-      foreignKey: 'productSkuId',
+      foreignKey: 'ProductSkuId',
       as: 'productSkuOrders'
     })
   };

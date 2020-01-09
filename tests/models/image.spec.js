@@ -1,8 +1,5 @@
 process.env.NODE_ENV = 'test'
 
-const { Image } = require('../../models')
-const ImageModel = require('../../models/image')
-
 const {
   checkModelAssociations,
   checkModelProperties,
@@ -10,17 +7,21 @@ const {
   checkModelCRUD
 } = require('./libs/conTestFuncs')
 
+const { Image } = require('../../models')
+const ImageModel = require('../../models/image')
+
+const name = 'Image'
 const properties = [
   'url',
-  'color',
-  'productId'
+  'isMain',
+  'ProductId'
 ]
 const associations = [
   ['belongsTo', 'Product']
 ]
 
 describe('# Image Model', () => {
-  compareModelName(ImageModel, 'Image')
+  compareModelName(ImageModel, name)
   checkModelProperties(ImageModel, properties)
   checkModelAssociations(ImageModel, associations)
   checkModelCRUD(Image)

@@ -1,8 +1,5 @@
 process.env.NODE_ENV = 'test'
 
-const { User } = require('../../models')
-const UserModel = require('../../models/user')
-
 const {
   checkModelAssociations,
   checkModelProperties,
@@ -10,6 +7,10 @@ const {
   checkModelCRUD
 } = require('./libs/conTestFuncs')
 
+const { User } = require('../../models')
+const UserModel = require('../../models/user')
+
+const name = 'User'
 const properties = [
   'name',
   'email',
@@ -22,7 +23,6 @@ const properties = [
   'role'
 ]
 const associations = [
-  ['belongsToMany', 'ProductSku'],
   ['hasMany', 'Order']
 ]
 const createOptions = {
@@ -30,7 +30,7 @@ const createOptions = {
 }
 
 describe('# User Model', () => {
-  compareModelName(UserModel, 'User')
+  compareModelName(UserModel, name)
   checkModelProperties(UserModel, properties)
   checkModelAssociations(UserModel, associations)
   checkModelCRUD(User, createOptions)

@@ -1,8 +1,5 @@
 process.env.NODE_ENV = 'test'
 
-const { ShippingMethod } = require('../../models')
-const ShippingMethodModel = require('../../models/shippingMethod')
-
 const {
   checkModelAssociations,
   checkModelProperties,
@@ -10,6 +7,10 @@ const {
   checkModelCRUD
 } = require('./libs/conTestFuncs')
 
+const { ShippingMethod } = require('../../models')
+const ShippingMethodModel = require('../../models/shippingMethod')
+
+const name = 'ShippingMethod'
 const properties = [
   'name',
   'fee'
@@ -19,7 +20,7 @@ const associations = [
 ]
 
 describe('# ShippingMethod Model', () => {
-  compareModelName(ShippingMethodModel, 'ShippingMethod')
+  compareModelName(ShippingMethodModel, name)
   checkModelProperties(ShippingMethodModel, properties)
   checkModelAssociations(ShippingMethodModel, associations)
   checkModelCRUD(ShippingMethod)

@@ -8,10 +8,10 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER
     },
     quantity: DataTypes.INTEGER,
-    UserId: {
+    CartId: {
       type: DataTypes.INTEGER,
       references: {
-        model: 'Users',
+        model: 'Carts',
         key: 'id'
       }
     },

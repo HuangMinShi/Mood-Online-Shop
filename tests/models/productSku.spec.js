@@ -1,8 +1,5 @@
 process.env.NODE_ENV = 'test'
 
-const { ProductSku } = require('../../models')
-const ProductSkuModel = require('../../models/productSku')
-
 const {
   checkModelAssociations,
   checkModelProperties,
@@ -10,23 +7,24 @@ const {
   checkModelCRUD
 } = require('./libs/conTestFuncs')
 
+const { ProductSku } = require('../../models')
+const ProductSkuModel = require('../../models/productSku')
+
+const name = 'ProductSku'
 const properties = [
   'sku',
-  'retailPrice',
-  'salePrice',
-  'cost',
   'stock',
-  'productId'
+  'size',
+  'ProductId'
 ]
 const associations = [
   ['belongsTo', 'Product'],
-  ['hasMany', 'ProductSkuAttribute'],
-  ['belongsToMany', 'User'],
+  ['belongsToMany', 'Cart'],
   ['belongsToMany', 'Order']
 ]
 
 describe('# ProductSku Model', () => {
-  compareModelName(ProductSkuModel, 'ProductSku')
+  compareModelName(ProductSkuModel, name)
   checkModelProperties(ProductSkuModel, properties)
   checkModelAssociations(ProductSkuModel, associations)
   checkModelCRUD(ProductSku)
