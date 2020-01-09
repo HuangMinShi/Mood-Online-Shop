@@ -3,140 +3,106 @@
 const { sequelize } = require('../models')
 const productSkus = [
   {
-    sku: 'TB21',
-    retail_price: 3000.00,
-    sale_price: 2800.00,
-    cost: 2000.00,
+    sku: 'TB20001',
+    size: 'S',
     stock: 1,
     product_id: 1
   },
   {
-    sku: 'TB31',
-    retail_price: 3000.00,
-    sale_price: 2800.00,
-    cost: 2000.00,
+    sku: 'TB30001',
+    size: 'M',
     stock: 2,
     product_id: 1
   },
   {
-    sku: 'GH11',
-    retail_price: 3000.00,
-    sale_price: 2800.00,
-    cost: 2000.00,
+    sku: 'GH10001',
+    size: 'XS',
     stock: 3,
-    product_id: 1
+    product_id: 2
   },
   {
-    sku: 'GH21',
-    retail_price: 3000.00,
-    sale_price: 2800.00,
-    cost: 2000.00,
+    sku: 'GH20001',
+    size: 'S',
     stock: 4,
-    product_id: 1
+    product_id: 2
   },
   {
-    sku: 'GH31',
-    retail_price: 3000.00,
-    sale_price: 2800.00,
-    cost: 2000.00,
+    sku: 'GH30001',
+    size: 'M',
     stock: 5,
-    product_id: 1
+    product_id: 2
   },
   {
-    sku: 'GH41',
-    retail_price: 3000.00,
-    sale_price: 2800.00,
-    cost: 2000.00,
+    sku: 'GH40001',
+    size: 'L',
     stock: 6,
-    product_id: 1
+    product_id: 2
   },
   {
-    sku: 'TB22',
-    retail_price: 4200.00,
-    sale_price: 3900.00,
-    cost: 1800.00,
+    sku: 'TB20002',
+    size: 'S',
     stock: 7,
-    product_id: 2
+    product_id: 3
   },
   {
-    sku: 'GH12',
-    retail_price: 4200.00,
-    sale_price: 3900.00,
-    cost: 1800.00,
+    sku: 'GH10002',
+    size: 'XS',
     stock: 8,
-    product_id: 2
+    product_id: 4
   },
   {
-    sku: 'GH22',
-    retail_price: 4200.00,
-    sale_price: 3900.00,
-    cost: 1800.00,
+    sku: 'GH20002',
+    size: 'S',
     stock: 9,
-    product_id: 2
+    product_id: 4
   },
   {
-    sku: 'GH32',
-    retail_price: 4200.00,
-    sale_price: 3900.00,
-    cost: 1800.00,
+    sku: 'GH30002',
+    size: 'M',
     stock: 10,
-    product_id: 2
+    product_id: 4
   },
   {
-    sku: 'SP13',
-    retail_price: 2850.00,
-    sale_price: 2450.00,
-    cost: 2000.00,
+    sku: 'SP10003',
+    size: 'XS',
     stock: 11,
-    product_id: 3
+    product_id: 5
   },
   {
-    sku: 'SP23',
-    retail_price: 2850.00,
-    sale_price: 2450.00,
-    cost: 2000.00,
+    sku: 'SP20003',
+    size: 'S',
     stock: 12,
-    product_id: 3
+    product_id: 5
   },
   {
-    sku: 'SP33',
-    retail_price: 2850.00,
-    sale_price: 2450.00,
-    cost: 2000.00,
+    sku: 'SP30003',
+    size: 'M',
     stock: 13,
-    product_id: 3
+    product_id: 5
   },
   {
-    sku: 'SP43',
-    retail_price: 2850.00,
-    sale_price: 2450.00,
-    cost: 2000.00,
+    sku: 'SP40003',
+    size: 'L',
     stock: 14,
-    product_id: 3
+    product_id: 5
   },
   {
-    sku: 'OU13',
-    retail_price: 2850.00,
-    sale_price: 2450.00,
-    cost: 2000.00,
+    sku: 'OU10003',
+    size: 'XS',
     stock: 15,
-    product_id: 3
+    product_id: 6
   },
   {
-    sku: 'OU23',
-    retail_price: 2850.00,
-    sale_price: 2450.00,
-    cost: 2000.00,
+    sku: 'OU20003',
+    size: 'S',
     stock: 16,
-    product_id: 3
+    product_id: 6
   },
   {
-    sku: 'OU33',
-    retail_price: 2850.00,
-    sale_price: 2450.00,
-    cost: 2000.00,
+    sku: 'OU30003',
+    size: 'M',
     stock: 17,
-    product_id: 3
+    product_id: 6
   }
 ]
 

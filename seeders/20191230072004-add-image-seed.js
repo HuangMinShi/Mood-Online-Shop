@@ -3,154 +3,154 @@
 const { sequelize } = require('../models')
 const images = [
   {
-    url: 'https://imgur.com/mpMhDrR',
-    color: 'TRUE BLACK',
+    url: '../images/product-0001/1-trueblack-1.jpg',
+    is_main: true,
     product_id: 1
   },
   {
-    url: 'https://imgur.com/ZtiZQ2T',
-    color: 'TRUE BLACK',
+    url: '../images/product-0001/1-trueblack-2.jpg',
+    is_main: false,
     product_id: 1
   },
   {
-    url: 'https://imgur.com/edC8CKS',
-    color: 'TRUE BLACK',
+    url: '../images/product-0001/1-trueblack-3.jpg',
+    is_main: false,
     product_id: 1
   },
   {
-    url: 'https://imgur.com/MpS62Ws',
-    color: 'TRUE BLACK',
+    url: '../images/product-0001/1-trueblack-4.jpg',
+    is_main: false,
     product_id: 1
   },
   {
-    url: 'https://imgur.com/8u2Uz2T',
-    color: 'TRUE BLACK',
+    url: '../images/product-0001/1-trueblack-5.jpg',
+    is_main: false,
     product_id: 1
   },
   {
-    url: 'https://imgur.com/Di9xxH8',
-    color: 'GRAY HEATHER',
-    product_id: 1
-  },
-  {
-    url: 'https://imgur.com/ZcHlPvk',
-    color: 'GRAY HEATHER',
-    product_id: 1
-  },
-  {
-    url: 'https://imgur.com/bsofBan',
-    color: 'GRAY HEATHER',
-    product_id: 1
-  },
-  {
-    url: 'https://imgur.com/fiDSGrp',
-    color: 'GRAY HEATHER',
-    product_id: 1
-  },
-  {
-    url: 'https://imgur.com/eM0LX91',
-    color: 'GRAY HEATHER',
-    product_id: 1
-  },
-  {
-    url: 'https://imgur.com/C2nyaHr',
-    color: 'TRUE BLACK',
+    url: '../images/product-0001/1-grayheather-1.jpg',
+    is_main: true,
     product_id: 2
   },
   {
-    url: 'https://imgur.com/a920IQY',
-    color: 'TRUE BLACK',
+    url: '../images/product-0001/1-grayheather-2.jpg',
+    is_main: false,
     product_id: 2
   },
   {
-    url: 'https://imgur.com/2rNswb6',
-    color: 'TRUE BLACK',
+    url: '../images/product-0001/1-grayheather-3.jpg',
+    is_main: false,
     product_id: 2
   },
   {
-    url: 'https://imgur.com/UZpIkhK',
-    color: 'TRUE BLACK',
+    url: '../images/product-0001/1-grayheather-4.jpg',
+    is_main: false,
     product_id: 2
   },
   {
-    url: 'https://imgur.com/rkmfm5o',
-    color: 'TRUE BLACK',
+    url: '../images/product-0001/1-grayheather-5.jpg',
+    is_main: false,
     product_id: 2
   },
   {
-    url: 'https://imgur.com/YjXFZio',
-    color: 'GRAY HEATHER',
-    product_id: 2
-  },
-  {
-    url: 'https://imgur.com/NfqKo7f',
-    color: 'GRAY HEATHER',
-    product_id: 2
-  },
-  {
-    url: 'https://imgur.com/lyV8D63',
-    color: 'GRAY HEATHER',
-    product_id: 2
-  },
-  {
-    url: 'https://imgur.com/oeMCZCk',
-    color: 'GRAY HEATHER',
-    product_id: 2
-  },
-  {
-    url: 'https://imgur.com/qkZIo3f',
-    color: 'GRAY HEATHER',
-    product_id: 2
-  },
-  {
-    url: 'https://imgur.com/pgycWdC',
-    color: 'SLATE POP FLORAL',
+    url: '../images/product-0002/2-trueblack-1.jpg',
+    is_main: true,
     product_id: 3
   },
   {
-    url: 'https://imgur.com/juV34JL',
-    color: 'SLATE POP FLORAL',
+    url: '../images/product-0002/2-trueblack-2.jpg',
+    is_main: false,
     product_id: 3
   },
   {
-    url: 'https://imgur.com/HKNYyFp',
-    color: 'SLATE POP FLORAL',
+    url: '../images/product-0002/2-trueblack-3.jpg',
+    is_main: false,
     product_id: 3
   },
   {
-    url: 'https://imgur.com/QEiU4Pc',
-    color: 'SLATE POP FLORAL',
+    url: '../images/product-0002/2-trueblack-4.jpg',
+    is_main: false,
     product_id: 3
   },
   {
-    url: 'https://imgur.com/wIe73hW',
-    color: 'SLATE POP FLORAL',
+    url: '../images/product-0002/2-trueblack-5.jpg',
+    is_main: false,
     product_id: 3
   },
   {
-    url: 'https://imgur.com/t3aswTW',
-    color: 'OUTLAND',
-    product_id: 3
+    url: '../images/product-0002/2-grayheather-1.jpg',
+    is_main: true,
+    product_id: 4
   },
   {
-    url: 'https://imgur.com/bNYAIpc',
-    color: 'OUTLAND',
-    product_id: 3
+    url: '../images/product-0002/2-grayheather-2.jpg',
+    is_main: false,
+    product_id: 4
   },
   {
-    url: 'https://imgur.com/IRhBzQI',
-    color: 'OUTLAND',
-    product_id: 3
+    url: '../images/product-0002/2-grayheather-3.jpg',
+    is_main: false,
+    product_id: 4
   },
   {
-    url: 'https://imgur.com/9BGVStr',
-    color: 'OUTLAND',
-    product_id: 3
+    url: '../images/product-0002/2-grayheather-4.jpg',
+    is_main: false,
+    product_id: 4
   },
   {
-    url: 'https://imgur.com/lQppzaE',
-    color: 'OUTLAND',
-    product_id: 3
+    url: '../images/product-0002/2-grayheather-5.jpg',
+    is_main: false,
+    product_id: 4
+  },
+  {
+    url: '../images/product-0003/3-slatepopfloral-1.jpg',
+    is_main: true,
+    product_id: 5
+  },
+  {
+    url: '../images/product-0003/3-slatepopfloral-2.jpg',
+    is_main: false,
+    product_id: 5
+  },
+  {
+    url: '../images/product-0003/3-slatepopfloral-3.jpg',
+    is_main: false,
+    product_id: 5
+  },
+  {
+    url: '../images/product-0003/3-slatepopfloral-4.jpg',
+    is_main: false,
+    product_id: 5
+  },
+  {
+    url: '../images/product-0003/3-slatepopfloral-5.jpg',
+    is_main: false,
+    product_id: 5
+  },
+  {
+    url: '../images/product-0003/3-outland-1.jpg',
+    is_main: true,
+    product_id: 6
+  },
+  {
+    url: '../images/product-0003/3-outland-2.jpg',
+    is_main: false,
+    product_id: 6
+  },
+  {
+    url: '../images/product-0003/3-outland-3.jpg',
+    is_main: false,
+    product_id: 6
+  },
+  {
+    url: '../images/product-0003/3-outland-4.jpg',
+    is_main: false,
+    product_id: 6
+  },
+  {
+    url: '../images/product-0003/3-outland-5.jpg',
+    is_main: false,
+    product_id: 6
   }
 ]
 

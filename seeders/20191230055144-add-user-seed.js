@@ -8,7 +8,7 @@ const users = [
   {
     name: 'Ethan Huang',
     email: 'z7707092003@gmail.com',
-    password: bcryptjs.hashSync('0000', bcryptjs.genSaltSync(10)),
+    password: bcryptjs.hashSync('0', bcryptjs.genSaltSync(10)),
     birthday: faker.date.recent(3),
     admin: true,
     avatar: 'https://imgur.com/95Sf85I',
@@ -19,7 +19,7 @@ const users = [
   {
     name: 'Eddy Lin',
     email: 's024039@gmail.com',
-    password: bcryptjs.hashSync('0000', bcryptjs.genSaltSync(10)),
+    password: bcryptjs.hashSync('0', bcryptjs.genSaltSync(10)),
     birthday: faker.date.recent(3),
     admin: false,
     avatar: 'https://imgur.com/KOcqhhj',
@@ -30,7 +30,7 @@ const users = [
   {
     name: '徐英誠',
     email: 'roger770516@hotmail.com',
-    password: bcryptjs.hashSync('0000', bcryptjs.genSaltSync(10)),
+    password: bcryptjs.hashSync('0', bcryptjs.genSaltSync(10)),
     birthday: faker.date.recent(3),
     admin: false,
     avatar: 'https://imgur.com/eEvrG3K',
@@ -41,7 +41,7 @@ const users = [
   {
     name: 'Allbe Yu',
     email: 'allbeYu@mail.e-land.gov.tw',
-    password: bcryptjs.hashSync('0000', bcryptjs.genSaltSync(10)),
+    password: bcryptjs.hashSync('0', bcryptjs.genSaltSync(10)),
     birthday: faker.date.recent(3),
     admin: false,
     avatar: 'https://imgur.com/a5OSM1K',
