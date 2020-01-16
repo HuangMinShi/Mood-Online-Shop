@@ -15,7 +15,7 @@ const vaildator = {
       requiredFields,
       checkItems,
       checkItemRequiredParams
-    } = getCheckOption(req.url)
+    } = getCheckOption(req.originalUrl)
 
     //  取得 user 未填欄位
     const emptyFields = getEmptyFields(inputs, requiredFields)

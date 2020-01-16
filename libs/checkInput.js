@@ -21,14 +21,23 @@ const checkInput = {
     return requiredFields.filter(field => inputs[field].length === 0)
   },
 
-  getCheckOption: (routePath) => {
-    if (routePath === '/signup') {
-      return checkOptions.signUp
+  isQuantityInTheScope: (quantity) => {
+    quantity = Number(quantity)
+
+    if (
+      isNaN(quantity)
+      || (quantity < 1 || quantity > 10)
+    ) {
+      return false
     }
 
-    if (routePath === '/signin') {
-      return checkOptions.signIn
-    }
+    return true
+  },
+
+  getCheckOption: (routePath) => {
+    if (routePath === '/users/signup') return checkOptions.signUp
+    if (routePath === '/users/signin') return checkOptions.signIn
+    if (routePath === '/cart') return checkOptions.cart
   },
 
   getErrorMessage: (key, input) => {
@@ -36,7 +45,8 @@ const checkInput = {
     const messages = {
       hasEmptyFields: `${input} 是必填欄位，請確認`,
       isEmailValid: 'email 無效，請重新輸入',
-      isPasswordCheckCorrect: '兩次密碼不一致，請重新輸入'
+      isPasswordCheckCorrect: '兩次密碼不一致，請重新輸入',
+      isQuantityInTheScope: '商品數量超過可銷售範圍，請確認'
     }
     return {
       message: messages[key]
@@ -45,6 +55,9 @@ const checkInput = {
 
 }
 
+/** 
+ * 不同路由配置 
+ * */
 const checkOptions = {
   signUp: {
     requiredFields: ['name', 'email', 'password', 'passwordCheck'],
@@ -65,6 +78,16 @@ const checkOptions = {
     },
     checkItemRequiredParams: {
       isEmailValid: ['email']
+    }
+  },
+
+  cart: {
+    requiredFields: ['productSn', 'color', 'size', 'quantity'],
+    checkItems: {
+      quantity: checkInput.isQuantityInTheScope
+    },
+    checkItemRequiredParams: {
+      isQuantityInTheScope: ['quantity']
     }
   }
 }
