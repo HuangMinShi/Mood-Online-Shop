@@ -41,19 +41,9 @@
 
   // 增減數量事件
   $('.calc-quantity').click(function (event) {
-    let quantity = 1
-
-    if (event.target.matches('.quantity-plus')) {
-      quantity = calcQuantityUse('+')
-    }
-    if (event.target.matches('.quantity-minus')) {
-      quantity = calcQuantityUse('-')
-    }
-
-    $('input[name=quantity]').attr('value', quantity)
+    if (event.target.matches('.quantity-plus')) return calcQuantityUse('+')
+    if (event.target.matches('.quantity-minus')) return calcQuantityUse('-')
   })
-
-
 
   /************* Functions *************/
   /** products **/
@@ -123,6 +113,5 @@
     }
 
     $('.quantity').attr('value', quantity)
-    return quantity
   }
 })()
