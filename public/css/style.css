@@ -1,3 +1,8 @@
+input[type="text"] {
+  background: #ffffff;
+  border: .5px solid #cccccc;
+}
+
 /* =============== Products =============== */
 .product {
   padding: 0 .5rem;
@@ -22,4 +27,60 @@
 
 .product-price {
   font-size: 18px;
+}
+
+/* =============== Product =============== */
+
+/* attribute options */
+#product #content .info .attribute-options a {
+  text-decoration:none;
+}
+
+/* action */
+#product #content .action .quantity {
+  font-size: 1rem;
+  width: 45px;
+  margin: 0;
+  text-align: center;
+}
+
+.quantity-plus,
+.quantity-minus {
+  background: #ffffff;
+  border: .3px solid #cccccc;
+  padding: .2rem;
+  width: 30px;
+  text-align: center;
+  text-decoration:none!important;
+}
+
+#product-addtocart-button {
+  background-color: #000000;
+  border-color: #cccccc;
+  color: #f5f4f4;
+  font-size: 1rem;
+}
+
+#product-addtocart-button::before {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 700;
+  content: "\f217";
+  font-size: .75rem;
+  margin-right: .5rem;
+}
+
+.gallery span,
+.gallery .main img,
+.size-option div {
+  display: none;
+}
+
+.gallery span.selected,
+.gallery .main img.selected,
+.size-option div.selected {
+  display: block;
+}
+
+.gallery img:hover {
+  cursor: pointer;
 }
