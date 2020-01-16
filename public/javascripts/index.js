@@ -40,7 +40,7 @@
   })
 
   // 增減數量事件
-  $('.action').click(function (event) {
+  $('.calc-quantity').click(function (event) {
     let quantity = 1
 
     if (event.target.matches('.quantity-plus')) {

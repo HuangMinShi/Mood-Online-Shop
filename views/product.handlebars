@@ -56,21 +56,23 @@
 
         <div class="action">
           <div class="btn-group d-flex">
-            <a href="javascript:;" class="text-dark quantity-minus">
-              -
-            </a>
+            <div class="calc-quantity d-flex">
+              <a href="javascript:;" class="text-dark quantity-minus">
+                -
+              </a>
 
-            <input type="text" name="quantity" class="quantity" value="1" disabled="disabled">
+              <input type="text" name="quantity" class="quantity" value="1" disabled="disabled">
 
-            <a href="javascript:;" class="text-dark quantity-plus">
-              +
-            </a>
+              <a href="javascript:;" class="text-dark quantity-plus">
+                +
+              </a>
+            </div>
 
             <form action="/cart" method="POST" class="mx-3">
               <input hidden name="productSn" value="{{this.sn}}">
               <input hidden name="color">
               <input hidden name="size">
-              <input hidden name="quantity" value="1">
+              <input hidden name="quantity">
               <button type="submit" id="product-addtocart-button" class="btn btn-sm tocart">加入購物車</button>
             </form>
 

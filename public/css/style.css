@@ -37,7 +37,7 @@ input[type="text"] {
 }
 
 /* action */
-#product #content .action .quantity {
+.calc-quantity .quantity {
   font-size: 1rem;
   width: 45px;
   margin: 0;
