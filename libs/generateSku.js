@@ -8,7 +8,7 @@ const generateSku = (properties) => {
   } = properties
 
   let sku = ''
-  const seperatedColorWords = color.split('_')
+  const seperatedColorWords = color.split('_').slice(0, 2)
 
   if (seperatedColorWords.length > 1) {
     sku += seperatedColorWords.map(str => str[0]).join('').toUpperCase()
