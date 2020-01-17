@@ -15,17 +15,19 @@ const cartController = {
     try {
       // 依據 input 的商品資料轉成 sku
       const sku = generateSku(req.body)
-      let reqSessionCartId = req.session.cartId || 0
 
       // 尋找購物車，若無則建立新購物車
       const [cart, isCreated] = await Cart.findOrCreate({
         where: {
-          id: reqSessionCartId
+          id: req.session.cartId || 0
         }
       })
 
-      // 若購物車為新建立，則利用 session 儲存該訪客購物車
-      reqSessionCartId = isCreated ? cart.id : reqSessionCartId
+      /**
+       * 若購物車為新建立，則利用 session 儲存該訪客購物車，
+       * 不過試圖修改共享記憶體的內容，可能會產生 race condition，先關掉 rule 
+       * */
+      req.session.cartId = isCreated ? cart.id : req.session.cartId
 
       // 依據 sku 尋找商品項目的庫存量
       const productSku = await ProductSku.findOne({
