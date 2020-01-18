@@ -19,8 +19,19 @@ const cartController = {
        * 不用多合併一張表，減少效能。
        * */
 
+      /** expect output:
+       * cartItem = {
+       *  mainImage: 'https://www.example.com'  // Image
+       *  name: 'FONTAWESOME T-SHIRT'           // Product
+       *  color: 'true_black'                   // Color
+       *  size: 'S                              // ProductSku
+       *  salePrice: 2450                       // Product
+       *  quantity: 1                           // CartProductSku
+       * }
+       */
+
       // 先查詢 Carts JOIN CartProductSkus 及 ProductSkus
-      let cart = await Cart.findByPk(req.session.cartId, {
+      let cart = await Cart.findByPk(43, {
         include: 'cartItems'
       })
       cart = cart || { cartItems: [] }
@@ -144,14 +155,3 @@ const cartController = {
 }
 
 module.exports = cartController
-
-/** cart expect output:
- * cartItem = {
- *  mainImage: 'https://www.example.com'  // Image
- *  name: 'FONTAWESOME T-SHIRT'           // Product
- *  color: 'true_black'                   // Color
- *  size: 'S                              // ProductSku
- *  salePrice: 2450                       // Product
- *  quantity: 1                           // CartProductSku
- * }
- */
