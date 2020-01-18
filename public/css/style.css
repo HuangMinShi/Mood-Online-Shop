@@ -1,6 +1,14 @@
-input[type="text"] {
+input[type="text"],
+input[type=number] {
   background: #ffffff;
   border: .5px solid #cccccc;
+  -moz-appearance:textfield; /* Firefox */
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 
 /* =============== Products =============== */
@@ -83,4 +91,45 @@ input[type="text"] {
 
 .gallery img:hover {
   cursor: pointer;
+}
+
+/* =============== Cart =============== */
+
+.table td,
+.table th {
+  vertical-align: middle; 
+}
+
+.item-image-container {
+  border: 1px solid rgba(204, 204, 204, 1);
+  padding: 1px;
+  display: block;
+  width: 165px;
+}
+
+.page-title,
+.item-details-name a{
+  text-decoration: none;
+  font-weight: 300;
+  font-size: 1.2rem;
+  color: #A8A8A8;
+}
+
+.quantity-field {
+  width: 2.5rem;
+}
+
+.quantity-field input {
+  width: 100%;
+  height: 100%;
+  text-align: center;
+}
+
+.quantity-change form {
+  line-height: 0;
+}
+
+.quantity-change button {
+  padding: 0 .5rem;
+  border-radius: 0;
 }

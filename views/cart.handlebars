@@ -1,0 +1,96 @@
+<span class="page-title">購物車</span>
+
+<div>
+  <table class="table">
+    <thead>
+      <tr class="text-center">
+        <th scope="col" class="text-left border-top-0">商品</th>
+        <th scope="col" class="border-top-0">價格</th>
+        <th scope="col" class="border-top-0">數量</th>
+        <th scope="col" class="border-top-0">小計</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      {{#each cartItems}}
+        <tr class="product-item-info text-center">
+          <td class="product-item-image text-left d-flex">
+            <a href="/products/{{this.sn}}">
+              <span class="item-image-container">
+                <img src="{{this.image}}" width="100%" height="auto">
+              </span>
+            </a>
+            <div class="product-item-details d-flex flex-column justify-content-center ml-4">
+              <p>
+                <strong class="item-details-name">
+                  <a href="/products/{{this.sn}}">
+                    {{this.name}}
+                  </a>
+                </strong>
+              </p>
+              <p>
+                <span class="font-weight-bold">Color:</span>
+                {{this.color}}
+              </p>
+              <p>
+                <span class="font-weight-bold">Size:</span>
+                {{this.size}}
+              </p>
+            </div>
+          </td>
+
+          <td>
+            NT$ {{this.salePrice}}
+          </td>
+
+          <td>
+            <div class="d-flex justify-content-center">
+              <div class="quantity-field mr-1">
+                <input type="number" maxlength="3" value="{{this.quantity}}">
+              </div>
+
+              <div class="quantity-change">
+                <form action="/cart/cartItems/{{CartProductSkuId}}/add" method="POST">
+                  <button type="submit" class="btn btn-sm btn-outline-secondary">
+                    <i class="fas fa-caret-up"></i>
+                  </button>
+                </form>
+                <form action="/cart/cartItems/{{CartProductSkuId}}/sub" method="POST" class="mt-1">
+                  <button type="submit" class="btn btn-sm btn-outline-secondary">
+                    <i class="fas fa-caret-down"></i>
+                  </button>
+                </form>
+              </div>
+            </div>
+          </td>
+
+          <td>NT$ {{this.subTotalAmount}}</td>
+        </tr>
+
+        <tr class="item-actions">
+          <td colspan="100" class="border-top-0">
+            <div class="actions-toolbar text-right">
+              <form action="/cart/cartItems/{{CartProductSkuId}}?_method=DELETE" method="POST">
+                <button type="submit" class="btn btn-link text-danger">
+                  <i class="fas fa-trash"></i>
+                </button>
+              </form>
+            </div>
+          </td>
+        </tr>
+
+      {{/each}}
+
+      <tr>
+        <td></td>
+        <td></td>
+        <td style="text-align: right;">
+          <h2>Total: </h2>
+        </td>
+        <td>
+          <h2>{{totalAmount}}</h2>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

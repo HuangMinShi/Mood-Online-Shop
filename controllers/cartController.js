@@ -1,5 +1,8 @@
 const {
   Cart,
+  Color,
+  Image,
+  Product,
   ProductSku,
   CartProductSku
 } = require('../models')
@@ -7,8 +10,69 @@ const {
 const generateSku = require('../libs/generateSku').generateSku
 
 const cartController = {
-  getCart: (req, res) => {
-    return res.send('GET cart')
+  getCart: async (req, res) => {
+    try {
+
+      /**
+       * 查詢預先載入 Cart => ProductSku => Product => Color,Image 是一種方式
+       * 但資料包裹太多層不利維護，因此拆出分段資料整理。另外 Color 可以反正規化進入 Product
+       * 不用多合併一張表，減少效能。
+       * */
+
+      // 先查詢 Carts JOIN CartProductSkus 及 ProductSkus
+      let cart = await Cart.findByPk(req.session.cartId, {
+        include: 'cartItems'
+      })
+      cart = cart || { cartItems: [] }
+
+      // 整理 Carts 查詢後資料
+      let cartItems = cart.cartItems.map(item => ({
+        size: item.size,
+        ProductId: item.ProductId,
+        CartProductSkuId: item.CartProductSku.id,
+        quantity: item.CartProductSku.quantity,
+      }))
+
+
+      // 再查詢 Products JOIN Color 及 Image
+      const products = await Product.findAll({
+        attributes: ['id', 'sn', 'name', 'salePrice'],
+        where: {
+          id: cartItems.map(item => item.ProductId)
+        },
+        include: [
+          {
+            model: Color,
+            attributes: ['type']
+          },
+          {
+            model: Image,
+            attributes: ['url'],
+            where: { isMain: true }
+          }
+        ]
+      })
+
+      // 上述查詢做資料合併
+      cartItems = cartItems.map(item => {
+        const product = products.find(product => product.id === item.ProductId)
+        return {
+          ...item,
+          sn: product.sn,
+          name: product.name,
+          salePrice: Number(product.salePrice),
+          color: product.Color.type.split('_').join(' ').toUpperCase(),
+          image: product.Images[0].url,
+          subTotalAmount: Number(product.salePrice) * Number(item.quantity)
+        }
+      })
+
+      const totalAmount = cartItems.length ? cartItems.map(item => item.subTotalAmount).reduce((a, c) => a + c) : 0
+
+      return res.render('cart', { cartItems, totalAmount })
+    } catch (err) {
+      console.log(err)
+    }
   },
 
   postCart: async (req, res) => {
@@ -80,3 +144,14 @@ const cartController = {
 }
 
 module.exports = cartController
+
+/** cart expect output:
+ * cartItem = {
+ *  mainImage: 'https://www.example.com'  // Image
+ *  name: 'FONTAWESOME T-SHIRT'           // Product
+ *  color: 'true_black'                   // Color
+ *  size: 'S                              // ProductSku
+ *  salePrice: 2450                       // Product
+ *  quantity: 1                           // CartProductSku
+ * }
+ */
