@@ -175,8 +175,26 @@ const cartController = {
     }
   },
 
-  subCartItemQuantity: (req, res) => {
-    return res.send('subCartItemQuantity')
+  subCartItemQuantity: async (req, res) => {
+    try {
+      const cartItem = await CartProductSku.findOne({
+        where: {
+          id: req.params.id,
+          CartId: req.session.cartId || 0
+        }
+      })
+
+      if (!cartItem) {
+        req.flash('errorMessage', '未授權行為')
+        return res.redirect('/products')
+      }
+
+      await cartItem.decrement('quantity')
+
+      return res.redirect('back')
+    } catch (err) {
+      console.log(err)
+    }
   },
 
   deleteCartItme: (req, res) => {
