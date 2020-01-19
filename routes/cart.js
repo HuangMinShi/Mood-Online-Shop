@@ -13,4 +13,16 @@ router.post('/',
   cartController.postCart
 )
 
+router.post('/cartItems/:id/add',
+  cartController.addCartItemQuantity
+)
+
+router.post('/cartItems/:id/sub',
+  cartController.subCartItemQuantity
+)
+
+router.delete('/cartItems/:id',
+  cartController.deleteCartItme
+)
+
 module.exports = router

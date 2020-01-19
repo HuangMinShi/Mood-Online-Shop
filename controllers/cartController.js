@@ -31,7 +31,7 @@ const cartController = {
        */
 
       // 先查詢 Carts JOIN CartProductSkus 及 ProductSkus
-      let cart = await Cart.findByPk(43, {
+      let cart = await Cart.findByPk(req.session.cartId, {
         include: 'cartItems'
       })
       cart = cart || { cartItems: [] }
@@ -151,6 +151,36 @@ const cartController = {
     } catch (err) {
       console.log(err);
     }
+  },
+
+  addCartItemQuantity: async (req, res) => {
+    try {
+      const cartItem = await CartProductSku.findOne({
+        where: {
+          id: req.params.id,
+          CartId: req.session.cartId || 0
+        }
+      })
+
+      if (!cartItem) {
+        req.flash('errorMessage', '未授權行為')
+        return res.redirect('/products')
+      }
+
+      await cartItem.increment('quantity')
+
+      return res.redirect('back')
+    } catch (err) {
+      console.log(err)
+    }
+  },
+
+  subCartItemQuantity: (req, res) => {
+    return res.send('subCartItemQuantity')
+  },
+
+  deleteCartItme: (req, res) => {
+    return res.send('deleteCartItme')
   }
 }
 
