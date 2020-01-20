@@ -167,11 +167,18 @@ const cartController = {
         return res.redirect('/products')
       }
 
-      await cartItem.increment('quantity')
+      await cartItem.update({
+        quantity: cartItem.quantity + 1
+      })
 
       return res.redirect('back')
     } catch (err) {
-      console.log(err)
+      if (err.name === 'SequelizeValidationError') {
+        const validationErrorInfo = err.errors[0]
+        req.flash('errorMessage', validationErrorInfo.message)
+        return res.redirect('back')
+      }
+      return console.log(err)
     }
   },
 
@@ -189,11 +196,18 @@ const cartController = {
         return res.redirect('/products')
       }
 
-      await cartItem.decrement('quantity')
+      await cartItem.update({
+        quantity: cartItem.quantity - 1
+      })
 
       return res.redirect('back')
     } catch (err) {
-      console.log(err)
+      if (err.name === 'SequelizeValidationError') {
+        const validationErrorInfo = err.errors[0]
+        req.flash('errorMessage', validationErrorInfo.message)
+        return res.redirect('back')
+      }
+      return console.log(err)
     }
   },
 
