@@ -160,13 +160,30 @@ const cartController = {
         where: {
           id: req.params.id,
           CartId: req.session.cartId || 0
+        },
+        include: {
+          model: ProductSku,
+          attributes: ['stock']
         }
       })
 
-      if (!cartItem) throw new Error('未授權行為')
+      if (!cartItem) {
+        req.flash('errorMessage', '未授權行為')
+        return res.redirect('back')
+      }
+
+      // 確認庫存數量
+      const expectedPurchaseQuantity = cartItem.quantity + 1
+      if (cartItem.ProductSku.stock < expectedPurchaseQuantity) {
+        req.flash(
+          'errorMessage',
+          `很抱歉，該商品僅剩 ${cartItem.ProductSku.stock} 件，您已購買 ${cartItem.quantity} 件，請確認`
+        )
+        return res.redirect('back')
+      }
 
       await cartItem.update({
-        quantity: cartItem.quantity + 1
+        quantity: expectedPurchaseQuantity
       })
 
       return res.redirect('back')
