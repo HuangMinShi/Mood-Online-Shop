@@ -105,11 +105,13 @@
   function calcQuantityUse(operator) {
     let quantity = $('.quantity').attr('value')
 
-    if (operator === '+') {
-      quantity = (quantity < 10) ? ++quantity : 10
-    }
-    if (operator === '-') {
-      quantity = (quantity > 1) ? --quantity : 1
+    switch (operator) {
+      case '+':
+        quantity = (quantity < 3) ? ++quantity : 3
+        break
+      case '-':
+        quantity = (quantity > 1) ? --quantity : 1
+        break
     }
 
     $('.quantity').attr('value', quantity)

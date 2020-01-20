@@ -8,9 +8,7 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      quantity: {
-        type: Sequelize.INTEGER
-      },
+      quantity: Sequelize.INTEGER,
       user_id: {
         type: Sequelize.INTEGER,
         references: {

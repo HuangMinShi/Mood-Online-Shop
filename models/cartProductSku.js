@@ -10,8 +10,14 @@ module.exports = (sequelize, DataTypes) => {
     quantity: {
       type: DataTypes.INTEGER,
       validate: {
-        min: 1,
-        max: 10
+        min: {
+          args: 1,
+          msg: '單次單項購買最少 1 件，請確認'
+        },
+        max: {
+          args: 3,
+          msg: '單次單項購買最多 3 件，您已購買 3 件，請確認'
+        },
       },
     },
     CartId: {
@@ -28,15 +34,7 @@ module.exports = (sequelize, DataTypes) => {
         key: 'id'
       }
     },
-  }, {
-    validate: {
-      quantityAboveValidationScope() {
-        if (this.quantity < 1 || this.quantity > 10) {
-          throw new Error('單一商品購買數量必須最少 1 件，最多 10 件，請確認!');
-        }
-      }
-    }
-  });
+  }, {});
   CartProductSku.associate = function (models) {
 
   };

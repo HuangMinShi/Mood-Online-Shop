@@ -26,7 +26,7 @@ const checkInput = {
 
     if (
       isNaN(quantity)
-      || (quantity < 1 || quantity > 10)
+      || (quantity < 1 || quantity > 3)
     ) {
       return false
     }
@@ -46,7 +46,7 @@ const checkInput = {
       hasEmptyFields: `${input} 是必填欄位，請確認`,
       isEmailValid: 'email 無效，請重新輸入',
       isPasswordCheckCorrect: '兩次密碼不一致，請重新輸入',
-      isQuantityInTheScope: '商品數量超過可銷售範圍，請確認'
+      isQuantityInTheScope: '單次單項購買數量最少 1 件，最多 3 件，請確認'
     }
     return {
       message: messages[key]
