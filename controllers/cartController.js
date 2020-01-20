@@ -162,10 +162,7 @@ const cartController = {
         }
       })
 
-      if (!cartItem) {
-        req.flash('errorMessage', '未授權行為')
-        return res.redirect('/products')
-      }
+      if (!cartItem) throw new Error('未授權行為')
 
       await cartItem.update({
         quantity: cartItem.quantity + 1
@@ -173,12 +170,10 @@ const cartController = {
 
       return res.redirect('back')
     } catch (err) {
-      if (err.name === 'SequelizeValidationError') {
-        const validationErrorInfo = err.errors[0]
-        req.flash('errorMessage', validationErrorInfo.message)
-        return res.redirect('back')
-      }
-      return console.log(err)
+      const errorMessage = (err.name === 'SequelizeValidationError') ? err.errors[0].message : err.message
+
+      req.flash('errorMessage', errorMessage)
+      return res.redirect('/cart')
     }
   },
 
@@ -187,14 +182,11 @@ const cartController = {
       const cartItem = await CartProductSku.findOne({
         where: {
           id: req.params.id,
-          CartId: req.session.cartId || 0
+          CartId: 1 || 0
         }
       })
 
-      if (!cartItem) {
-        req.flash('errorMessage', '未授權行為')
-        return res.redirect('/products')
-      }
+      if (!cartItem) throw new Error('未授權行為')
 
       await cartItem.update({
         quantity: cartItem.quantity - 1
@@ -202,12 +194,10 @@ const cartController = {
 
       return res.redirect('back')
     } catch (err) {
-      if (err.name === 'SequelizeValidationError') {
-        const validationErrorInfo = err.errors[0]
-        req.flash('errorMessage', validationErrorInfo.message)
-        return res.redirect('back')
-      }
-      return console.log(err)
+      const errorMessage = (err.name === 'SequelizeValidationError') ? err.errors[0].message : err.message
+
+      req.flash('errorMessage', errorMessage)
+      return res.redirect('/cart')
     }
   },
 
