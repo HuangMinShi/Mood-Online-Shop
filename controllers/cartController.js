@@ -182,7 +182,7 @@ const cartController = {
       const cartItem = await CartProductSku.findOne({
         where: {
           id: req.params.id,
-          CartId: 1 || 0
+          CartId: req.session.cartId || 0
         }
       })
 
@@ -201,8 +201,25 @@ const cartController = {
     }
   },
 
-  deleteCartItme: (req, res) => {
-    return res.send('deleteCartItme')
+  deleteCartItme: async (req, res) => {
+    try {
+      const cartItem = await CartProductSku.findOne({
+        where: {
+          id: req.params.id,
+          CartId: req.session.cartId || 0
+        }
+      })
+
+      if (!cartItem) throw new Error('未授權行為')
+
+      await cartItem.destroy()
+
+      req.flash('successMessage', '成功刪除')
+      return res.redirect('back')
+    } catch (err) {
+      req.flash('errorMessage', err.message)
+      return res.redirect('cart')
+    }
   }
 }
 
