@@ -124,32 +124,33 @@ const cartController = {
         }
       })
 
-      // 若購買數量超過庫存跳出警告
-      cartProductSku.quantity = cartProductSku.quantity || 0
-      const purchaseQuantity = Number(req.body.quantity)
-      const totalPurchaseQuantity = cartProductSku.quantity + purchaseQuantity
+      // 確認庫存數量 
+      const currentPurchasedQuantity = cartProductSku.quantity || 0
+      const customerWantPurchaseQuantity = Number(req.body.quantity)
+      const totalPurchasedQuantity = currentPurchasedQuantity + customerWantPurchaseQuantity
 
-      if (productSku.stock < totalPurchaseQuantity) {
+      if (productSku.stock < totalPurchasedQuantity) {
         req.flash(
           'errorMessage',
-          `庫存 ${productSku.stock} 件，
-          已購 ${cartProductSku.quantity} 件，
-          欲購 ${purchaseQuantity} 件，庫存不足請確認`
+          `很抱歉，該商品僅剩 ${productSku.stock} 件，您已購買 ${currentPurchasedQuantity} 件，請確認`
         )
-
         return res.redirect('back')
       }
 
       // 將購買數量寫入資料庫
       await cartProductSku.update({
-        quantity: totalPurchaseQuantity
+        quantity: totalPurchasedQuantity
       })
 
       req.flash('successMessage', `${req.body.name} 成功加入購物車`)
       return res.redirect('back')
 
     } catch (err) {
-      console.log(err);
+      if (err.name === 'SequelizeValidationError') {
+        req.flash('errorMessage', err.errors[0].message)
+        return res.redirect('back')
+      }
+      return console.log(err)
     }
   },
 
@@ -170,10 +171,12 @@ const cartController = {
 
       return res.redirect('back')
     } catch (err) {
-      const errorMessage = (err.name === 'SequelizeValidationError') ? err.errors[0].message : err.message
+      if (err.name === 'SequelizeValidationError') {
+        req.flash('errorMessage', err.errors[0].message)
+        return res.redirect('back')
+      }
 
-      req.flash('errorMessage', errorMessage)
-      return res.redirect('/cart')
+      return console.log(err)
     }
   },
 
@@ -186,7 +189,10 @@ const cartController = {
         }
       })
 
-      if (!cartItem) throw new Error('未授權行為')
+      if (!cartItem) {
+        req.flash('errorMessage', '未授權行為')
+        return res.redirect('back')
+      }
 
       await cartItem.update({
         quantity: cartItem.quantity - 1
@@ -194,10 +200,12 @@ const cartController = {
 
       return res.redirect('back')
     } catch (err) {
-      const errorMessage = (err.name === 'SequelizeValidationError') ? err.errors[0].message : err.message
+      if (err.name === 'SequelizeValidationError') {
+        req.flash('errorMessage', err.errors[0].message)
+        return res.redirect('back')
+      }
 
-      req.flash('errorMessage', errorMessage)
-      return res.redirect('/cart')
+      return console.log(err)
     }
   },
 
@@ -210,15 +218,17 @@ const cartController = {
         }
       })
 
-      if (!cartItem) throw new Error('未授權行為')
+      if (!cartItem) {
+        req.flash('errorMessage', '未授權行為')
+        return res.redirect('back')
+      }
 
       await cartItem.destroy()
 
       req.flash('successMessage', '成功刪除')
       return res.redirect('back')
     } catch (err) {
-      req.flash('errorMessage', err.message)
-      return res.redirect('cart')
+      return console.log(err)
     }
   }
 }
