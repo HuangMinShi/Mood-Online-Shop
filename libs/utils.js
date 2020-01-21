@@ -1,0 +1,24 @@
+const moment = require('moment')
+
+module.exports = {
+
+  formatDateToYYYYMMDD: (date) => {
+    return moment(date).format('YYYY/MM/DD')
+  },
+
+  formatPriceToHaveComma: (price) => {
+    const formatedPrice = price.toLocaleString('zh-TW', { style: 'currency', currency: 'TWD' })
+    return formatedPrice.split('.', 1)[0]
+  },
+
+  mapOrderStatusCodeToString: (statusNum) => {
+    const orderStatusCodesList = {
+      '-1': '取消',
+      '0': '待付款',
+      '1': '待出貨',
+      '2': '待收貨',
+      '3': '完成'
+    }
+    return orderStatusCodesList[statusNum.toString()]
+  }
+}
