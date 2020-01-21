@@ -11,6 +11,7 @@ const generateSku = require('../libs/generateSku').generateSku
 
 const cartController = {
   getCart: async (req, res) => {
+    req.session.cartId = 1
     try {
 
       /**
@@ -87,6 +88,7 @@ const cartController = {
   },
 
   postCart: async (req, res) => {
+    req.session.cartId = 1
     try {
       // 依據 input 的商品資料轉成 sku
       const sku = generateSku(req.body)
