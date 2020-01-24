@@ -6,9 +6,13 @@ module.exports = {
     return moment(date).format('YYYY/MM/DD')
   },
 
-  formatPriceToHaveComma: (price) => {
+  formatNumberToCurrency: (price) => {
     const formatedPrice = price.toLocaleString('zh-TW', { style: 'currency', currency: 'TWD' })
     return formatedPrice.split('.', 1)[0]
+  },
+
+  formatCurrencyToNumber: (currency) => {
+    return Number(currency.replace(/[^0-9.-]+/g, ''))
   },
 
   mapOrderStatusCodeToString: (statusNum) => {
