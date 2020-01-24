@@ -134,6 +134,70 @@ input::-webkit-inner-spin-button {
   border-radius: 0;
 }
 
+/* 右側 */
+.cart .table-container {
+  padding: 2rem;
+}
+
+.cart .table-container table {
+  border-bottom: 1px solid #A8A8A8;
+}
+
+.cart .shipping-summary {
+  padding: 2.7rem 1.2rem;
+  background-color: #fbfbfb;
+  height: fit-content;
+  border: 1px solid #A8A8A8;
+}
+.cart .shipping-summary .title {
+  margin-bottom: .75rem;
+}
+
+.cart .shipping-summary .info {
+  padding: .75rem 0;
+  border-top: 1px solid #DEE2E6;
+  border-bottom: 1px solid #DEE2E6;
+}
+
+.cart .shipping-summary .info .check {
+  border-bottom: 1px solid #DEE2E6;
+}
+
+.cart .shipping-summary .form-check {
+  margin: .75rem 0;
+}
+
+.cart .shipping-summary .sub-amount,
+.cart .shipping-summary .shipping-cost {
+  display: flex;
+  justify-content: space-between;
+  margin: .75rem 0;
+}
+
+.cart .shipping-summary .total-amount {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-top: .75rem;
+  padding-top: .75rem;
+  border-top: 1px solid #DEE2E6;
+}
+
+.cart .shipping-summary .expected-cost + button {
+  margin-top: .75rem;
+  padding: .5rem;
+  width: 100%;
+  border: 0;
+  background-color: #ECECEC;
+  color: #535353;
+}
+
+.cart .shipping-summary .expected-cost + button:hover {
+  background-color: #4B4B4B;
+  color: #F4F4F4;
+}
+
 /* =============== Order =============== */
 #order .action span{
   line-height: 3rem;

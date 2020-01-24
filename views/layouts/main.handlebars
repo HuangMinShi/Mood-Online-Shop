@@ -14,7 +14,7 @@
   <link rel="stylesheet" href="/css/style.css">
 </head>
 
-<body class="bg-light">
+<body>
   <header>
     <div class="d-flex flex-column flex-md-row p-3 px-md-4 mb-3 border-bottom">
       <h5 class="my-0 mr-md-auto">
@@ -28,9 +28,11 @@
   </header>
 
   <main>
-    <div class="container-fluid">
-      {{> messages}}
-      {{{body}}}
+    <div class="row">
+      <div class="col-10 mx-auto">
+        {{> messages}}
+        {{{body}}}
+      </div>
     </div>
   </main>
 

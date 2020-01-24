@@ -1,96 +1,169 @@
 <span class="page-title">購物車</span>
 
-<div>
-  <table class="table">
-    <thead>
-      <tr class="text-center">
-        <th scope="col" class="text-left border-top-0">商品</th>
-        <th scope="col" class="border-top-0">價格</th>
-        <th scope="col" class="border-top-0">數量</th>
-        <th scope="col" class="border-top-0">小計</th>
-      </tr>
-    </thead>
+<div class="cart row">
+  <div class="table-container col-lg-8 mx-auto">
+    <table class="table">
+      <thead>
+        <tr class="text-center">
+          <th scope="col" class="text-left border-0">商品</th>
+          <th scope="col" class="border-0">價格</th>
+          <th scope="col" class="border-0">數量</th>
+          <th scope="col" class="border-0">小計</th>
+        </tr>
+      </thead>
 
-    <tbody>
-      {{#each cartItems}}
-        <tr class="product-item-info text-center">
-          <td class="product-item-image text-left d-flex">
-            <a href="/products/{{this.sn}}">
-              <span class="item-image-container">
-                <img src="{{this.image}}" width="100%" height="auto">
-              </span>
-            </a>
-            <div class="product-item-details d-flex flex-column justify-content-center ml-4">
-              <p>
-                <strong class="item-details-name">
-                  <a href="/products/{{this.sn}}">
-                    {{this.name}}
-                  </a>
-                </strong>
-              </p>
-              <p>
-                <span class="font-weight-bold">Color:</span>
-                {{this.color}}
-              </p>
-              <p>
-                <span class="font-weight-bold">Size:</span>
-                {{this.size}}
-              </p>
-            </div>
-          </td>
-
-          <td>
-            NT$ {{this.salePrice}}
-          </td>
-
-          <td>
-            <div class="d-flex justify-content-center">
-              <div class="quantity-field mr-1">
-                <input type="number" maxlength="3" value="{{this.quantity}}" disabled>
+      <tbody>
+        {{#each cartItems}}
+          <tr class="product-item-info text-center">
+            <td class="product-item-image text-left d-flex">
+              <a href="/products/{{this.sn}}">
+                <span class="item-image-container">
+                  <img src="{{this.image}}" width="100%" height="auto">
+                </span>
+              </a>
+              <div class="product-item-details d-flex flex-column justify-content-center ml-4">
+                <p>
+                  <strong class="item-details-name">
+                    <a href="/products/{{this.sn}}">
+                      {{this.name}}
+                    </a>
+                  </strong>
+                </p>
+                <p>
+                  <span class="font-weight-bold">Color:</span>
+                  {{this.color}}
+                </p>
+                <p>
+                  <span class="font-weight-bold">Size:</span>
+                  {{this.size}}
+                </p>
               </div>
+            </td>
 
-              <div class="quantity-change">
-                <form action="/cart/cartItems/{{CartProductSkuId}}/add" method="POST">
-                  <button type="submit" class="btn btn-sm btn-outline-secondary">
-                    <i class="fas fa-caret-up"></i>
+            <td>
+              {{this.salePrice}}
+            </td>
+
+            <td>
+              <div class="d-flex justify-content-center">
+                <div class="quantity-field mr-1">
+                  <input type="number" maxlength="3" value="{{this.quantity}}" disabled>
+                </div>
+
+                <div class="quantity-change">
+                  <form action="/cart/cartItems/{{CartProductSkuId}}/add" method="POST">
+                    <button type="submit" class="btn btn-sm btn-outline-secondary">
+                      <i class="fas fa-caret-up"></i>
+                    </button>
+                  </form>
+                  <form action="/cart/cartItems/{{CartProductSkuId}}/sub" method="POST" class="mt-1">
+                    <button type="submit" class="btn btn-sm btn-outline-secondary">
+                      <i class="fas fa-caret-down"></i>
+                    </button>
+                  </form>
+                </div>
+              </div>
+            </td>
+
+            <td>{{this.subTotalAmount}}</td>
+          </tr>
+
+          <tr class="item-actions">
+            <td colspan="100" class="border-top-0">
+              <div class="actions-toolbar text-right">
+                <form action="/cart/cartItems/{{CartProductSkuId}}?_method=DELETE" method="POST">
+                  <button type="submit" class="btn btn-link text-danger">
+                    <i class="fas fa-trash"></i>
                   </button>
                 </form>
-                <form action="/cart/cartItems/{{CartProductSkuId}}/sub" method="POST" class="mt-1">
-                  <button type="submit" class="btn btn-sm btn-outline-secondary">
-                    <i class="fas fa-caret-down"></i>
-                  </button>
-                </form>
               </div>
+            </td>
+          </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  </div>
+
+  <div class="shipping-summary col-lg-4 mx-auto">
+    <p class="title">內含商品</p>
+    <div class="info">
+      <p>估計運費</p>
+      <form action="/orders/create" method="GET">
+        <div class="form-group">
+          <label for="country">國家</label>
+          <select class="form-control custom-select-sm" id="country" name="country">
+            <option selected>請選擇您的國家</option>
+            <option>台灣</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="county">縣市</label>
+          <select class="form-control custom-select-sm" id="county" name="county">
+            <option selected>請選擇一個縣市</option>
+            <option>臺北市</option>
+            <option>新北市</option>
+            <option>桃園市</option>
+            <option>臺中市</option>
+            <option>臺南市</option>
+            <option>高雄市</option>
+            <option>新竹縣</option>
+            <option>苗栗縣</option>
+            <option>彰化縣</option>
+            <option>南投縣</option>
+            <option>雲林縣</option>
+            <option>嘉義縣</option>
+            <option>屏東縣</option>
+            <option>宜蘭縣</option>
+            <option>花蓮縣</option>
+            <option>臺東縣</option>
+            <option>基隆市</option>
+            <option>新竹市</option>
+            <option>嘉義市</option>
+            <option>澎湖縣</option>
+            <option>金門縣</option>
+            <option>連江縣</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="postal">郵遞區號</label>
+          <input type="text" class="form-control" id="postal" name="postal" placeholder="500">
+        </div>
+
+        <div class="check">
+          {{#each shippingFee}}
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="shipping" value={{@key}} id="free">
+              <label class="form-check-label" for="{{@key}}">
+                {{#if (eq @key 'inStorePickup')}}
+                  到店自取
+                {{else}}
+                  寄送運費
+                {{/if}}
+                {{this}}
+              </label>
             </div>
-          </td>
+          {{/each}}
+        </div>
 
-          <td>NT$ {{this.subTotalAmount}}</td>
-        </tr>
-
-        <tr class="item-actions">
-          <td colspan="100" class="border-top-0">
-            <div class="actions-toolbar text-right">
-              <form action="/cart/cartItems/{{CartProductSkuId}}?_method=DELETE" method="POST">
-                <button type="submit" class="btn btn-link text-danger">
-                  <i class="fas fa-trash"></i>
-                </button>
-              </form>
-            </div>
-          </td>
-        </tr>
-
-      {{/each}}
-
-      <tr>
-        <td></td>
-        <td></td>
-        <td style="text-align: right;">
-          <h2>Total: </h2>
-        </td>
-        <td>
-          <h2>{{totalAmount}}</h2>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-</div>
+        <div class="expected-cost">
+          <div class="sub-amount">
+            <span>小計</span>
+            <span>{{totalAmount}}</span>
+          </div>
+          <div class="shipping-cost">
+            <span>配送資訊</span>
+            <span>NT$0.00</span>
+          </div>
+          <p class="total-amount">
+            <span>訂單金額</span>
+            <span>NT$2,800.00</span>
+          </p>
+        </div>
+        <button type="submit">
+          <span>進行結算</span>
+        </button>
+      </form>
+    </div>
+  </div>
