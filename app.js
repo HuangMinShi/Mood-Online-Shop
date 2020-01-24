@@ -5,12 +5,18 @@ const session = require('express-session')
 const flash = require('connect-flash')
 const methodOverride = require('method-override')
 const passport = require('./config/passport')
+const helpers = require('handlebars-helpers').comparison()
 
-const app = express()
 const env = process.env.NODE_ENV || 'development'
 const port = process.env.PORT || 3000
 
-app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
+const app = express()
+const hbs = exphbs.create({
+  defaultLayout: 'main',
+  helpers: helpers
+})
+
+app.engine('handlebars', hbs.engine)
 app.set('view engine', 'handlebars')
 app.use(express.static('public'))
 app.use(bodyParser.urlencoded({ extended: true }))
@@ -41,7 +47,6 @@ if (env !== 'test') {
     console.log(`App is running on localhost:${port}, env:${env}`)
   })
 }
-
 
 require('./routes')(app)
 
