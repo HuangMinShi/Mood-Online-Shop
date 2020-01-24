@@ -7,7 +7,19 @@ const {
   CartProductSku
 } = require('../models')
 
-const generateSku = require('../libs/generateSku').generateSku
+const {
+  generateSku
+} = require('../libs/generateSku')
+
+const {
+  formatNumberToCurrency,
+  formatCurrencyToNumber
+} = require('../libs/utils')
+
+const shippingFee = {
+  inStorePickup: formatNumberToCurrency(0),
+  directDelivery: formatNumberToCurrency(100)
+}
 
 const cartController = {
   getCart: async (req, res) => {
@@ -72,16 +84,25 @@ const cartController = {
           ...item,
           sn: product.sn,
           name: product.name,
-          salePrice: Number(product.salePrice),
+          salePrice: formatNumberToCurrency(Number(product.salePrice)),
           color: product.Color.type.split('_').join(' ').toUpperCase(),
           image: product.Images[0].url,
-          subTotalAmount: Number(product.salePrice) * Number(item.quantity)
+          subTotalAmount: formatNumberToCurrency(Number(product.salePrice) * Number(item.quantity))
         }
       })
 
-      const totalAmount = cartItems.length ? cartItems.map(item => item.subTotalAmount).reduce((a, c) => a + c) : 0
+      let totalAmount = cartItems.length ? cartItems.map(item => formatCurrencyToNumber(item.subTotalAmount)).reduce((a, c) => a + c) : 0
+      totalAmount = formatNumberToCurrency(totalAmount)
 
-      return res.render('cart', { cartItems, totalAmount })
+      return res.render(
+        'cart',
+        {
+          cartItems,
+          totalAmount,
+          shippingFee
+        }
+      )
+
     } catch (err) {
       console.log(err)
     }
