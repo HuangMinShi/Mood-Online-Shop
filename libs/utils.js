@@ -1,7 +1,6 @@
 const moment = require('moment')
 
-module.exports = {
-
+const utils = {
   formatDateToYYYYMMDD: (date) => {
     return moment(date).format('YYYY/MM/DD')
   },
@@ -26,3 +25,5 @@ module.exports = {
     return orderStatusCodesList[statusNum.toString()]
   }
 }
+
+module.exports = utils
