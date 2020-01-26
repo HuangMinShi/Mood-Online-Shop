@@ -14,71 +14,72 @@
 
       <tbody>
         {{#each cartItems}}
-          <tr class="product-item-info text-center">
-            <td class="product-item-image text-left d-flex">
-              <a href="/products/{{this.sn}}">
-                <span class="item-image-container">
-                  <img src="{{this.image}}" width="100%" height="auto">
-                </span>
-              </a>
-              <div class="product-item-details d-flex flex-column justify-content-center ml-4">
-                <p>
-                  <strong class="item-details-name">
-                    <a href="/products/{{this.sn}}">
-                      {{this.name}}
-                    </a>
-                  </strong>
-                </p>
-                <p>
-                  <span class="font-weight-bold">Color:</span>
-                  {{this.color}}
-                </p>
-                <p>
-                  <span class="font-weight-bold">Size:</span>
-                  {{this.size}}
-                </p>
+        <tr class="product-item-info text-center">
+          <td class="product-item-image text-left d-flex">
+            <a href="/products/{{this.sn}}">
+              <span class="item-image-container">
+                <img src="{{this.image}}" width="100%" height="auto">
+              </span>
+            </a>
+            <div class="product-item-details d-flex flex-column justify-content-center ml-4">
+              <p>
+                <strong class="item-details-name">
+                  <a href="/products/{{this.sn}}">
+                    {{this.name}}
+                  </a>
+                </strong>
+              </p>
+              <p>
+                <span class="font-weight-bold">Color:</span>
+                {{this.color}}
+              </p>
+              <p>
+                <span class="font-weight-bold">Size:</span>
+                {{this.size}}
+              </p>
+            </div>
+          </td>
+
+          <td>
+            {{this.salePrice}}
+          </td>
+
+          <td>
+            <div class="d-flex justify-content-center">
+              <div class="quantity-field mr-1">
+                <input type="number" maxlength="3" value="{{this.quantity}}" disabled>
               </div>
-            </td>
 
-            <td>
-              {{this.salePrice}}
-            </td>
-
-            <td>
-              <div class="d-flex justify-content-center">
-                <div class="quantity-field mr-1">
-                  <input type="number" maxlength="3" value="{{this.quantity}}" disabled>
-                </div>
-
-                <div class="quantity-change">
-                  <form action="/cart/cartItems/{{CartProductSkuId}}/add" method="POST">
-                    <button type="submit" class="btn btn-sm btn-outline-secondary">
-                      <i class="fas fa-caret-up"></i>
-                    </button>
-                  </form>
-                  <form action="/cart/cartItems/{{CartProductSkuId}}/sub" method="POST" class="mt-1">
-                    <button type="submit" class="btn btn-sm btn-outline-secondary">
-                      <i class="fas fa-caret-down"></i>
-                    </button>
-                  </form>
-                </div>
-              </div>
-            </td>
-
-            <td>{{this.subTotalAmount}}</td>
-          </tr>
-
-          <tr class="item-actions">
-            <td colspan="100" class="border-top-0">
-              <div class="actions-toolbar text-right">
-                <form action="/cart/cartItems/{{CartProductSkuId}}?_method=DELETE" method="POST">
-                  <button type="submit" class="btn btn-link text-danger">
-                    <i class="fas fa-trash"></i>
+              <div class="quantity-change">
+                <form action="/cart/cartItems/{{CartProductSkuId}}/add" method="POST">
+                  <input type="hidden" name="">
+                  <button type="submit" class="btn btn-sm btn-outline-secondary">
+                    <i class="fas fa-caret-up"></i>
+                  </button>
+                </form>
+                <form action="/cart/cartItems/{{CartProductSkuId}}/sub" method="POST" class="mt-1">
+                  <button type="submit" class="btn btn-sm btn-outline-secondary">
+                    <i class="fas fa-caret-down"></i>
                   </button>
                 </form>
               </div>
-            </td>
-          </tr>
+            </div>
+          </td>
+
+          <td>{{this.subTotalAmount}}</td>
+        </tr>
+
+        <tr class="item-actions">
+          <td colspan="100" class="border-top-0">
+            <div class="actions-toolbar text-right">
+              <form action="/cart/cartItems/{{CartProductSkuId}}?_method=DELETE" method="POST">
+                <button type="submit" class="btn btn-link text-danger">
+                  <i class="fas fa-trash"></i>
+                </button>
+              </form>
+            </div>
+          </td>
+        </tr>
         {{/each}}
       </tbody>
     </table>
@@ -92,15 +93,15 @@
         <div class="form-group">
           <label for="country">國家</label>
           <select class="form-control custom-select-sm" id="country" name="country">
-            <option selected>請選擇您的國家</option>
-            <option>台灣</option>
+            <option>請選擇您的國家</option>
+            <option {{#eq country '台灣'}} selected {{/eq}}>台灣 </option>
           </select>
         </div>
 
         <div class="form-group">
           <label for="county">縣市</label>
           <select class="form-control custom-select-sm" id="county" name="county">
-            <option selected>請選擇一個縣市</option>
+            <option>請選擇一個縣市</option>
             <option>臺北市</option>
             <option>新北市</option>
             <option>桃園市</option>
@@ -128,37 +129,37 @@
 
         <div class="form-group">
           <label for="postal">郵遞區號</label>
-          <input type="text" class="form-control" id="postal" name="postal" placeholder="500">
+          <input type="text" class="form-control" id="postal" name="postal" placeholder="523...">
         </div>
 
         <div class="check">
           {{#each shippingFee}}
-            <div class="form-check">
-              <input class="form-check-input" type="radio" name="shipping" value={{@key}} id="free">
-              <label class="form-check-label" for="{{@key}}">
-                {{#if (eq @key 'inStorePickup')}}
-                  到店自取
-                {{else}}
-                  寄送運費
-                {{/if}}
-                {{this}}
-              </label>
-            </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="shipping" value={{@key}} id={{@key}}>
+            <label class="form-check-label" for="{{@key}}">
+              {{#eq @key 'inStorePickup'}}
+              <span>到店自取</span>
+              {{else}}
+              <span>寄送運費</span>
+              {{/eq}}
+              <span>{{this}}</span>
+            </label>
+          </div>
           {{/each}}
         </div>
 
         <div class="expected-cost">
-          <div class="sub-amount">
+          <div class="products-amount">
             <span>小計</span>
             <span>{{totalAmount}}</span>
           </div>
-          <div class="shipping-cost">
+          <div class="shipping-fee">
             <span>配送資訊</span>
-            <span>NT$0.00</span>
+            <span></span>
           </div>
           <p class="total-amount">
             <span>訂單金額</span>
-            <span>NT$2,800.00</span>
+            <span></span>
           </p>
         </div>
         <button type="submit">
@@ -167,3 +168,5 @@
       </form>
     </div>
   </div>
+</div>
+<script src="/javascripts/index.js"></script>

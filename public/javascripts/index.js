@@ -13,6 +13,9 @@
   })
 
 
+
+
+
   /************* product 頁面 *************/
   // 預設
   defaultSelectedColor()
@@ -44,6 +47,28 @@
     if (event.target.matches('.quantity-plus')) return calcQuantityUse('+')
     if (event.target.matches('.quantity-minus')) return calcQuantityUse('-')
   })
+
+
+
+
+
+  /************* cart 頁面 *************/
+  $('.cart .check').click(function (event) {
+    const target = event.target
+    if ($(target).is('input')) {
+      const productsAmount = $('.products-amount span:last').text()
+      const shippingFee = $(this).find('input[name="shipping"]:checked + label span:last').text()
+      const totalAmountInNum = formatCurrencyToNumber(productsAmount) + formatCurrencyToNumber(shippingFee)
+      const totalAmount = formatNumberToCurrency(totalAmountInNum)
+
+      $('.shipping-fee span:last').replaceWith(`<span>${shippingFee}</span>`)
+      $('.total-amount span:last').replaceWith(`<span>${totalAmount}</span>`)
+    }
+  })
+
+
+
+
 
   /************* Functions *************/
   /** products **/
@@ -116,4 +141,14 @@
 
     $('.quantity').attr('value', quantity)
   }
+
+  function formatNumberToCurrency(price) {
+    const formatedPrice = price.toLocaleString('zh-TW', { style: 'currency', currency: 'TWD' })
+    return 'NT' + formatedPrice.split('.', 1)[0]
+  }
+
+  function formatCurrencyToNumber(currency) {
+    return Number(currency.replace(/[^0-9.-]+/g, ''))
+  }
+
 })()

@@ -1,5 +1,5 @@
 input[type="text"],
-input[type=number] {
+input[type="number"] {
   background: #ffffff;
   border: .5px solid #cccccc;
   -moz-appearance:textfield; /* Firefox */
@@ -167,8 +167,8 @@ input::-webkit-inner-spin-button {
   margin: .75rem 0;
 }
 
-.cart .shipping-summary .sub-amount,
-.cart .shipping-summary .shipping-cost {
+.cart .shipping-summary .products-amount,
+.cart .shipping-summary .shipping-fee {
   display: flex;
   justify-content: space-between;
   margin: .75rem 0;
