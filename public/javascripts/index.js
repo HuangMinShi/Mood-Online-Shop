@@ -53,9 +53,23 @@
 
 
   /************* cart 頁面 *************/
-  $('.cart .check').click(function (event) {
+  $('.cart .info').change(function (event) {
     const target = event.target
-    if ($(target).is('input')) {
+    const value = target.value
+
+    if ($(target).is('select[name="country"]')) {
+      $('.quantity-change input[name="country"]').attr('value', value)
+    }
+
+    if ($(target).is('select[name="county"]')) {
+      $('.quantity-change input[name="county"]').attr('value', value)
+    }
+
+    if ($(target).is('input[name="postal"]')) {
+      $('.quantity-change input[name="postal"]').attr('value', value)
+    }
+
+    if ($(target).is('input[name="shipping"]')) {
       const productsAmount = $('.products-amount span:last').text()
       const shippingFee = $(this).find('input[name="shipping"]:checked + label span:last').text()
       const totalAmountInNum = formatCurrencyToNumber(productsAmount) + formatCurrencyToNumber(shippingFee)
@@ -63,6 +77,9 @@
 
       $('.shipping-fee span:last').replaceWith(`<span>${shippingFee}</span>`)
       $('.total-amount span:last').replaceWith(`<span>${totalAmount}</span>`)
+
+      // 增減數量 button 綁定
+      $('.quantity-change input[name="shipping"]').attr('value', value)
     }
   })
 

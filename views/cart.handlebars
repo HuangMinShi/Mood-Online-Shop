@@ -52,12 +52,19 @@
 
               <div class="quantity-change">
                 <form action="/cart/cartItems/{{CartProductSkuId}}/add" method="POST">
-                  <input type="hidden" name="">
+                  <input type="hidden" name="country" value="{{../country}}">
+                  <input type="hidden" name="county" value="{{../county}}">
+                  <input type="hidden" name="postal" value="{{../postal}}">
+                  <input type="hidden" name="shipping" value="{{../shipping}}">
                   <button type="submit" class="btn btn-sm btn-outline-secondary">
                     <i class="fas fa-caret-up"></i>
                   </button>
                 </form>
                 <form action="/cart/cartItems/{{CartProductSkuId}}/sub" method="POST" class="mt-1">
+                  <input type="hidden" name="country" value="{{../country}}">
+                  <input type="hidden" name="county" value="{{../county}}">
+                  <input type="hidden" name="postal" value="{{../postal}}">
+                  <input type="hidden" name="shipping" value="{{../shipping}}">
                   <button type="submit" class="btn btn-sm btn-outline-secondary">
                     <i class="fas fa-caret-down"></i>
                   </button>
@@ -94,7 +101,7 @@
           <label for="country">國家</label>
           <select class="form-control custom-select-sm" id="country" name="country">
             <option>請選擇您的國家</option>
-            <option {{#eq country '台灣'}} selected {{/eq}}>台灣 </option>
+            <option {{#eq country '台灣'}} selected {{/eq}}>台灣</option>
           </select>
         </div>
 
@@ -102,22 +109,22 @@
           <label for="county">縣市</label>
           <select class="form-control custom-select-sm" id="county" name="county">
             <option>請選擇一個縣市</option>
-            {{#each countries}}
-            <option>{{this}}</option>
+            {{#each countyList}}
+            <option {{#eq ../county this}} selected {{/eq}}>{{this}}</option>
             {{/each}}
           </select>
         </div>
 
         <div class="form-group">
           <label for="postal">郵遞區號</label>
-          <input type="text" class="form-control" id="postal" name="postal" placeholder="523...">
+          <input type="text" class="form-control" id="postal" name="postal" value="{{postal}}">
         </div>
 
         <div class="check">
-          {{#each shippingFee}}
+          {{#each shippingFeeList}}
           <div class="form-check">
             <input class="form-check-input" type="radio" name="shipping" value={{@key}} id={{@key}}
-              {{#eq @key 'inStorePickup'}} checked {{/eq}}>
+              {{#eq @key ../shipping}} checked {{/eq}}>
             <label class="form-check-label" for="{{@key}}">
               {{#eq @key 'inStorePickup'}}
               <span>到店自取</span>
