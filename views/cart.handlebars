@@ -66,7 +66,7 @@
             </div>
           </td>
 
-          <td>{{this.subTotalAmount}}</td>
+          <td>{{this.itemTotal}}</td>
         </tr>
 
         <tr class="item-actions">
@@ -133,15 +133,15 @@
         <div class="expected-cost">
           <div class="products-amount">
             <span>小計</span>
-            <span>{{totalAmount}}</span>
+            <span>{{subTotal}}</span>
           </div>
           <div class="shipping-fee">
             <span>配送資訊</span>
-            <span>NT$ 0</span>
+            <span>{{selectedShippingFee}}</span>
           </div>
           <p class="total-amount">
             <span>訂單金額</span>
-            <span>{{totalAmount}}</span>
+            <span>{{total}}</span>
           </p>
         </div>
         <button type="submit">

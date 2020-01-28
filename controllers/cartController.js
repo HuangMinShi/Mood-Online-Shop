@@ -80,26 +80,38 @@ const cartController = {
       // 上述查詢做資料合併
       cartItems = cartItems.map(item => {
         const product = products.find(product => product.id === item.ProductId)
+
         return {
           ...item,
           sn: product.sn,
           name: product.name,
-          salePrice: formatNumberToCurrency(Number(product.salePrice)),
-          color: product.Color.type.split('_').join(' ').toUpperCase(),
           image: product.Images[0].url,
-          subTotalAmount: formatNumberToCurrency(Number(product.salePrice) * Number(item.quantity))
+          color: product.Color.type.split('_').join(' ').toUpperCase(),
+          salePrice: formatNumberToCurrency(Number(product.salePrice)),
+          itemTotal: formatNumberToCurrency(Number(product.salePrice) * Number(item.quantity))
         }
       })
 
-      let totalAmount = cartItems.length ? cartItems.map(item => formatCurrencyToNumber(item.subTotalAmount)).reduce((a, c) => a + c) : 0
-      totalAmount = formatNumberToCurrency(totalAmount)
+      // 運費及價格資訊
+      const cartInfo = req.session.cartInfo || {}
+      const selectedShippingFee = shippingFeeList[cartInfo.shipping] || ''
+
+      let subTotal = cartItems.length ? cartItems.map(item => formatCurrencyToNumber(item.itemTotal)).reduce((a, c) => a + c) : 0
+      let total = subTotal + formatCurrencyToNumber(selectedShippingFee)
+
+      subTotal = formatNumberToCurrency(subTotal)
+      total = formatNumberToCurrency(total)
 
       return res.render(
         'cart',
         {
+          ...cartInfo,
           cartItems,
-          totalAmount,
-          shippingFee
+          subTotal,
+          selectedShippingFee,
+          total,
+          countyList,
+          shippingFeeList,
         }
       )
 
