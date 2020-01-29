@@ -14,7 +14,7 @@ const {
 
 const { generateSku } = require('../libs/generateSku')
 
-const shippingFeeList = {
+const shippingMethods = {
   inStorePickup: formatNumberToCurrency(0),
   directDelivery: formatNumberToCurrency(100)
 }
@@ -93,7 +93,7 @@ const cartController = {
 
       // 運費及價格資訊
       const cartInfo = req.session.cartInfo || {}
-      const selectedShippingFee = shippingFeeList[cartInfo.shipping] || ''
+      const selectedShippingFee = shippingMethods[cartInfo.shipping] || ''
 
       let subTotal = cartItems.length ? cartItems.map(item => formatCurrencyToNumber(item.itemTotal)).reduce((a, c) => a + c) : 0
       let total = subTotal + formatCurrencyToNumber(selectedShippingFee)
@@ -110,7 +110,7 @@ const cartController = {
           selectedShippingFee,
           total,
           countyList,
-          shippingFeeList,
+          shippingMethods,
         }
       )
 

@@ -121,7 +121,7 @@
         </div>
 
         <div class="check">
-          {{#each shippingFeeList}}
+          {{#each shippingMethods}}
           <div class="form-check">
             <input class="form-check-input" type="radio" name="shipping" value={{@key}} id={{@key}}
               {{#eq @key ../shipping}} checked {{/eq}}>
