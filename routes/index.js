@@ -8,6 +8,4 @@ module.exports = app => {
   app.use('/products', products)
   app.use('/cart', cart)
   app.use('/orders', orders)
-
-  app.use('/', (req, res) => res.send('HOME'))
 }

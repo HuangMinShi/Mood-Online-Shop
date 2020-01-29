@@ -4,9 +4,12 @@ const {
 
 const {
   formatDateToYYYYMMDD,
-  formatPriceToHaveComma,
+  formatNumberToCurrency,
   mapOrderStatusCodeToString
 } = require('../libs/utils')
+
+const counties = require('../public/counties.json').counties
+const shippingMethods = require('../public/shippingMethods.json').shippingMethods
 
 const orderController = {
   getOrders: async (req, res) => {
@@ -35,7 +38,7 @@ const orderController = {
       return {
         ...order.dataValues,
         createdAt: formatDateToYYYYMMDD(order.createdAt),
-        amount: formatPriceToHaveComma(order.amount),
+        amount: formatNumberToCurrency(order.amount),
         status: mapOrderStatusCodeToString(order.status)
       }
     })
@@ -45,6 +48,12 @@ const orderController = {
 
   getOrder: (req, res) => {
     return res.send('get order')
+  },
+
+  createOrder: (req, res) => {
+    const cartInfo = req.query
+
+    return res.render('create', { counties, shippingMethods })
   },
 
   postOrder: (req, res) => {

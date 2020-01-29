@@ -216,3 +216,17 @@ input::-webkit-inner-spin-button {
 #order .action button:hover{
   color: #000000;
 }
+
+/* =============== Create order =============== */
+.create-order p.title {
+  padding: .75rem 0;
+  border-bottom: 1px solid #DEE2E6;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.required-icon {
+  margin-left: .5rem;
+  color: #ff0000;
+}
+
