@@ -57,15 +57,15 @@
     const target = event.target
     const value = target.value
 
-    if ($(target).is('select[name="country"]')) {
+    if ($(target).is('#country')) {
       $('.quantity-change input[name="country"]').attr('value', value)
     }
 
-    if ($(target).is('select[name="county"]')) {
+    if ($(target).is('#county')) {
       $('.quantity-change input[name="county"]').attr('value', value)
     }
 
-    if ($(target).is('input[name="postal"]')) {
+    if ($(target).is('#postal')) {
       $('.quantity-change input[name="postal"]').attr('value', value)
     }
 
@@ -160,8 +160,9 @@
   }
 
   function formatNumberToCurrency(price) {
-    const formatedPrice = price.toLocaleString('zh-TW', { style: 'currency', currency: 'TWD' })
-    return 'NT' + formatedPrice.split('.', 1)[0]
+    const currency = price.toLocaleString('zh-TW', { style: 'currency', currency: 'TWD' })
+    const formatedPrice = currency.replace(/[^0-9-.,]+/g, '');
+    return 'NT$ ' + formatedPrice.split('.', 1)[0]
   }
 
   function formatCurrencyToNumber(currency) {
