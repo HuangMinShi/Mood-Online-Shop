@@ -237,13 +237,9 @@ input::-webkit-inner-spin-button {
   border-radius: .5rem;
 }
 
-.buy-list .shipping-fee {
-  border-bottom: 1px solid #DEE2E6;
-  padding: .5rem 0;
-}
-
 .buy-list .total-amount {
   padding: .5rem 0;
+  border-top: 1px solid #DEE2E6;
 }
 
 .buy-list .minicart-item-container {
