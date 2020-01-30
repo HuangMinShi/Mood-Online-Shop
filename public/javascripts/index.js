@@ -87,7 +87,7 @@
 
 
   /************* create order 頁面 *************/
-  $('.shipping-methods .check').change(function (event) {
+  $('.shipping-methods .check').change(function () {
     const productsAmount = $('.products-amount span:last').text()
     const shippingFee = $(this).find('input[name="shipping"]:checked + label span:last').text()
     const totalAmountInNum = formatCurrencyToNumber(productsAmount) + formatCurrencyToNumber(shippingFee)
