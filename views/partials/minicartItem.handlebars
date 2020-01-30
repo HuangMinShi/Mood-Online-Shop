@@ -1,48 +1,59 @@
-<div class="minicart-item-container">
-  <ul class="minicart-items">
-    {{#each cartItems}}
-    <li class="product-item d-flex py-3 border-bottom">
-      <div class="product-item-image mt-1">
-        <a href="/products/{{this.sn}}">
-          <span class="item-image-container">
-            <img src="{{this.image}}" width="100%" height="auto">
-          </span>
-        </a>
-      </div>
+<div id="minicart">
+  <span class="text-muted pb-1 toggle" data-toggle="collapse" data-target="#minicart-expend-block">
+    購物項目
+  </span>
+  <hr>
 
-      <div class="product-item-details">
-        <div class="name">
-          <strong class="item-details-name">
+  <div id="minicart-expend-block" class="collapse">
+    <div class="minicart-item-container d-flex">
+      <ul class="minicart-items">
+        {{#each cartItems}}
+        <li class="product-item d-flex py-3 border-bottom">
+          <div class="product-item-image mt-1">
             <a href="/products/{{this.sn}}">
-              {{this.name}}
+              <span class="item-image-container">
+                <img src="{{this.image}}" width="100%" height="auto">
+              </span>
             </a>
-          </strong>
-        </div>
-
-        <div class="quantity py-1">
-          <span class="font-weight-bold">數量 :</span>
-          {{this.quantity}}
-        </div>
-
-        <div class="price">
-          {{this.salePrice}}
-        </div>
-
-        <div class="expend pt-1">
-          <span class="text-muted">查看詳細資訊</span>
-          <div class="color py-1">
-            <span class="font-weight-bold">顏色 :</span>
-            {{this.color}}
           </div>
 
-          <div class="size">
-            <span class="font-weight-bold">尺寸 :</span>
-            {{this.size}}
-          </div>
-        </div>
-      </div>
-    </li>
-    {{/each}}
-  </ul>
+          <div class="product-item-details">
+            <div class="name">
+              <strong class="item-details-name">
+                <a href="/products/{{this.sn}}">
+                  {{this.name}}
+                </a>
+              </strong>
+            </div>
 
+            <div class="quantity py-1">
+              <span class="font-weight-bold">數量 :</span>
+              {{this.quantity}}
+            </div>
+
+            <div class="price pb-1">
+              {{this.salePrice}}
+            </div>
+
+            <span class="toggle collapsed text-muted" data-toggle="collapse" data-target=".expend-{{this.sn}}">
+              查看詳細資訊
+            </span>
+
+            <div class="expend-{{this.sn}} collapse pt-1">
+              <div class="color py-1">
+                <span class="font-weight-bold">顏色 :</span>
+                {{this.color}}
+              </div>
+
+              <div class="size">
+                <span class="font-weight-bold">尺寸 :</span>
+                {{this.size}}
+              </div>
+            </div>
+          </div>
+        </li>
+        {{/each}}
+      </ul>
+    </div>
+  </div>
 </div>
