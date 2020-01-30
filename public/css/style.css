@@ -11,6 +11,19 @@ input::-webkit-inner-spin-button {
   margin: 0;
 }
 
+.action-btn {
+  margin-top: .75rem;
+  padding: .5rem;
+  border: 0;
+  background-color: #ECECEC;
+  color: #535353;
+}
+
+.action-btn:hover {
+  background-color: #4B4B4B;
+  color: #F4F4F4;
+}
+
 /* =============== Products =============== */
 .product {
   padding: 0 .5rem;
@@ -149,6 +162,7 @@ input::-webkit-inner-spin-button {
   height: fit-content;
   border: 1px solid #A8A8A8;
 }
+
 .cart .shipping-summary .title {
   margin-bottom: .75rem;
 }
@@ -184,20 +198,6 @@ input::-webkit-inner-spin-button {
   border-top: 1px solid #DEE2E6;
 }
 
-.cart .shipping-summary .expected-cost + button {
-  margin-top: .75rem;
-  padding: .5rem;
-  width: 100%;
-  border: 0;
-  background-color: #ECECEC;
-  color: #535353;
-}
-
-.cart .shipping-summary .expected-cost + button:hover {
-  background-color: #4B4B4B;
-  color: #F4F4F4;
-}
-
 /* =============== Order =============== */
 #order .action span{
   line-height: 3rem;
@@ -230,3 +230,60 @@ input::-webkit-inner-spin-button {
   color: #ff0000;
 }
 
+.buy-list {
+  background-color: #f5f5f5;
+  height: fit-content;
+  border: 1px solid #A8A8A8;
+  border-radius: .5rem;
+}
+
+.buy-list .shipping-fee {
+  border-bottom: 1px solid #DEE2E6;
+  padding: .5rem 0;
+}
+
+.buy-list .total-amount {
+  padding: .5rem 0;
+}
+
+.buy-list .minicart-item-container {
+  display: flex;
+}
+
+.buy-list .product-item-details {
+  padding: 0 1rem;
+}
+
+.create-order .shipping-methods .form-check {
+  margin: .75rem 0;
+}
+
+.create-order .shipping-info .action {
+  text-align: right;
+  margin: 2rem;
+}
+
+.buy-list .products-amount,
+.buy-list .shipping-fee {
+  display: flex;
+  justify-content: space-between;
+  margin: .75rem 0;
+}
+
+.buy-list .total-amount {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-top: .75rem;
+  padding-top: .75rem;
+}
+
+.minicart-items {
+  list-style: none;
+  padding-left: 0;
+}
+
+.minicart-item-container .item-image-container {
+  width: 70px;
+}

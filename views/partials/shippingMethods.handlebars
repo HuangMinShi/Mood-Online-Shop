@@ -2,7 +2,7 @@
   {{#each shippingMethods}}
   <div class="form-check">
     <input class="form-check-input" type="radio" name="shipping" value={{@key}} id={{@key}} {{#eq @key ../shipping}}
-      checked {{/eq}}>
+      checked {{/eq}} required>
     <label class="form-check-label" for="{{@key}}">
       {{#each this}}
       <span>{{this}}</span>

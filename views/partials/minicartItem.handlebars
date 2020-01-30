@@ -1,42 +1,48 @@
 <div class="minicart-item-container">
-  <div class="product-item-image">
-    <a href="/products/{{this.sn}}">
-      <span class="item-image-container">
-        <img src="{{this.image}}" width="100%" height="auto">
-      </span>
-    </a>
-  </div>
-
-  <div class="product-item-details">
-    <p>
-      <div class="name">
-        <strong class="item-details-name">
-          <a href="/products/{{this.sn}}">
-            {{!-- {{this.name}} --}}GIRL'S CROWN BONDED FULL-ZIP HOODIE
-          </a>
-        </strong>
+  <ul class="minicart-items">
+    {{#each cartItems}}
+    <li class="product-item d-flex py-3 border-bottom">
+      <div class="product-item-image mt-1">
+        <a href="/products/{{this.sn}}">
+          <span class="item-image-container">
+            <img src="{{this.image}}" width="100%" height="auto">
+          </span>
+        </a>
       </div>
 
-      <div class="quantity">
-        <span class="font-weight-bold">Quantity:</span>
-        {{!-- {{this.quantity}} --}}1
-      </div>
-      <div class="expend">
-        <span>查看詳細資訊</span>
-        <div class="color">
-          <span class="font-weight-bold">Color:</span>
-          {{!-- {{this.color}} --}}CREME FRESH PRESSED
+      <div class="product-item-details">
+        <div class="name">
+          <strong class="item-details-name">
+            <a href="/products/{{this.sn}}">
+              {{this.name}}
+            </a>
+          </strong>
         </div>
 
-        <div class="size">
-          <span class="font-weight-bold">Size:</span>
-          {{!-- {{this.size}} --}}L
+        <div class="quantity py-1">
+          <span class="font-weight-bold">數量:</span>
+          {{this.quantity}}
         </div>
 
         <div class="price">
-          {{!-- {{this.salePrice}} --}}NT$2,450
+          {{this.salePrice}}
+        </div>
+
+        <div class="expend pt-1">
+          <span>查看詳細資訊</span>
+          <div class="color py-1">
+            <span class="font-weight-bold">Color:</span>
+            {{this.color}}
+          </div>
+
+          <div class="size">
+            <span class="font-weight-bold">Size:</span>
+            {{this.size}}
+          </div>
         </div>
       </div>
-    </p>
-  </div>
+    </li>
+    {{/each}}
+  </ul>
+
 </div>

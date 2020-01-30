@@ -1,14 +1,14 @@
 <span class="page-title">新增訂單</span>
 
 <div class="row create-order">
-  <div class="shipping-info col-lg-8">
-    <form action="/" method="POST">
+  <div class="shipping-info col-lg-8 w-75">
+    <form action="/orders" method="POST">
       <div class="shipping-address">
         <p class="title">配送地址</p>
 
         <div class="form-group">
           <label for="name">名字<span class="required-icon">*</span></label>
-          <input type="text" id="name" name="name" class="form-control" value="Ethan Huang" autofocus required>
+          <input type="text" id="name" name="name" class="form-control" value="{{name}}" autofocus required>
         </div>
 
         <div class="form-group">
@@ -31,22 +31,22 @@
 
         <div class="form-group">
           <label for="township">鄉鎮市區<span class="required-icon">*</span></label>
-          <input type="text" class="form-control" id="township" name="township" value="彰化市" required>
+          <input type="text" class="form-control" id="township" name="township" value="{{township}}" required>
         </div>
 
         <div class="form-group">
           <label for="street">街道地址<span class="required-icon">*</span></label>
-          <input type="text" class="form-control" id="street" name="street" value="信義里民生路317巷17號1樓" required>
+          <input type="text" class="form-control" id="street" name="street" value="{{street}}" required>
         </div>
 
         <div class="form-group">
           <label for="postal">郵遞區號<span class="required-icon">*</span></label>
-          <input type="text" class="form-control" id="postal" name="postal" value="500" required>
+          <input type="text" class="form-control" id="postal" name="postal" value="{{postal}}" required>
         </div>
 
         <div class="form-group">
           <label for="tel">電話號碼<span class="required-icon">*</span></label>
-          <input type="tel" class="form-control" id="tel" name="tel" value="0912387122" required>
+          <input type="tel" class="form-control" id="tel" name="tel" value="{{tel}}" required>
         </div>
       </div>
 
@@ -56,7 +56,11 @@
         {{> shippingMethods}}
       </div>
 
-      <input type="submit">
+      <div class="action">
+        <button type="submit" class="action-btn">
+          <span>繼續</span>
+        </button>
+      </div>
     </form>
   </div>
 
