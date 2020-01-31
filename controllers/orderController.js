@@ -75,6 +75,7 @@ const orderController = {
 
     // 資料整理
     let cartItems = cart.cartItems.map(item => ({
+      sku: item.sku,
       size: item.size,
       ProductId: item.ProductId,
       CartProductSkuId: item.CartProductSku.id,

@@ -35,11 +35,11 @@
               {{this.salePrice}}
             </div>
 
-            <span class="toggle collapsed text-muted" data-toggle="collapse" data-target=".expend-{{this.sn}}">
+            <span class="toggle collapsed text-muted" data-toggle="collapse" data-target="#expend-{{this.sku}}">
               查看詳細資訊
             </span>
 
-            <div class="expend-{{this.sn}} collapse pt-1">
+            <div id="expend-{{this.sku}}" class="collapse pt-1">
               <div class="color py-1">
                 <span class="font-weight-bold">顏色 :</span>
                 {{this.color}}
