@@ -66,7 +66,7 @@ const orderController = {
       township: '南投市',
       street: '埔里鎮民生路127號',
       postal: '400',
-      tel: '0912387122',
+      phone: '0912387122',
       shipping: 'directDelivery'
     }
 

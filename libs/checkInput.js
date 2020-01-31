@@ -38,6 +38,7 @@ const checkInput = {
     if (routePath === '/users/signup') return checkOptions.signUp
     if (routePath === '/users/signin') return checkOptions.signIn
     if (routePath === '/cart') return checkOptions.cart
+    if (routePath === '/orders') return checkOptions.orders
   },
 
   getErrorMessage: (key, input) => {
@@ -46,13 +47,19 @@ const checkInput = {
       hasEmptyFields: `${input} 是必填欄位，請確認`,
       isEmailValid: 'email 無效，請重新輸入',
       isPasswordCheckCorrect: '兩次密碼不一致，請重新輸入',
-      isQuantityInTheScope: '單次單項購買數量最少 1 件，最多 3 件，請確認'
+      isQuantityInTheScope: '單次單項購買數量最少 1 件，最多 3 件，請確認',
+      isPhoneNumsValid: '手機號碼格式錯誤，請確認'
     }
     return {
       message: messages[key]
     }
   },
 
+  isPhoneNumsValid: (phone) => {
+    phone = phone.replace(/[^\d]+/g, '')
+    const pattern = /^09\d{8}$/
+    return pattern.test(phone)
+  }
 }
 
 /** 
@@ -88,6 +95,18 @@ const checkOptions = {
     },
     checkItemRequiredParams: {
       isQuantityInTheScope: ['quantity']
+    }
+  },
+
+  orders: {
+    requiredFields: ['email', 'name', 'country', 'county', 'township', 'street', 'postal', 'phone', 'shipping'],
+    checkItems: {
+      email: checkInput.isEmailValid,
+      phone: checkInput.isPhoneNumsValid
+    },
+    checkItemRequiredParams: {
+      isEmailValid: ['email'],
+      isPhoneNumsValid: ['phone']
     }
   }
 }

@@ -53,9 +53,12 @@
         </div>
 
         <div class="form-group">
-          <label for="tel">電話號碼<span class="required-icon">*</span></label>
-          <input type="tel" class="form-control" id="tel" name="tel" value="{{tel}}" required>
+          <label for="phone">手機號碼<span class="required-icon">*</span></label>
+          <input type="tel" class=" form-control" id="phone" name="phone" value="{{phone}}" pattern="[0-9]{10}"
+            required>
+          <span>格式：0912345678</span>
         </div>
+
       </div>
 
       <div class="shipping-methods">
