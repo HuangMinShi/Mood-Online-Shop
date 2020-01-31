@@ -12,22 +12,11 @@ module.exports = {
         type: Sequelize.STRING
       },
       status: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        defaultValue: '0'
       },
-      amount: {
-        type: Sequelize.FLOAT
-      },
-      order_name: {
-        type: Sequelize.STRING
-      },
-      order_address: {
-        type: Sequelize.STRING
-      },
-      order_email: {
-        type: Sequelize.STRING
-      },
-      order_phone: {
-        type: Sequelize.STRING
+      total: {
+        type: Sequelize.INTEGER
       },
       invoice: {
         type: Sequelize.STRING
@@ -42,12 +31,8 @@ module.exports = {
           key: 'id'
         }
       },
-      shipping_method_id: {
-        type: Sequelize.INTEGER,
-        references: {
-          model: 'Shipping_methods',
-          key: 'id'
-        }
+      shipping_method: {
+        type: Sequelize.STRING
       },
       receive_name: {
         type: Sequelize.STRING
@@ -55,7 +40,7 @@ module.exports = {
       receive_address: {
         type: Sequelize.STRING
       },
-      receive_email: {
+      receive_country: {
         type: Sequelize.STRING
       },
       receive_phone: {

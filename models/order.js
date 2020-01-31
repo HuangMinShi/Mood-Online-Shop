@@ -2,18 +2,18 @@
 module.exports = (sequelize, DataTypes) => {
   const Order = sequelize.define('Order', {
     sn: DataTypes.STRING,
-    status: DataTypes.STRING,
-    amount: DataTypes.FLOAT,
-    orderName: DataTypes.STRING,
-    orderAddress: DataTypes.STRING,
-    orderEmail: DataTypes.STRING,
-    orderPhone: DataTypes.STRING,
+    status: {
+      type: DataTypes.STRING,
+      defaultValue: '0'
+    },
+    total: DataTypes.INTEGER,
     invoice: DataTypes.STRING,
     note: DataTypes.STRING,
     receiveName: DataTypes.STRING,
+    receiveCountry: DataTypes.STRING,
     receiveAddress: DataTypes.STRING,
-    receiveEmail: DataTypes.STRING,
     receivePhone: DataTypes.STRING,
+    shippingMethod: DataTypes.STRING,
     UserId: {
       type: DataTypes.INTEGER,
       references: {
@@ -21,13 +21,6 @@ module.exports = (sequelize, DataTypes) => {
         key: 'id'
       }
     },
-    ShippingMethodId: {
-      type: DataTypes.INTEGER,
-      references: {
-        model: 'ShippingMethods',
-        key: 'id'
-      }
-    }
   }, {});
   Order.associate = function (models) {
     Order.belongsToMany(models.ProductSku, {
@@ -37,7 +30,6 @@ module.exports = (sequelize, DataTypes) => {
     })
     Order.belongsTo(models.User)
     Order.hasMany(models.PaymentLog)
-    Order.belongsTo(models.ShippingMethod)
   };
   return Order;
 };
