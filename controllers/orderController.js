@@ -55,14 +55,19 @@ const orderController = {
     return res.send('get order')
   },
 
-  createOrder: async (req, res) => {
+  getCheckout: async (req, res) => {
     req.session.cartId = 1
     const cartInfo = req.query
     const options = {
+      email: 'england78999@gmail.com',
       name: '蔡易軒',
+      country: '台灣',
+      county: '南投縣',
       township: '南投市',
       street: '埔里鎮民生路127號',
-      tel: '0912387122'
+      postal: '400',
+      tel: '0912387122',
+      shipping: 'directDelivery'
     }
 
     // 找出購物車商品
@@ -120,7 +125,7 @@ const orderController = {
     subTotal = formatNumberToCurrency(subTotal)
     total = formatNumberToCurrency(total)
 
-    return res.render('create', {
+    return res.render('checkout', {
       ...options,
       ...cartInfo,
       cartItems,
