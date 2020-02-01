@@ -65,87 +65,34 @@ const orderController = {
     return res.send('get order')
   },
 
-  getCheckout: async (req, res) => {
-    req.session.cartId = 1
-    const cartInfo = req.query
-    const options = {
-      email: 'england78999@gmail.com',
-      name: '蔡易軒',
-      country: '台灣',
-      county: '南投縣',
-      township: '南投市',
-      street: '埔里鎮民生路127號',
-      postal: '400',
-      phone: '0912387122',
-      shipping: 'directDelivery'
-    }
+  getCheckoutShipping: async (req, res) => {
+    const shippingInfo = req.query
+    const cartInfo = req.flash('cartInfo')[0]
+    const shippingFee = getShippingFee(shippingInfo.shippingWay)
+    const total = cartInfo.subTotal + shippingFee
 
-    // 找出購物車商品
-    let cart = await Cart.findByPk(req.session.cartId, { include: 'cartItems' })
+    Object.assign(cartInfo, shippingInfo)
 
-    // 資料整理
-    let cartItems = cart.cartItems.map(item => ({
-      sku: item.sku,
-      size: item.size,
-      ProductId: item.ProductId,
-      CartProductSkuId: item.CartProductSku.id,
-      quantity: item.CartProductSku.quantity,
-    }))
-
-    // 找出商品資訊
-    const products = await Product.findAll({
-      attributes: ['id', 'sn', 'name', 'salePrice'],
-      where: {
-        id: cartItems.map(item => item.ProductId)
-      },
-      include: [
-        {
-          model: Color,
-          attributes: ['type']
-        },
-        {
-          model: Image,
-          attributes: ['url'],
-          where: { isMain: true }
-        }
-      ]
-    })
-
-    // 購物車商品與商品資訊合併
-    cartItems = cartItems.map(item => {
-      const product = products.find(product => product.id === item.ProductId)
-
-      return {
-        ...item,
-        sn: product.sn,
-        name: product.name,
-        image: product.Images[0].url,
-        color: product.Color.type.split('_').join(' ').toUpperCase(),
-        salePrice: formatNumberToCurrency(Number(product.salePrice)),
-        itemTotal: formatNumberToCurrency(Number(product.salePrice) * Number(item.quantity))
-      }
-    })
-
-    // 運費及價格
-    const selectedShippingWay = shippingMethods[cartInfo.shipping] || []
-    const len = selectedShippingWay.length
-    const selectedShippingFee = selectedShippingWay[len - 1] || ''
-
-    let subTotal = cartItems.length ? cartItems.map(item => formatCurrencyToNumber(item.itemTotal)).reduce((a, c) => a + c) : 0
-    let total = subTotal + formatCurrencyToNumber(selectedShippingFee)
-    subTotal = formatNumberToCurrency(subTotal)
-    total = formatNumberToCurrency(total)
-
-    return res.render('checkout', {
-      ...options,
+    const renderParams = {
       ...cartInfo,
-      cartItems,
+      shippingFee,
+      total,
       counties,
       shippingMethods,
-      selectedShippingFee,
-      subTotal,
-      total
-    })
+      ...options
+    }
+
+    return res.render('checkout', renderParams)
+  },
+
+  postCheckoutShipping: (req, res) => {
+    // console.log('postCheckoutShipping', req.flash('data'));
+
+
+
+    return res.send('postCheckoutShipping')
+  },
+
   },
 
   postOrder: (req, res) => {
