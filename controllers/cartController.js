@@ -7,19 +7,10 @@ const {
   CartProductSku
 } = require('../models')
 
-const {
-  formatNumberToCurrency,
-  formatCurrencyToNumber
-} = require('../libs/utils')
-
+const { getShippingFee } = require('../libs/utils')
 const { generateSku } = require('../libs/generateSku')
-
-const shippingMethods = {
-  inStorePickup: formatNumberToCurrency(0),
-  directDelivery: formatNumberToCurrency(100)
-}
-
-const countyList = require('../public/counties.json').counties
+const { counties } = require('../public/counties.json')
+const { shippingMethods } = require('../public/shippingMethods.json')
 
 const cartController = {
   getCart: async (req, res) => {
@@ -43,21 +34,22 @@ const cartController = {
        * }
        */
 
-      // 先查詢 Carts JOIN CartProductSkus 及 ProductSkus
+      // 查詢 Carts JOIN CartProductSkus and ProductSkus
       let cart = await Cart.findByPk(req.session.cartId, {
         include: 'cartItems'
       })
       cart = cart || { cartItems: [] }
 
-      // 整理 Carts 查詢後資料
+      // 整理
       let cartItems = cart.cartItems.map(item => ({
+        sku: item.sku,
         size: item.size,
         ProductId: item.ProductId,
         CartProductSkuId: item.CartProductSku.id,
         quantity: item.CartProductSku.quantity,
       }))
 
-      // 再查詢 Products JOIN Color 及 Image
+      // 查詢 Products JOIN Color and Image
       const products = await Product.findAll({
         attributes: ['id', 'sn', 'name', 'salePrice'],
         where: {
@@ -76,7 +68,7 @@ const cartController = {
         ]
       })
 
-      // 上述查詢做資料合併
+      // 合併
       cartItems = cartItems.map(item => {
         const product = products.find(product => product.id === item.ProductId)
 
@@ -86,33 +78,36 @@ const cartController = {
           name: product.name,
           image: product.Images[0].url,
           color: product.Color.type.split('_').join(' ').toUpperCase(),
-          salePrice: formatNumberToCurrency(Number(product.salePrice)),
-          itemTotal: formatNumberToCurrency(Number(product.salePrice) * Number(item.quantity))
+          salePrice: Number(product.salePrice),
+          itemTotal: Number(product.salePrice) * Number(item.quantity)
         }
       })
 
-      // 運費及價格資訊
-      const cartInfo = req.session.cartInfo || {}
-      const selectedShippingFee = shippingMethods[cartInfo.shipping] || ''
+      // 計算運費及總金額
+      const shippingInfo = req.flash('shippingInfo')[0] || { shippingWay: 'inStorePickup' }
+      const shippingFee = getShippingFee(shippingInfo.shippingWay)
+      const subTotal = cartItems.length ? cartItems.map(item => item.itemTotal).reduce((a, c) => a + c) : 0
+      const total = subTotal + shippingFee
+      const cartInfo = {
+        ...shippingInfo,
+        cartItems,
+        subTotal
+      }
+      const renderParams = {
+        ...cartInfo,
+        shippingFee,
+        total,
+        counties,
+        shippingMethods
+      }
 
-      let subTotal = cartItems.length ? cartItems.map(item => formatCurrencyToNumber(item.itemTotal)).reduce((a, c) => a + c) : 0
-      let total = subTotal + formatCurrencyToNumber(selectedShippingFee)
+      // 傳至確認頁
+      const flashLength = req.flash('cartInfo').length
+      if (flashLength < 2) {
+        req.flash('cartInfo', cartInfo)
+      }
 
-      subTotal = formatNumberToCurrency(subTotal)
-      total = formatNumberToCurrency(total)
-
-      return res.render(
-        'cart',
-        {
-          ...cartInfo,
-          cartItems,
-          subTotal,
-          selectedShippingFee,
-          total,
-          countyList,
-          shippingMethods,
-        }
-      )
+      return res.render('cart', renderParams)
 
     } catch (err) {
       console.log(err)
@@ -192,7 +187,7 @@ const cartController = {
     try {
 
       // 紀錄訪客估算運費資訊
-      req.session.cartInfo = req.body
+      req.flash('shippingInfo', req.body)
 
       const cartItem = await CartProductSku.findOne({
         where: {
@@ -242,7 +237,7 @@ const cartController = {
     try {
 
       // 紀錄訪客估算運費資訊
-      req.session.cartInfo = req.body
+      req.flash('shippingInfo', req.body)
 
       const cartItem = await CartProductSku.findOne({
         where: {
