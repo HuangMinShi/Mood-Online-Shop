@@ -5,14 +5,16 @@ const { vaildateInput } = require('../middlewares/validator')
 const orderController = require('../controllers/orderController')
 
 router.get('/', orderController.getOrders)
-router.get('/checkout', orderController.getCheckout)
+router.get('/checkout/shipping', orderController.getCheckoutShipping)
 
-router.post('/',
+router.post('/checkout/shipping',
   vaildateInput,
-  orderController.postOrder
+  orderController.postCheckoutShipping
 )
 
-router.get('/checkout/payment', orderController.getCheckout)
+router.get('/checkout/payment', orderController.getCheckoutPayment)
+
+router.post('/', orderController.postOrder)
 router.get('/:id', orderController.getOrder)
 router.post('/:id/cancel', orderController.cancelOrder)
 router.get('/:id/payment', orderController.getPayment)
