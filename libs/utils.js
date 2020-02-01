@@ -1,5 +1,7 @@
 const moment = require('moment')
 
+const { shippingMethods } = require('../public/shippingMethods.json')
+
 const utils = {
   formatDateToYYYYMMDD: (date) => {
     return moment(date).format('YYYY/MM/DD')
@@ -14,6 +16,12 @@ const utils = {
       '3': '完成'
     }
     return orderStatusCodesList[statusNum.toString()]
+  },
+
+  getShippingFee: (shippingWay) => {
+    const content = shippingMethods[shippingWay] || []
+    const fee = Number(content[content.length - 1])
+    return fee || 0
   }
 }
 
