@@ -38,7 +38,7 @@ const checkInput = {
     if (routePath === '/users/signup') return checkOptions.signUp
     if (routePath === '/users/signin') return checkOptions.signIn
     if (routePath === '/cart') return checkOptions.cart
-    if (routePath === '/orders') return checkOptions.orders
+    if (routePath === '/orders/checkout/shipping') return checkOptions.checkoutShipping
   },
 
   getErrorMessage: (key, input) => {
@@ -98,7 +98,7 @@ const checkOptions = {
     }
   },
 
-  orders: {
+  checkoutShipping: {
     requiredFields: ['email', 'name', 'country', 'county', 'township', 'street', 'postal', 'phone', 'shipping'],
     checkItems: {
       email: checkInput.isEmailValid,
