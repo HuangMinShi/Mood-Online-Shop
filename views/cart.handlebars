@@ -104,7 +104,7 @@
         <div class="form-group">
           <label for="country">國家</label>
           <select class="form-control custom-select-sm" id="country" name="country">
-            <option>請選擇您的國家</option>
+            <option value="">請選擇您的國家</option>
             <option {{#eq country '台灣'}} selected {{/eq}}>台灣</option>
           </select>
         </div>
@@ -112,8 +112,8 @@
         <div class="form-group">
           <label for="county">縣市</label>
           <select class="form-control custom-select-sm" id="county" name="county">
-            <option>請選擇一個縣市</option>
-            {{#each countyList}}
+            <option value="">請選擇一個縣市</option>
+            {{#each counties}}
             <option {{#eq ../county this}} selected {{/eq}}>{{this}}</option>
             {{/each}}
           </select>
