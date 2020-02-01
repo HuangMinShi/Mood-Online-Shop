@@ -8,13 +8,24 @@ const {
 
 const {
   formatDateToYYYYMMDD,
-  formatNumberToCurrency,
-  formatCurrencyToNumber,
   mapOrderStatusCodeToString
 } = require('../libs/utils')
 
-const counties = require('../public/counties.json').counties
-const shippingMethods = require('../public/shippingMethods.json').shippingMethods
+const { getShippingFee } = require('../libs/utils')
+const { counties } = require('../public/counties.json')
+const { shippingMethods } = require('../public/shippingMethods.json')
+
+const options = {
+  email: 'england78999@gmail.com',
+  name: '蔡易軒',
+  country: '台灣',
+  county: '南投縣',
+  township: '南投市',
+  street: '埔里鎮民生路127號',
+  postal: '400',
+  phone: '0912387122',
+  shipping: 'directDelivery'
+}
 
 const orderController = {
   getOrders: async (req, res) => {
@@ -25,7 +36,7 @@ const orderController = {
      *  sn: '456789987',
      *  createdAt: 2010/02/10,
      *  receiveAddress: '台北市中正區1號',
-     *  amount: NT$ 2,980,
+     *  order: 2980,
      *  status: '待付款'
      * }
      * 
@@ -35,7 +46,7 @@ const orderController = {
       where: {
         UserId: 1
       },
-      attributes: ['id', 'sn', 'status', 'amount', 'receiveAddress', 'createdAt'],
+      attributes: ['id', 'sn', 'status', 'total', 'receiveAddress', 'createdAt'],
       order: [['sn', 'ASC']]
     })
 
@@ -43,7 +54,6 @@ const orderController = {
       return {
         ...order.dataValues,
         createdAt: formatDateToYYYYMMDD(order.createdAt),
-        amount: formatNumberToCurrency(order.amount),
         status: mapOrderStatusCodeToString(order.status)
       }
     })
