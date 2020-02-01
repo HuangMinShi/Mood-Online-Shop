@@ -1,8 +1,8 @@
 <div class="check">
   {{#each shippingMethods}}
   <div class="form-check">
-    <input class="form-check-input" type="radio" name="shipping" value={{@key}} id={{@key}} {{#eq @key ../shipping}}
-      checked {{/eq}} required>
+    <input class="form-check-input" type="radio" name="shippingWay" value={{@key}} id={{@key}}
+      {{#eq @key ../shippingWay}} checked {{/eq}}>
     <label class="form-check-label" for="{{@key}}">
       {{#each this}}
       <span>

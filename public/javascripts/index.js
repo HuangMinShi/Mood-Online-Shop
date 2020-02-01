@@ -69,9 +69,9 @@
       $('.quantity-change input[name="postal"]').attr('value', value)
     }
 
-    if ($(target).is('input[name="shipping"]')) {
+    if ($(target).is('input[name="shippingWay"]')) {
       const productsAmount = $('.products-amount span:last').text()
-      const shippingFee = $(this).find('input[name="shipping"]:checked + label span:last').text()
+      const shippingFee = $(this).find('input[name="shippingWay"]:checked + label span:last').text()
       const totalAmountInNum = formatCurrencyToNumber(productsAmount) + formatCurrencyToNumber(shippingFee)
       const totalAmount = formatNumberToCurrency(totalAmountInNum)
 
@@ -79,7 +79,7 @@
       $('.total-amount span:last').replaceWith(`<span>${totalAmount}</span>`)
 
       // 增減數量 button 綁定
-      $('.quantity-change input[name="shipping"]').attr('value', value)
+      $('.quantity-change input[name="shippingWay"]').attr('value', value)
     }
   })
 
@@ -89,7 +89,7 @@
   /************* create order 頁面 *************/
   $('.shipping-methods .check').change(function () {
     const productsAmount = $('.products-amount span:last').text()
-    const shippingFee = $(this).find('input[name="shipping"]:checked + label span:last').text()
+    const shippingFee = $(this).find('input[name="shippingWay"]:checked + label span:last').text()
     const totalAmountInNum = formatCurrencyToNumber(productsAmount) + formatCurrencyToNumber(shippingFee)
     const totalAmount = formatNumberToCurrency(totalAmountInNum)
 
