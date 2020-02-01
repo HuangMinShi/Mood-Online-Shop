@@ -5,15 +5,6 @@ const utils = {
     return moment(date).format('YYYY/MM/DD')
   },
 
-  formatNumberToCurrency: (price) => {
-    const formatedPrice = price.toLocaleString('zh-TW', { style: 'currency', currency: 'TWD' })
-    return formatedPrice.split('.', 1)[0]
-  },
-
-  formatCurrencyToNumber: (currency) => {
-    return Number(currency.replace(/[^0-9.-]+/g, ''))
-  },
-
   mapOrderStatusCodeToString: (statusNum) => {
     const orderStatusCodesList = {
       '-1': '取消',

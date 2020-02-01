@@ -41,7 +41,8 @@
           </td>
 
           <td>
-            {{this.salePrice}}
+            {{#currency this.salePrice}}
+            {{/currency}}
           </td>
 
           <td>
@@ -73,7 +74,10 @@
             </div>
           </td>
 
-          <td>{{this.itemTotal}}</td>
+          <td>
+            {{#currency this.itemTotal}}
+            {{/currency}}
+          </td>
         </tr>
 
         <tr class="item-actions">
@@ -120,35 +124,29 @@
           <input type="text" class="form-control" id="postal" name="postal" value="{{postal}}">
         </div>
 
-        <div class="check">
-          {{#each shippingMethods}}
-          <div class="form-check">
-            <input class="form-check-input" type="radio" name="shipping" value={{@key}} id={{@key}}
-              {{#eq @key ../shipping}} checked {{/eq}}>
-            <label class="form-check-label" for="{{@key}}">
-              {{#eq @key 'inStorePickup'}}
-              <span>到店自取</span>
-              {{else}}
-              <span>寄送運費</span>
-              {{/eq}}
-              <span>{{this}}</span>
-            </label>
-          </div>
-          {{/each}}
-        </div>
+        {{> shippingMethods}}
 
         <div class="expected-cost">
           <div class="products-amount">
             <span>小計</span>
-            <span>{{subTotal}}</span>
+            <span>
+              {{#currency subTotal}}
+              {{/currency}}
+            </span>
           </div>
           <div class="shipping-fee">
             <span>配送資訊</span>
-            <span>{{selectedShippingFee}}</span>
+            <span>
+              {{#currency shippingFee}}
+              {{/currency}}
+            </span>
           </div>
           <p class="total-amount">
             <span>訂單金額</span>
-            <span>{{total}}</span>
+            <span>
+              {{#currency total}}
+              {{/currency}}
+            </span>
           </p>
         </div>
         <button type="submit" class="action-btn w-100">

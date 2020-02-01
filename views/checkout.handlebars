@@ -83,15 +83,24 @@
       <div class="expected-cost">
         <div class="products-amount">
           <span>購物車總計</span>
-          <span>{{subTotal}}</span>
+          <span>
+            {{#currency subTotal}}
+            {{/currency}}
+          </span>
         </div>
         <div class="shipping-fee">
           <span>配送資訊</span>
-          <span>{{selectedShippingFee}}</span>
+          <span>
+            {{#currency shippingFee}}
+            {{/currency}}
+          </span>
         </div>
         <p class="total-amount">
           <span>訂單金額</span>
-          <span>{{total}}</span>
+          <span>
+            {{#currency total}}
+            {{/currency}}
+          </span>
         </p>
       </div>
 

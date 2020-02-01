@@ -5,7 +5,10 @@
       checked {{/eq}} required>
     <label class="form-check-label" for="{{@key}}">
       {{#each this}}
-      <span>{{this}}</span>
+      <span>
+        {{#currency this}}
+        {{/currency}}
+      </span>
       {{/each}}
     </label>
   </div>

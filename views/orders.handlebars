@@ -15,34 +15,34 @@
 
     <tbody>
       {{#each orders}}
-        <tr class="text-center">
-          <td>{{this.sn}}</td>
-          <td>{{this.createdAt}}</td>
-          <td>{{this.receiveAddress}}</td>
-          <td>{{this.amount}}</td>
-          <td class="font-weight-bolder">{{this.status}}</td>
-          <td>
-            <div class="action d-flex">
-              <span>
-                <a href="/orders/{{this.id}}">
-                  查看訂單
-                </a>
-              </span>
-              <span>
-                <form action="/orders/{{this.id}}/cancel" method="POST">
-                  <button type="submit" class="btn btn-link">
-                    取消訂單
-                  </button>
-                </form>
-              </span>
-              <span>
-                <a href="/orders/{{this.id}}/payment">
-                  立即付款
-                </a>
-              </span>
-            </div>
-          </td>
-        </tr>
+      <tr class="text-center">
+        <td>{{this.sn}}</td>
+        <td>{{this.createdAt}}</td>
+        <td>{{this.receiveAddress}}</td>
+        <td>{{#currency total}}{{/currency}}</td>
+        <td class="font-weight-bolder">{{this.status}}</td>
+        <td>
+          <div class="action d-flex">
+            <span>
+              <a href="/orders/{{this.id}}">
+                查看訂單
+              </a>
+            </span>
+            <span>
+              <form action="/orders/{{this.id}}/cancel" method="POST">
+                <button type="submit" class="btn btn-link">
+                  取消訂單
+                </button>
+              </form>
+            </span>
+            <span>
+              <a href="/orders/{{this.id}}/payment">
+                立即付款
+              </a>
+            </span>
+          </div>
+        </td>
+      </tr>
       {{/each}}
     </tbody>
   </table>

@@ -5,7 +5,8 @@ const session = require('express-session')
 const flash = require('connect-flash')
 const methodOverride = require('method-override')
 const passport = require('./config/passport')
-const helpers = require('handlebars-helpers').comparison()
+const comparehelpers = require('handlebars-helpers').comparison()
+const helpers = require('./libs/handlebarsHelpers')
 
 const env = process.env.NODE_ENV || 'development'
 const port = process.env.PORT || 3000
@@ -13,7 +14,10 @@ const port = process.env.PORT || 3000
 const app = express()
 const hbs = exphbs.create({
   defaultLayout: 'main',
-  helpers: helpers
+  helpers: {
+    ...helpers,
+    comparehelpers
+  }
 })
 
 app.engine('handlebars', hbs.engine)

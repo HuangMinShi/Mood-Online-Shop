@@ -2,11 +2,11 @@
   "shippingMethods": {
     "inStorePickup": [
       "到店自取",
-      "NT$ 0"
+      "0"
     ],
     "directDelivery": [
       "寄送運費",
-      "NT$ 100"
+      "100"
     ]
   }
 }

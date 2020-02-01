@@ -32,7 +32,8 @@
             </div>
 
             <div class="price pb-1">
-              {{this.salePrice}}
+              {{#currency salePrice}}
+              {{/currency}}
             </div>
 
             <span class="toggle collapsed text-muted" data-toggle="collapse" data-target="#expend-{{this.sku}}">
