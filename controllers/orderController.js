@@ -65,24 +65,21 @@ const orderController = {
     return res.send('get order')
   },
 
-  getCheckoutShipping: async (req, res) => {
+  getCheckoutShipping: (req, res) => {
     const shippingInfo = req.query
-    const cartInfo = req.flash('cartInfo')[0]
+    const cartInfo = req.flash('cartInfo')[0] || {}
     const shippingFee = getShippingFee(shippingInfo.shippingWay)
     const total = cartInfo.subTotal + shippingFee
 
-    Object.assign(cartInfo, shippingInfo)
+    Object.assign(cartInfo, shippingInfo, { shippingFee, total })
 
-    const renderParams = {
-      ...cartInfo,
-      shippingFee,
-      total,
-      counties,
-      shippingMethods,
-      ...options
+    // 資料閃存
+    const flashLength = req.flash('cartInfo').length
+    if (flashLength < 2) {
+      req.flash('cartInfo', cartInfo)
     }
 
-    return res.render('checkout', renderParams)
+    return res.render('checkout', { ...cartInfo, counties, shippingMethods, ...options })
   },
 
   postCheckoutShipping: (req, res) => {
