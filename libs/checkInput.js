@@ -99,7 +99,7 @@ const checkOptions = {
   },
 
   checkoutShipping: {
-    requiredFields: ['email', 'name', 'country', 'county', 'township', 'street', 'postal', 'phone', 'shipping'],
+    requiredFields: ['email', 'name', 'country', 'county', 'township', 'street', 'postal', 'phone', 'shippingWay'],
     checkItems: {
       email: checkInput.isEmailValid,
       phone: checkInput.isPhoneNumsValid
