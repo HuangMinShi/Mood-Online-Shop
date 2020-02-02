@@ -86,16 +86,15 @@
 
 
 
-  /************* create order 頁面 *************/
-  $('.shipping-methods .check').change(function () {
-    const productsAmount = $('.products-amount span:last').text()
+  /************* checkout shipping *************/
+  $('.shipping-methods').change(function () {
+    const itemsAmount = $('.items.amount span:last').text()
     const shippingFee = $(this).find('input[name="shippingWay"]:checked + label span:last').text()
-    const totalAmountInNum = formatCurrencyToNumber(productsAmount) + formatCurrencyToNumber(shippingFee)
+    const totalAmountInNum = formatCurrencyToNumber(itemsAmount) + formatCurrencyToNumber(shippingFee)
     const totalAmount = formatNumberToCurrency(totalAmountInNum)
 
     $('.shipping-fee span:last').replaceWith(`<span>${shippingFee}</span>`)
-    $('.total-amount span:last').replaceWith(`<span>${totalAmount}</span>`)
-
+    $('.total span:last').replaceWith(`<span>${totalAmount}</span>`)
   })
 
 
