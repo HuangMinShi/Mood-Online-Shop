@@ -11,7 +11,7 @@ input::-webkit-inner-spin-button {
   margin: 0;
 }
 
-.action-btn {
+.btn-action {
   margin-top: .75rem;
   padding: .5rem;
   border: 0;
@@ -19,10 +19,46 @@ input::-webkit-inner-spin-button {
   color: #535353;
 }
 
-.action-btn:hover {
+.btn-action:hover {
   background-color: #4B4B4B;
   color: #F4F4F4;
 }
+
+p.title {
+  border-bottom: 1px solid #DEE2E6;
+  /* font-size: 1.5rem; */
+  font-weight: 700;
+}
+
+aside.info {
+  background-color: #f5f5f5;
+  height: fit-content;
+  border: 1px solid #A8A8A8;
+  border-radius: .5rem;
+}
+
+.amount {
+  display: flex;
+  justify-content: space-between;
+  margin: .75rem 0;
+}
+
+.item-img-wrapper {
+  border: 1px solid rgba(204, 204, 204, 1);
+  padding: 1px;
+  display: block;
+  width: 165px;
+}
+
+.item-detail-name a{
+  text-decoration: none;
+  color: #A8A8A8;
+}
+
+
+
+
+
 
 /* =============== Products =============== */
 .product {
@@ -113,15 +149,7 @@ input::-webkit-inner-spin-button {
   vertical-align: middle; 
 }
 
-.item-image-container {
-  border: 1px solid rgba(204, 204, 204, 1);
-  padding: 1px;
-  display: block;
-  width: 165px;
-}
-
-.page-title,
-.item-details-name a{
+.item-detail-name a{
   text-decoration: none;
   font-weight: 300;
   font-size: 1.2rem;
@@ -217,66 +245,9 @@ input::-webkit-inner-spin-button {
   color: #000000;
 }
 
-/* =============== Create order =============== */
-.create-order p.title {
-  padding: .75rem 0;
-  border-bottom: 1px solid #DEE2E6;
-  font-size: 1.5rem;
-  font-weight: 600;
-}
+/* =============== minicart =============== */
 
-.required-icon {
-  margin-left: .5rem;
-  color: #ff0000;
-}
-
-.buy-list {
-  background-color: #f5f5f5;
-  height: fit-content;
-  border: 1px solid #A8A8A8;
-  border-radius: .5rem;
-}
-
-.buy-list .total-amount {
-  padding: .5rem 0;
-  border-top: 1px solid #DEE2E6;
-}
-
-.buy-list .product-item-details {
-  padding: 0 1rem;
-}
-
-.create-order .shipping-methods .form-check {
-  margin: .75rem 0;
-}
-
-.create-order .shipping-info .action {
-  text-align: right;
-  margin: 2rem;
-}
-
-.buy-list .products-amount,
-.buy-list .shipping-fee {
-  display: flex;
-  justify-content: space-between;
-  margin: .75rem 0;
-}
-
-.buy-list .total-amount {
-  display: flex;
-  justify-content: space-between;
-  font-size: 1.5rem;
-  font-weight: 600;
-  margin-top: .75rem;
-  padding-top: .75rem;
-}
-
-#minicart .minicart-items {
-  list-style: none;
-  padding-left: 0;
-}
-
-#minicart .item-image-container {
+#minicart .item-img-wrapper {
   width: 70px;
 }
 

@@ -1,39 +1,41 @@
 <div id="minicart">
-  <span class="text-muted pb-1 toggle" data-toggle="collapse" data-target="#minicart-expend-block">
-    購物項目
+  <span class="text-muted pb-1 toggle" data-toggle="collapse" data-target="#minicart-expend">
+    商品項目
   </span>
   <hr>
-
-  <div id="minicart-expend-block" class="collapse">
-    <div class="minicart-item-container d-flex">
-      <ul class="minicart-items">
+  <div id="minicart-expend" class="collapse">
+    <div class="wrapper">
+      <ul class="pl-0">
         {{#each cartItems}}
-        <li class="product-item d-flex py-3 border-bottom">
-          <div class="product-item-image mt-1">
+        <li class="d-flex py-3 border-bottom">
+          <div class="item-img mt-1 mr-3">
             <a href="/products/{{this.sn}}">
-              <span class="item-image-container">
-                <img src="../{{this.image}}" width="100%" height="auto">
-              </span>
+              <div class="item-img-wrapper">
+                <img src="../{{this.image}}" width="100%">
+              </div>
             </a>
           </div>
 
-          <div class="product-item-details">
-            <div class="name">
-              <strong class="item-details-name">
+          <div class="item-detail">
+            <div class="item-detail-name">
+              <strong>
                 <a href="/products/{{this.sn}}">
                   {{this.name}}
                 </a>
               </strong>
             </div>
 
-            <div class="quantity py-1">
-              <span class="font-weight-bold">數量 :</span>
-              {{this.quantity}}
+            <div class="item-detail-qty">
+              <span>數量 :</span>
+              <span>{{this.quantity}}</span>
             </div>
 
-            <div class="price pb-1">
-              {{#currency salePrice}}
-              {{/currency}}
+            <div class="item-detail-price">
+              <span>單價 :</span>
+              <span>
+                {{#currency salePrice}}
+                {{/currency}}
+              </span>
             </div>
 
             <span class="toggle collapsed text-muted" data-toggle="collapse" data-target="#expend-{{this.sku}}">
@@ -41,14 +43,14 @@
             </span>
 
             <div id="expend-{{this.sku}}" class="collapse pt-1">
-              <div class="color py-1">
-                <span class="font-weight-bold">顏色 :</span>
-                {{this.color}}
+              <div class="item-detail-color">
+                <span>顏色 :</span>
+                <span>{{this.color}}</span>
               </div>
 
-              <div class="size">
-                <span class="font-weight-bold">尺寸 :</span>
-                {{this.size}}
+              <div class="item-detail-size">
+                <span>尺寸 :</span>
+                <span> {{this.size}}</span>
               </div>
             </div>
           </div>
