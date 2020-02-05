@@ -18,7 +18,10 @@ const checkInput = {
   },
 
   getEmptyFields: (inputs, requiredFields) => {
-    return requiredFields.filter(field => inputs[field].length === 0)
+    return requiredFields.filter(field => {
+      const input = inputs[field]
+      return !input || input.length === 0
+    })
   },
 
   isQuantityInTheScope: (quantity) => {
@@ -39,6 +42,7 @@ const checkInput = {
     if (routePath === '/users/signin') return checkOptions.signIn
     if (routePath === '/cart') return checkOptions.cart
     if (routePath === '/orders/checkout/shipping') return checkOptions.checkoutShipping
+    if (routePath === '/orders/checkout/payment') return checkOptions.checkoutPayment
   },
 
   getErrorMessage: (key, input) => {
@@ -99,15 +103,21 @@ const checkOptions = {
   },
 
   checkoutShipping: {
-    requiredFields: ['email', 'name', 'country', 'county', 'township', 'street', 'postal', 'phone', 'shippingWay'],
+    requiredFields: ['email', 'receiveName', 'receiveCountry', 'county', 'township', 'street', 'zip', 'receivePhone', 'shippingWay'],
     checkItems: {
       email: checkInput.isEmailValid,
       phone: checkInput.isPhoneNumsValid
     },
     checkItemRequiredParams: {
       isEmailValid: ['email'],
-      isPhoneNumsValid: ['phone']
+      isPhoneNumsValid: ['receivePhone']
     }
+  },
+
+  checkoutPayment: {
+    requiredFields: ['receipt', 'payment'],
+    checkItems: {},
+    checkItemRequiredParams: {}
   }
 }
 
