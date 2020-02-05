@@ -53,18 +53,18 @@
 
               <div class="quantity-change">
                 <form action="/cart/cartItems/{{CartProductSkuId}}/add" method="POST">
-                  <input type="hidden" name="country" value="{{../country}}">
+                  <input type="hidden" name="receiveCountry" value="{{../receiveCountry}}">
                   <input type="hidden" name="county" value="{{../county}}">
-                  <input type="hidden" name="postal" value="{{../postal}}">
+                  <input type="hidden" name="zip" value="{{../zip}}">
                   <input type="hidden" name="shippingWay" value="{{../shippingWay}}">
                   <button type="submit" class="btn btn-sm btn-outline-secondary">
                     <i class="fas fa-caret-up"></i>
                   </button>
                 </form>
                 <form action="/cart/cartItems/{{CartProductSkuId}}/sub" method="POST" class="mt-1">
-                  <input type="hidden" name="country" value="{{../country}}">
+                  <input type="hidden" name="receiveCountry" value="{{../receiveCountry}}">
                   <input type="hidden" name="county" value="{{../county}}">
-                  <input type="hidden" name="postal" value="{{../postal}}">
+                  <input type="hidden" name="zip" value="{{../zip}}">
                   <input type="hidden" name="shippingWay" value="{{../shippingWay}}">
                   <button type="submit" class="btn btn-sm btn-outline-secondary">
                     <i class="fas fa-caret-down"></i>
@@ -102,10 +102,10 @@
       <p>估計運費</p>
       <form action="/orders/checkout/shipping" method="GET">
         <div class="form-group">
-          <label for="country">國家</label>
-          <select class="form-control custom-select-sm" id="country" name="country">
+          <label for="receiveCountry">國家</label>
+          <select class="form-control custom-select-sm" id="receiveCountry" name="receiveCountry">
             <option value="">請選擇您的國家</option>
-            <option {{#eq country '台灣'}} selected {{/eq}}>台灣</option>
+            <option {{#eq receiveCountry '台灣'}} selected {{/eq}}>台灣</option>
           </select>
         </div>
 
@@ -120,8 +120,8 @@
         </div>
 
         <div class="form-group">
-          <label for="postal">郵遞區號</label>
-          <input type="text" class="form-control" id="postal" name="postal" value="{{postal}}">
+          <label for="zip">郵遞區號</label>
+          <input type="text" class="form-control" id="zip" name="zip" value="{{zip}}">
         </div>
 
         {{> shippingMethods}}
@@ -144,7 +144,7 @@
           <p class="total-amount">
             <span>訂單金額</span>
             <span>
-              {{#currency total}}
+              {{#currency totalAmount}}
               {{/currency}}
             </span>
           </p>

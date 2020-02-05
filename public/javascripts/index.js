@@ -57,16 +57,16 @@
     const target = event.target
     const value = target.value
 
-    if ($(target).is('#country')) {
-      $('.quantity-change input[name="country"]').attr('value', value)
+    if ($(target).is('#receiveCountry')) {
+      $('.quantity-change input[name="receiveCountry"]').attr('value', value)
     }
 
     if ($(target).is('#county')) {
       $('.quantity-change input[name="county"]').attr('value', value)
     }
 
-    if ($(target).is('#postal')) {
-      $('.quantity-change input[name="postal"]').attr('value', value)
+    if ($(target).is('#zip')) {
+      $('.quantity-change input[name="zip"]').attr('value', value)
     }
 
     if ($(target).is('input[name="shippingWay"]')) {
