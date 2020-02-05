@@ -55,18 +55,16 @@ const orderController = {
   },
 
   getCheckoutShipping: (req, res) => {
+    const cartInfo = req.flash('data')[0]
     const shippingInfo = req.query
-    const cartInfo = req.flash('cartInfo')[0] || {}
     const shippingFee = getShippingFee(shippingInfo.shippingWay)
-    const total = cartInfo.subTotal + shippingFee
+    const totalAmount = cartInfo.subTotal + shippingFee
+    const orderInfo = Object.assign({}, cartInfo, shippingInfo, { shippingFee, totalAmount })
 
-    Object.assign(cartInfo, shippingInfo, { shippingFee, total })
+    req.flash('data', orderInfo)
+    return res.render('checkoutShipping', { ...orderInfo, counties, shippingMethods, ...shippingOptions })
+  },
 
-    // 資料閃存
-    const flashLength = req.flash('cartInfo').length
-    if (flashLength < 2) {
-      req.flash('cartInfo', cartInfo)
-    }
 
     return res.render('checkout', { ...cartInfo, counties, shippingMethods, ...options })
   },

@@ -1,37 +1,35 @@
 <p class="page title border-0">確認頁</p>
 
 <div class="row checkout">
-  <main class="col-lg-8 w-75">
-    <div class="panel">
+  <main class="col-lg-8">
+    <div class="main-content">
       <form action="/orders/checkout/shipping" method="POST">
-        <div>
+        <section>
           <p class="title">配送地址</p>
 
           <div class="form-group">
-            <label for="email">電子郵件地址<span class="required-icon">*</span></label>
-            <input type="email" id="email" name="email" class="form-control" value="{{email}}" required>
+            <input type="email" name="email" class="form-control" value="{{email}}" placeholder="電子郵件地址*" autofocus
+              required>
             <span>您可以在結帳後加入會員。</span>
           </div>
           <hr>
           <br>
 
           <div class="form-group">
-            <label for="name">名字<span class="required-icon">*</span></label>
-            <input type="text" id="name" name="name" class="form-control" value="{{name}}" autofocus required>
+            <input type="text" name="receiveName" class="form-control" value="{{receiveName}}" placeholder="名字*"
+              required>
           </div>
 
           <div class="form-group">
-            <label for="country">國家<span class="required-icon">*</span></label>
-            <select class="form-control custom-select-sm" id="country" name="country" required>
-              <option value="">請選擇您的國家</option>
-              <option {{#eq country '台灣'}} selected {{/eq}}>台灣</option>
+            <select class="form-control custom-select-sm" name="receiveCountry">
+              <option value="" disabled hidden selected>請選擇您的國家*</option>
+              <option {{#eq receiveCountry '台灣'}} selected {{/eq}}>台灣</option>
             </select>
           </div>
 
           <div class="form-group">
-            <label for="county">縣市<span class="required-icon">*</span></label>
-            <select class="form-control custom-select-sm" id="county" name="county" required>
-              <option value="">請選擇一個縣市</option>
+            <select class="form-control custom-select-sm" name="county" required>
+              <option value="" disabled hidden selected>請選擇您的縣市*</option>
               {{#each counties}}
               <option {{#eq ../county this}} selected {{/eq}}>{{this}}</option>
               {{/each}}
@@ -39,37 +37,32 @@
           </div>
 
           <div class="form-group">
-            <label for="township">鄉鎮市區<span class="required-icon">*</span></label>
-            <input type="text" class="form-control" id="township" name="township" value="{{township}}" required>
+            <input type="text" class="form-control" name="township" value="{{township}}" placeholder="鄉鎮市區*" required>
           </div>
 
           <div class="form-group">
-            <label for="street">街道地址<span class="required-icon">*</span></label>
-            <input type="text" class="form-control" id="street" name="street" value="{{street}}" required>
+            <input type="text" class="form-control" name="street" value="{{street}}" placeholder="街道地址*" required>
           </div>
 
           <div class="form-group">
-            <label for="postal">郵遞區號<span class="required-icon">*</span></label>
-            <input type="text" class="form-control" id="postal" name="postal" value="{{postal}}" required>
+            <input type="text" class="form-control" name="zip" value="{{zip}}" placeholder="郵遞區號*" required>
           </div>
 
           <div class="form-group">
-            <label for="phone">手機號碼<span class="required-icon">*</span></label>
-            <input type="tel" class=" form-control" id="phone" name="phone" value="{{phone}}" pattern="[0-9]{10}"
-              required>
+            <input type="tel" class="form-control" name="receivePhone" value="{{receivePhone}}" pattern="[0-9]{10}"
+              placeholder="手機號碼*" required>
             <span>格式：0912345678</span>
           </div>
+        </section>
 
-        </div>
-
-        <div>
+        <section>
           <p class="title">配送方式</p>
           {{> shippingMethods}}
-        </div>
+        </section>
 
-        <div>
+        <div class="border-top">
           <button type="submit" class="btn btn-action w-25">
-            <span>繼續</span>
+            <span>下一步</span>
           </button>
         </div>
       </form>
@@ -99,7 +92,7 @@
           <div class="total amount font-weight-bold">
             <span>訂單金額</span>
             <span>
-              {{#currency total}}
+              {{#currency totalAmount}}
               {{/currency}}
             </span>
           </div>
