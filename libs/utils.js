@@ -9,11 +9,11 @@ const utils = {
 
   mapOrderStatusCodeToString: (statusNum) => {
     const orderStatusCodesList = {
-      '-1': '取消',
-      '0': '待付款',
-      '1': '待出貨',
-      '2': '待收貨',
-      '3': '完成'
+      '0': '取消',
+      '1': '待付款',
+      '2': '待出貨',
+      '3': '待收貨',
+      '4': '完成'
     }
     return orderStatusCodesList[statusNum.toString()]
   },

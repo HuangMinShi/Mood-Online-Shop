@@ -13,12 +13,15 @@ module.exports = {
       },
       status: {
         type: Sequelize.STRING,
-        defaultValue: '0'
+        defaultValue: '1'
       },
-      total: {
+      total_amount: {
         type: Sequelize.INTEGER
       },
-      invoice: {
+      receipt: {
+        type: Sequelize.STRING
+      },
+      payment: {
         type: Sequelize.STRING
       },
       note: {
@@ -31,7 +34,7 @@ module.exports = {
           key: 'id'
         }
       },
-      shipping_method: {
+      shipping_way: {
         type: Sequelize.STRING
       },
       receive_name: {

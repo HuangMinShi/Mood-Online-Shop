@@ -14,14 +14,14 @@ const name = 'Order'
 const properties = [
   'sn',
   'status',
-  'total',
-  'invoice',
+  'totalAmount',
+  'receipt',
   'note',
   'receiveName',
   'receiveAddress',
   'receiveCountry',
   'receivePhone',
-  'shippingMethod',
+  'shippingWay',
   'UserId'
 ]
 const associations = [

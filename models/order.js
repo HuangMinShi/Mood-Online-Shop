@@ -4,16 +4,17 @@ module.exports = (sequelize, DataTypes) => {
     sn: DataTypes.STRING,
     status: {
       type: DataTypes.STRING,
-      defaultValue: '0'
+      defaultValue: '1'
     },
-    total: DataTypes.INTEGER,
-    invoice: DataTypes.STRING,
+    totalAmount: DataTypes.INTEGER,
+    receipt: DataTypes.STRING,
+    payment: DataTypes.STRING,
     note: DataTypes.STRING,
     receiveName: DataTypes.STRING,
     receiveCountry: DataTypes.STRING,
     receiveAddress: DataTypes.STRING,
     receivePhone: DataTypes.STRING,
-    shippingMethod: DataTypes.STRING,
+    shippingWay: DataTypes.STRING,
     UserId: {
       type: DataTypes.INTEGER,
       references: {
