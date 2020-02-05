@@ -22,6 +22,19 @@ const utils = {
     const content = shippingMethods[shippingWay] || []
     const fee = Number(content[content.length - 1])
     return fee || 0
+  },
+
+  generateReceiveAddress: (orderInfo) => {
+    const addressRequiredElements = ['zip', 'county', 'township', 'street']
+    const { zip, county, township, street } = orderInfo
+
+    orderInfo.receiveAddress = `${zip}  ${county}${township}${street}`
+
+    addressRequiredElements.forEach(element => {
+      delete orderInfo[element]
+    })
+
+    return orderInfo
   }
 }
 
