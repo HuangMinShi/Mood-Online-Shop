@@ -97,6 +97,12 @@ const orderController = {
     return res.redirect('/orders/checkout/order')
   },
 
+  getCheckoutOrder: (req, res) => {
+    const orderInfo = req.flash('data')[0]
+    req.flash('data', orderInfo)
+
+    return res.render('checkoutOrder', orderInfo)
+  },
   },
 
   postOrder: (req, res) => {

@@ -1,0 +1,89 @@
+<p class="page title border-0">確認頁</p>
+
+<div class="row checkout">
+
+  {{#eq order.status '1'}}
+  {{> successOrder}}
+  {{/eq}}
+
+  <main class="col-lg-8">
+    <div class="main-content">
+      <form action="/orders" method="POST">
+        <section class="panel">
+          <p class="title border-bottom-0 pb-0">配送資訊</p>
+          <div class="delivery">
+            <ul>
+              <li>{{receiveName}}</li>
+              <li>{{receiveCountry}}</li>
+              <li>{{receiveAddress}}</li>
+              <li>{{receivePhone}}</li>
+              <li>{{#shippingWayToMandarin shippingWay}}{{/shippingWayToMandarin}}
+                <span> - </span>
+                <span>{{store}}</span>
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        <section class="panel">
+          <p class="title border-bottom-0 pb-0">付款資訊</p>
+          <div class="payment">
+            <ul>
+              <li>{{#receiptToMandarin receipt}}{{/receiptToMandarin}}</li>
+              <li>{{#paymentToMandarin payment}}{{/paymentToMandarin}}</li>
+            </ul>
+          </div>
+        </section>
+
+        <section class="panel">
+          <p class="title border-bottom-0 pb-0">備註</p>
+          <div class="note">
+            <ul>
+              <li>{{note}}</li>
+            </ul>
+          </div>
+        </section>
+
+        <div class="border-top">
+          <button type="submit" class="btn btn-action w-25">
+            <span>成立訂單</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </main>
+
+  <aside class="info col-lg-4">
+    <section class="panel">
+      <p class="title border-bottom-0 pb-0">訂單資訊</p>
+      <div>
+        {{> minicartItem}}
+        <div class="expected-cost">
+          <div class="items amount">
+            <span>購物車總計</span>
+            <span>
+              {{#currency subTotal}}
+              {{/currency}}
+            </span>
+          </div>
+          <div class="shipping-fee amount ">
+            <span>配送資訊</span>
+            <span>
+              {{#currency shippingFee}}
+              {{/currency}}
+            </span>
+          </div>
+          <div class="total amount font-weight-bold">
+            <span>訂單金額</span>
+            <span>
+              {{#currency totalAmount}}
+              {{/currency}}
+            </span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </aside>
+</div>
+
+<script src="/javascripts/index.js"> </script>
