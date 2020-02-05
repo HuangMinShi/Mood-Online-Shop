@@ -1,0 +1,21 @@
+{
+  "shippingMethods": {
+    "inStorePickup": [
+      "到店自取",
+      "0"
+    ],
+    "directDelivery": [
+      "物流配送",
+      "100"
+    ]
+  },
+  "receiptMethods": {
+    "1": "個人電子發票（中獎會主動掛號寄出）",
+    "2": "捐贈",
+    "3": "公司三聯式發票"
+  },
+  "paymentMethods": {
+    "1": "信用卡付款",
+    "2": "ATM 轉帳付款"
+  }
+}
