@@ -86,9 +86,15 @@ const orderController = {
     return res.render('checkoutPayment', orderInfo)
   },
 
+  postCheckoutPayment: (req, res) => {
+    const paymentInfo = req.body
+    const orderInfo = req.flash('data')[0]
+    req.flash('data', orderInfo)
 
+    Object.assign(orderInfo, paymentInfo)
 
-    return res.send('postCheckoutShipping')
+    req.flash('data', orderInfo)
+    return res.redirect('/orders/checkout/order')
   },
 
   },
