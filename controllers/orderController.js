@@ -1,31 +1,20 @@
 const {
-  Cart,
+  User,
   Order,
-  Color,
-  Image,
-  Product
+  ProductSku,
+  OrderProductSku
 } = require('../models')
 
 const {
+  getShippingFee,
   formatDateToYYYYMMDD,
-  mapOrderStatusCodeToString
+  mapOrderStatusCodeToString,
+  generateReceiveAddress
 } = require('../libs/utils')
 
-const { getShippingFee } = require('../libs/utils')
-const { counties } = require('../public/counties.json')
-const { shippingMethods } = require('../public/shippingMethods.json')
-
-const options = {
-  email: 'england78999@gmail.com',
-  name: '蔡易軒',
-  country: '台灣',
-  county: '南投縣',
-  township: '南投市',
-  street: '埔里鎮民生路127號',
-  postal: '400',
-  phone: '0912387122',
-  shipping: 'directDelivery'
-}
+const { counties } = require('../config/geonames.json')
+const { shippingMethods } = require('../config/business.json')
+const { shippingOptions } = require('../config/options.json')
 
 const orderController = {
   getOrders: async (req, res) => {
@@ -46,7 +35,7 @@ const orderController = {
       where: {
         UserId: 1
       },
-      attributes: ['id', 'sn', 'status', 'total', 'receiveAddress', 'createdAt'],
+      attributes: ['id', 'sn', 'status', 'totalAmount', 'receiveAddress', 'createdAt'],
       order: [['sn', 'ASC']]
     })
 
