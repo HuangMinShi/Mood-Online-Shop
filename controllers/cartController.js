@@ -87,25 +87,24 @@ const cartController = {
       const shippingInfo = req.flash('shippingInfo')[0] || { shippingWay: 'inStorePickup' }
       const shippingFee = getShippingFee(shippingInfo.shippingWay)
       const subTotal = cartItems.length ? cartItems.map(item => item.itemTotal).reduce((a, c) => a + c) : 0
-      const total = subTotal + shippingFee
-      const cartInfo = {
+      const totalAmount = subTotal + shippingFee
+
+      const data = {
         ...shippingInfo,
         cartItems,
         subTotal
       }
+
       const renderParams = {
-        ...cartInfo,
+        ...data,
         shippingFee,
-        total,
+        totalAmount,
         counties,
         shippingMethods
       }
 
       // 傳至確認頁
-      const flashLength = req.flash('cartInfo').length
-      if (flashLength < 2) {
-        req.flash('cartInfo', cartInfo)
-      }
+      req.flash('data', data)
 
       return res.render('cart', renderParams)
 
@@ -186,8 +185,9 @@ const cartController = {
   addCartItemQuantity: async (req, res) => {
     try {
 
-      // 紀錄訪客估算運費資訊
+      // 紀錄訪客估算運費資訊 && 重置 req.flash('data)
       req.flash('shippingInfo', req.body)
+      req.flash('data')
 
       const cartItem = await CartProductSku.findOne({
         where: {
@@ -236,8 +236,9 @@ const cartController = {
   subCartItemQuantity: async (req, res) => {
     try {
 
-      // 紀錄訪客估算運費資訊
+      // 紀錄訪客估算運費資訊 && 重置 req.flash('data)
       req.flash('shippingInfo', req.body)
+      req.flash('data')
 
       const cartItem = await CartProductSku.findOne({
         where: {
