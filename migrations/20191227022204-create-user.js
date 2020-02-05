@@ -23,7 +23,8 @@ module.exports = {
         type: Sequelize.DATEONLY
       },
       admin: {
-        type: Sequelize.BOOLEAN
+        type: Sequelize.BOOLEAN,
+        defaultValue: '0'
       },
       avatar: {
         type: Sequelize.STRING
@@ -35,7 +36,8 @@ module.exports = {
         type: Sequelize.STRING
       },
       role: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        defaultValue: 'member'
       },
       created_at: {
         allowNull: false,

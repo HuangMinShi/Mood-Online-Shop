@@ -9,11 +9,17 @@ module.exports = (sequelize, DataTypes) => {
     },
     password: DataTypes.STRING,
     birthday: DataTypes.DATEONLY,
-    admin: DataTypes.BOOLEAN,
+    admin: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: '0'
+    },
     avatar: DataTypes.STRING,
     address: DataTypes.STRING,
     tel: DataTypes.STRING,
-    role: DataTypes.STRING
+    role: {
+      type: DataTypes.STRING,
+      defaultValue: 'member'
+    }
   }, {});
 
   User.associate = function (models) {
