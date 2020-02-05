@@ -9,8 +9,8 @@ const {
 
 const { getShippingFee } = require('../libs/utils')
 const { generateSku } = require('../libs/generateSku')
-const { counties } = require('../public/counties.json')
-const { shippingMethods } = require('../public/shippingMethods.json')
+const { counties } = require('../config/geonames.json')
+const { shippingMethods } = require('../config/business.json')
 
 const cartController = {
   getCart: async (req, res) => {

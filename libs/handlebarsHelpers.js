@@ -1,3 +1,9 @@
+const {
+  shippingMethods,
+  receiptMethods,
+  paymentMethods
+} = require('../config/business.json')
+
 module.exports = {
   currency: (price) => {
     const priceToNum = Number(price)

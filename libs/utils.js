@@ -1,6 +1,6 @@
 const moment = require('moment')
 
-const { shippingMethods } = require('../public/shippingMethods.json')
+const { shippingMethods } = require('../config/business.json')
 
 const utils = {
   formatDateToYYYYMMDD: (date) => {
