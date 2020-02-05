@@ -65,12 +65,20 @@ const orderController = {
     return res.render('checkoutShipping', { ...orderInfo, counties, shippingMethods, ...shippingOptions })
   },
 
+  postCheckoutShipping: (req, res) => {
+    let orderInfo = req.flash('data')[0]
+    req.flash('data', orderInfo)
+    const shippingInfo = req.body
+    const shippingFee = getShippingFee(shippingInfo.shippingWay)
+    const totalAmount = orderInfo.subTotal + shippingFee
 
-    return res.render('checkout', { ...cartInfo, counties, shippingMethods, ...options })
+    Object.assign(orderInfo, shippingInfo, { shippingFee, totalAmount })
+    orderInfo = generateReceiveAddress(orderInfo)
+
+    req.flash('data', orderInfo)
+    return res.redirect('/orders/checkout/payment')
   },
 
-  postCheckoutShipping: (req, res) => {
-    // console.log('postCheckoutShipping', req.flash('data'));
 
 
 
