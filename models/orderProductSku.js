@@ -7,7 +7,19 @@ module.exports = (sequelize, DataTypes) => {
       primaryKey: true,
       type: DataTypes.INTEGER
     },
-    quantity: DataTypes.INTEGER,
+    quantity: {
+      type: DataTypes.INTEGER,
+      validate: {
+        min: {
+          args: 1,
+          msg: '單次單項購買最少 1 件，請確認'
+        },
+        max: {
+          args: 3,
+          msg: '單次單項購買最多 3 件，您已購買 3 件，請確認'
+        },
+      },
+    },
     OrderId: {
       type: DataTypes.INTEGER,
       references: {
