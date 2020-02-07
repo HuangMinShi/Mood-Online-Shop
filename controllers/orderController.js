@@ -1,5 +1,9 @@
 const bcrypt = require('bcryptjs')
 
+const { counties } = require('../config/geonames.json')
+const { shippingMethods } = require('../config/business.json')
+const { shippingOptions } = require('../config/options.json')
+
 const {
   User,
   Order,
@@ -14,10 +18,12 @@ const {
   generateReceiveAddress
 } = require('../libs/utils')
 
-const { counties } = require('../config/geonames.json')
-const { shippingMethods } = require('../config/business.json')
-const { shippingOptions } = require('../config/options.json')
-const { createTransport, generateMail } = require('../libs/mail')
+const {
+  createTransport,
+  generateMail
+} = require('../libs/mail')
+
+const genTradeInfo = require('../libs/newebpay')
 
 const orderController = {
   getOrders: async (req, res) => {
@@ -196,15 +202,16 @@ const orderController = {
       // })
 
       // 寄發訂單成立 mail
-      const mail = generateMail(orderInfo, sn)
-      const transporter = createTransport()
-      transporter.sendMail(mail, (err, info) => {
-        if (err) return console.log(err);
-        return console.log(`Email sent：${info.response}`);
-      })
+      // const mail = generateMail(orderInfo, sn)
+      // const transporter = createTransport()
+      // transporter.sendMail(mail, (err, info) => {
+      //   if (err) return console.log(err);
+      //   return console.log(`Email sent：${info.response}`);
+      // })
 
       // 若成功額外帶往下一個頁面
       req.flash('order', order)
+      req.flash('isOrderNewCreated', true)
 
       return res.redirect('/orders/success')
 
@@ -227,8 +234,31 @@ const orderController = {
     return res.send('cancel order')
   },
 
-  getPayment: (req, res) => {
-    return res.send('get payment')
+  getPayment: async (req, res) => {
+    try {
+      const isOrderNewCreated = req.flash('isOrderNewCreated')[0]
+      const orderId = req.params.id
+      let order = null
+
+      if (isOrderNewCreated) {
+        order = await Order.findByPk(orderId, {
+          attributes: ['id', 'sn', 'totalAmount', 'note', 'orderEmail']
+        })
+      } else {
+        // 訪客查詢訂單
+      }
+
+      if (!order) {
+        req.flash('errorMessage', '非法訪問')
+        return res.redirect('/products')
+      }
+
+      const tradeInfo = genTradeInfo(order.dataValues)
+
+      return res.render('payment', { tradeInfo })
+    } catch (err) {
+      console.log(err);
+    }
   }
 }
 

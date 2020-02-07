@@ -1,0 +1,15 @@
+<h1 class="text-center mx-auto w-100">
+  <div class="font-weight-bold">BurnSki Online Shop</div>
+  <span>頁面跳轉中...</span>
+</h1>
+
+<form id="newebpay" name="newebpay" action='{{tradeInfo.PayGateWay}}' method="POST" hidden>
+  <input type="text" name="MerchantID" value="{{tradeInfo.MerchantID}}">
+  <input type="text" name="TradeInfo" value="{{tradeInfo.TradeInfo}}">
+  <input type="text" name="TradeSha" value="{{tradeInfo.TradeSha}}">
+  <input type="text" name="Version" value="{{tradeInfo.Version}}">
+</form>
+
+<script>
+  $('#newebpay').submit()
+</script>
