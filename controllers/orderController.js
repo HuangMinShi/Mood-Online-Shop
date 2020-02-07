@@ -118,10 +118,10 @@ const orderController = {
       const passwordInHash = await bcrypt.hash('HelloKitty24', salt)
       const [user, isCreated] = await User.findOrCreate({
         where: {
-          email: orderInfo.email
+          email: orderInfo.orderEmail
         },
         defaults: {
-          email: orderInfo.email,
+          email: orderInfo.orderEmail,
           password: passwordInHash,
           name: orderInfo.receiveName,
           address: orderInfo.receiveAddress,

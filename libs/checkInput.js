@@ -103,13 +103,13 @@ const checkOptions = {
   },
 
   checkoutShipping: {
-    requiredFields: ['email', 'receiveName', 'receiveCountry', 'county', 'township', 'street', 'zip', 'receivePhone', 'shippingWay'],
+    requiredFields: ['orderEmail', 'receiveName', 'receiveCountry', 'county', 'township', 'street', 'zip', 'receivePhone', 'shippingWay'],
     checkItems: {
       email: checkInput.isEmailValid,
       phone: checkInput.isPhoneNumsValid
     },
     checkItemRequiredParams: {
-      isEmailValid: ['email'],
+      isEmailValid: ['orderEmail'],
       isPhoneNumsValid: ['receivePhone']
     }
   },

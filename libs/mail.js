@@ -27,7 +27,7 @@ const createTransport = () => {
 const generateMail = (orderInfo, sn) => {
   const mail = {
     from: user,
-    to: orderInfo.email,
+    to: orderInfo.orderEmail,
     subject: '【Burton 訂購通知信-訪客購買】',
     template: 'email',
     context: { orderInfo, sn }
