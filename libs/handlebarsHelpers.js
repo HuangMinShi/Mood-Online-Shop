@@ -16,7 +16,7 @@ module.exports = {
   },
 
   shippingWayToMandarin: (way) => {
-    return shippingMethods[way][0]
+    return shippingMethods[way] && shippingMethods[way][0]
   },
 
   receiptToMandarin: (index) => {
