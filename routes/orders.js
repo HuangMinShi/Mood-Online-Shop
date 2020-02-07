@@ -28,5 +28,6 @@ router.post('/:id/cancel', orderController.cancelOrder)
 
 // 金流
 router.get('/:id/payment', orderController.getPayment)
+router.post('/newebpay/callback', orderController.newebpayCallback)
 
 module.exports = router

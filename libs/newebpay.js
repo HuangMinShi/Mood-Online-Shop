@@ -5,8 +5,8 @@ const hashKey = process.env.HASH_KEY
 const hashIv = process.env.HASH_IV
 const merchantID = process.env.MERCHANT_ID
 const payGateWay = 'https://ccore.spgateway.com/MPG/mpg_gateway'
-const returnURL = host + '/newebpay/callback?from=ReturnURL'
-const notifyURL = host + '/newebpay/callback?from=NotifyURL'
+const returnURL = host + '/orders/newebpay/callback?from=ReturnURL'
+const notifyURL = host + '/orders/newebpay/callback?from=NotifyURL'
 const clientBackURL = host + '/orders'
 
 const encodeToUrlQueryString = params => {
