@@ -25,6 +25,8 @@ router.get('/success', orderController.getSuccessOrder)
 // 單一訂單操作
 router.get('/:id', orderController.getOrder)
 router.post('/:id/cancel', orderController.cancelOrder)
+
+// 金流
 router.get('/:id/payment', orderController.getPayment)
 
 module.exports = router
