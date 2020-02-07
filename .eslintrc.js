@@ -16,6 +16,7 @@ module.exports = {
     },
     "rules": {
         quotes: ["error", "single"],
-        "require-atomic-updates": "off"
+        "require-atomic-updates": "off",
+        "no-control-regex": "off"
     }
 };
