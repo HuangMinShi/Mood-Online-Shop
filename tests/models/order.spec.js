@@ -22,6 +22,7 @@ const properties = [
   'receiveCountry',
   'receivePhone',
   'shippingWay',
+  'orderEmail',
   'UserId'
 ]
 const associations = [

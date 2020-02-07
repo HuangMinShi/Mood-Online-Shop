@@ -15,6 +15,7 @@ module.exports = (sequelize, DataTypes) => {
     receiveAddress: DataTypes.STRING,
     receivePhone: DataTypes.STRING,
     shippingWay: DataTypes.STRING,
+    orderEmail: DataTypes.STRING,
     UserId: {
       type: DataTypes.INTEGER,
       references: {

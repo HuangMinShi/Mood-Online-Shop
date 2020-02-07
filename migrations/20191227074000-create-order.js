@@ -49,6 +49,9 @@ module.exports = {
       receive_phone: {
         type: Sequelize.STRING
       },
+      order_email: {
+        type: Sequelize.STRING
+      },
       created_at: {
         allowNull: false,
         type: Sequelize.DATE,
