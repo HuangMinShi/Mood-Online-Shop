@@ -12,11 +12,11 @@ const PaymentLogModel = require('../../models/paymentLog')
 
 const name = 'PaymentLog'
 const properties = [
-  'params',
-  'method',
+  'tradeNo',
+  'paymentType',
   'status',
-  'paidAt',
-  'amount',
+  'payTime',
+  'amt',
   'OrderId'
 ]
 const associations = [

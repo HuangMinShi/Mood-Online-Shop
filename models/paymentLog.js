@@ -1,11 +1,14 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   const PaymentLog = sequelize.define('PaymentLog', {
-    params: DataTypes.STRING,
-    method: DataTypes.STRING,
-    status: DataTypes.STRING,
-    paidAt: DataTypes.DATE,
-    amount: DataTypes.FLOAT,
+    tradeNo: DataTypes.STRING,
+    paymentType: DataTypes.STRING,
+    status: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false
+    },
+    payTime: DataTypes.DATE,
+    amt: DataTypes.FLOAT,
     OrderId: {
       type: DataTypes.INTEGER,
       references: {

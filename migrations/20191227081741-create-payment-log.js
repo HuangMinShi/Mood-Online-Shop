@@ -8,19 +8,20 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      params: {
+      trade_no: {
         type: Sequelize.STRING
       },
-      method: {
+      payment_type: {
         type: Sequelize.STRING
       },
       status: {
-        type: Sequelize.STRING
+        type: Sequelize.BOOLEAN,
+        defaultValue: false
       },
-      paid_at: {
+      pay_time: {
         type: Sequelize.DATE
       },
-      amount: {
+      amt: {
         type: Sequelize.FLOAT
       },
       order_id: {
