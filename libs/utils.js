@@ -35,6 +35,11 @@ const utils = {
     })
 
     return orderInfo
+  },
+
+  genDate: (str) => {
+    const dateStr = str.slice(0, 10) + 'T' + str.slice(10)
+    return new Date(dateStr)
   }
 }
 
