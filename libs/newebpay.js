@@ -28,6 +28,8 @@ const encrypt = tradeData => {
 const decrypt = tradeInfo => {
   const decipher = crypto.createDecipheriv('aes256', hashKey, hashIv)
 
+  // 從 newebpay 傳進來的加密資料沒有使用標準密碼區塊填充，因此關閉自動填充
+  decipher.setAutoPadding(false)
   let text = decipher.update(tradeInfo, 'hex', 'utf8')
   text += decipher.final('utf8')
   const plainText = text.replace(/[\x00-\x20]+/g, '')
@@ -79,4 +81,10 @@ const genTradeInfo = (order) => {
   return tradeInfo
 }
 
-module.exports = genTradeInfo
+
+
+
+module.exports = {
+  decrypt,
+  genTradeInfo
+}
