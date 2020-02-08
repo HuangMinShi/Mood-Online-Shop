@@ -8,14 +8,16 @@ const {
   User,
   Order,
   ProductSku,
-  OrderProductSku
+  OrderProductSku,
+  PaymentLog
 } = require('../models')
 
 const {
+  genDate,
   getShippingFee,
   formatDateToYYYYMMDD,
-  mapOrderStatusCodeToString,
-  generateReceiveAddress
+  generateReceiveAddress,
+  mapOrderStatusCodeToString
 } = require('../libs/utils')
 
 const {
@@ -23,7 +25,10 @@ const {
   generateMail
 } = require('../libs/mail')
 
-const genTradeInfo = require('../libs/newebpay')
+const {
+  decrypt,
+  genTradeInfo
+} = require('../libs/newebpay')
 
 const orderController = {
   getOrders: async (req, res) => {
@@ -200,6 +205,7 @@ const orderController = {
       //     id: req.session.cartId
       //   }
       // })
+      // delete req.session.cartId
 
       // 寄發訂單成立 mail
       // const mail = generateMail(orderInfo, sn)
@@ -258,6 +264,66 @@ const orderController = {
       return res.render('payment', { tradeInfo })
     } catch (err) {
       console.log(err);
+    }
+  },
+
+  newebpayCallback: async (req, res) => {
+    try {
+      const fromURL = req.query.from
+      const tradeResult = req.body
+      const tradeInfo = JSON.parse(decrypt(tradeResult.TradeInfo))
+      const isTradeSuccess = (tradeInfo.Status === 'SUCCESS') ? true : false
+
+      if (fromURL === 'NotifyURL') {
+        const sn = tradeInfo.Result.MerchantOrderNo
+        const order = await Order.findOne({ whehe: { sn } })
+
+        const [paymentLog, isNewCreated] = await PaymentLog.findOrCreate({
+          where: {
+            OrderId: order.id,
+            status: true
+          },
+          defaults: {
+            tradeNo: tradeInfo.Result.TradeNo,
+            paymentType: tradeInfo.Result.PaymentType,
+            payTime: genDate(tradeInfo.Result.PayTime),
+            amt: Number(tradeInfo.Result.Amt),
+            OrderId: order.id
+          }
+        })
+
+        // 從 newebpay 觸發交易，但 paymentLog 已有該筆訂單成功付款紀錄
+        if (!isNewCreated) {
+          console.log('商店管理員重複觸發交易')
+          return res.status(200).send('商店管理員重複觸發交易')
+        }
+
+        // 交易成功，修改訂單及交易紀錄的狀態
+        if (isTradeSuccess && isNewCreated) {
+          await paymentLog.update({ status: true }) // true成功, false失敗
+          await order.update({ status: '2' }) // 0取消 1待付款 2待出貨 3待收貨 4完成
+        }
+
+        return res.status(200).send('消費者付款失敗');
+      }
+
+      if (fromURL === 'ReturnURL') {
+
+        // 已存在相同的商店訂單編號
+        const isDoublePayment = (tradeInfo.Status === 'MPG03008') ? true : false
+
+        return res.render('test', {
+          fromURL,
+          isTradeSuccess,
+          isDoublePayment
+        })
+
+      }
+
+      req.flash('errorMessage', '不合法的訪問')
+      return res.redirect('/products')
+    } catch (err) {
+      return console.log(err)
     }
   }
 }
