@@ -1,10 +1,10 @@
 (function () {
-  /************* products 頁面 *************/
+  /************* Products 頁面 *************/
   $('[class=product-img] img:first-child').each(function () {
     $(this).addClass('selected')
   })
 
-  $('.products').click((event) => {
+  $('.products').click(function (event) {
     if (event.target.matches('.color-option')) {
       const productSn = event.target.dataset.productSn
       const colorOption = event.target.dataset.colorOption
@@ -12,40 +12,42 @@
     }
   })
 
+  /************* Product 頁面 *************/
 
-
-
-
-  /************* product 頁面 *************/
   // 預設
-  defaultSelectedColor()
+  toSelectDefaultColor()
 
   // 選取顏色或尺寸事件
   $('.attribute-options').click(function (event) {
+
     if (event.target.matches('.color')) {
-      const selectedColor = event.target.dataset.option
-      switchColorTo(selectedColor, event.target)
-      switchSizeBlockTo(selectedColor)
-      switchGalleryBlockTo(selectedColor)
+      const colorSelected = event.target.dataset.option
+      switchColorTo(colorSelected, event.target)
+      switchSizeBlockTo(colorSelected)
+      switchGalleryBlockTo(colorSelected)
     }
+
     if (event.target.matches('.size')) {
-      const selectedSize = event.target.dataset.option
-      switchSizeTo(selectedSize, event.target)
+      const sizeSelected = event.target.dataset.option
+      switchSizeTo(sizeSelected, event.target)
     }
+
   })
 
   // 選取畫廊縮圖事件
   $('.nav-wrap').click(function (event) {
+
     if (event.target.matches('.img-order')) {
       const orderSelected = event.target.dataset.option
       switchGalleryMainImageTo(orderSelected)
     }
+
   })
 
   // 增減數量事件
   $('.calc-quantity').click(function (event) {
-    if (event.target.matches('.quantity-plus')) return calcQuantityUse('+')
-    if (event.target.matches('.quantity-minus')) return calcQuantityUse('-')
+    if (event.target.matches('.quantity-plus')) return clacQtyWith('+')
+    if (event.target.matches('.quantity-minus')) return clacQtyWith('-')
   })
 
 
@@ -102,6 +104,7 @@
 
 
   /************* Functions *************/
+
   /** products **/
   function switchProductMainImage(productSn, colorOption) {
     $(`.product-${productSn} .product-img`).find('.selected').removeClass('selected')
@@ -109,56 +112,72 @@
   }
 
   /** product **/
-  function defaultSelectedColor() {
-    // 預設第一組 color
+  function toSelectDefaultColor() {
+
+    // 預設選取第一組 color
+    $('.color-option .color-img-wrapper').first().addClass('selected')
     const defaultColor = $('.color-option img').first().addClass('selected').attr('data-option')
-    // 依據預設 color 選取 size and gallery 並輸入 value
+
+    // 依據 color 選取 size
     $(`.size-option div[class~=color-${defaultColor}]`).addClass('selected')
+
+    // 依據 color 選取 gallery
     $(`.gallery span[class~=color-${defaultColor}]`).each(function () {
       $(this).addClass('selected').children().first().addClass('selected')
     })
+    // 依據 color 輸入 value
     $('input[name=color]').attr('value', defaultColor)
+
   }
 
-  function switchColorTo(color, colorTarget) {
+  function switchColorTo(color, colorEventTarget) {
+    $('.color-option .color-img-wrapper.selected').removeClass('selected')
     $('.color-option img.selected').removeClass('selected')
-    $(colorTarget).addClass('selected')
+    $(colorEventTarget).addClass('selected').parent().addClass('selected')
     $('input[name=color]').attr('value', color)
   }
 
-  function switchSizeTo(size, sizeTarget) {
+  function switchSizeTo(size, sizeEventTarget) {
     $('.size-option button.selected').removeClass('selected')
-    $(sizeTarget).addClass('selected')
+    $(sizeEventTarget).addClass('selected')
     $('input[name=size]').attr('value', size)
   }
 
   function switchGalleryBlockTo(color) {
+
+    // 移除組圖以及該張圖片
     $('.gallery span.selected').each(function () {
       $(this).removeClass('selected').find('img.selected').removeClass('selected')
     })
+
     $(`.gallery span[class~=color-${color}]`).each(function () {
       $(this).addClass('selected').children().first().addClass('selected')
     })
+
   }
 
   function switchSizeBlockTo(color) {
     $('.size-option div.selected').removeClass('selected')
     $(`.size-option div[class~=color-${color}]`).addClass('selected')
+
     // 切換顏色時 size 也要清空
     $('.size-option button.selected').removeClass('selected')
     $('input[name=size]').attr('value', null)
   }
 
   function switchGalleryMainImageTo(order) {
+
     $('.gallery img.selected').each(function () {
       $(this).removeClass('selected')
     })
+
     $(`.gallery span.selected img[class~=order-${order}]`).each(function () {
       $(this).addClass('selected')
     })
+
   }
 
-  function calcQuantityUse(operator) {
+  function clacQtyWith(operator) {
     let quantity = $('.quantity').attr('value')
 
     switch (operator) {
