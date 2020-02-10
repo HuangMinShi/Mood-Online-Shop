@@ -15,9 +15,9 @@
 </head>
 
 <body>
-  <div class="wrapper d-flex flex-column">
-    <header class="fixed-top border-bottom">
-      <div class="wrapper d-flex">
+  <div class="wrapper d-flex flex-column align-items-center">
+    <header class="fixed-top">
+      <div class="wrapper d-flex border-bottom">
         <nav class="mr-md-auto">
           <ul class="d-flex flex-column flex-md-row">
             <li><a href="/">主頁</a></li>
@@ -42,14 +42,16 @@
       </div>
     </header>
 
-    <main id="data-panel" class="row mx-auto">
-      <div class="col-lg-10 mx-auto">
-        {{> messages}}
+    <main>
+      <div id="data-panel">
+        <div class="messages my-3">
+          {{> messages}}
+        </div>
         {{{body}}}
       </div>
     </main>
 
-    <footer class="text-center border-top">
+    <footer class="w-100 text-center border-top">
       <a href="jquery:;" class="back-top">
         <i class="fas fa-chevron-up"></i>
       </a>

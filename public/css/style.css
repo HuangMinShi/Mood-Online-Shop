@@ -6,7 +6,14 @@ body {
 }
 
 header {
+  height: 100px;
   background: #fff;
+}
+
+#data-panel {
+  margin: 100px 0;
+  width: 1280px;
+  max-width: 1280px;
 }
 
 a {
@@ -31,9 +38,6 @@ li {
 }
 
 
-
-
-
 /* =============== common =============== */
 input[type="text"],
 input[type="number"] {
@@ -46,11 +50,6 @@ input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
-}
-
-#data-panel {
-  margin: 150px 0;
-  max-width: 1280px;
 }
 
 .btn-action {
@@ -103,9 +102,6 @@ p.title {
 .wrapper {
   padding: 1rem;
 }
-
-
-
 
 /* =============== Products =============== */
 .product-img img[class*="color-option"] {
