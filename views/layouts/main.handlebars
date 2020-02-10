@@ -15,23 +15,61 @@
 </head>
 
 <body>
-  <header>
-    <div class="d-flex flex-column flex-md-row p-3 px-md-4 mb-3 border-bottom">
-      <h5 class="my-0 mr-md-auto">
-        <a href="/products" class="text-dark">Home Page</a>
-      </h5>
-      <nav class="my-2 my-md-0 mr-md-3">
-        <a class="p-2 text-dark" href="/cart">Cart</a>
-        <a class="p-2 text-dark" href="/orders">Order</a>
-      </nav>
-    </div>
-  </header>
+  <div class="wrapper d-flex flex-column">
+    <header class="fixed-top border-bottom">
+      <div class="wrapper d-flex">
+        <nav class="mr-md-auto">
+          <ul class="d-flex flex-column flex-md-row">
+            <li><a href="/">主頁</a></li>
+            <li><a href="/products">商品頁</a></li>
+            <li><a href="/cart">購物車</a></li>
+            <li><a href="/orders">訂單總覽</a></li>
+          </ul>
+        </nav>
 
-  <div class="row">
-    <div class="col-10 mx-auto">
-      {{> messages}}
-      {{{body}}}
-    </div>
+        <div>
+          <ul class="d-flex flex-column flex-md-row">
+            <li><a href="/users/signin">登入</a></li>
+            <li><a href="/users/signup">註冊</a></li>
+            <li>
+              <a href="/cart">
+                <i class="fa fa-shopping-cart"></i>
+                <span class="badge badge-danger">2</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </header>
+
+    <main id="data-panel" class="row mx-auto">
+      <div class="col-lg-10 mx-auto">
+        {{> messages}}
+        {{{body}}}
+      </div>
+    </main>
+
+    <footer class="text-center border-top">
+      <a href="jquery:;" class="back-top">
+        <i class="fas fa-chevron-up"></i>
+      </a>
+
+      <div class="wrapper">
+        <ul class="mx-auto footer-nav">
+          <li class="footer-item"><a href="#">關於我們</a></li>
+          <li class="footer-item"><a href="#">店鋪資訊</a></li>
+          <li class="footer-item"><a href="#">聯絡我們</a></li>
+          <li class="footer-item"><a href="#">隱私權聲明</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <a href="#">
+          <i class="fab fa-github-square"></i>
+        </a>
+        <p class="footer-muted">© 2019 Ethan</p>
+      </div>
+    </footer>
   </div>
 
   <!-- bootstrap -->

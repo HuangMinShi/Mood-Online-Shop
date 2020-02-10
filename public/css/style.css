@@ -1,3 +1,40 @@
+/* =============== * =============== */
+html, 
+body {
+  margin: 0;
+  height: 100%;
+}
+
+header {
+  background: #fff;
+}
+
+a {
+  font-size: 1.3rem;
+  color: #5b5b5f
+}
+
+a:active,
+a:hover {
+  outline: 0;
+  text-decoration: none;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+li {
+  margin-right: 1.5rem;
+}
+
+
+
+
+
+/* =============== common =============== */
 input[type="text"],
 input[type="number"] {
   background: #ffffff;
@@ -9,6 +46,11 @@ input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
+}
+
+#data-panel {
+  margin: 150px 0;
+  max-width: 1280px;
 }
 
 .btn-action {
@@ -58,7 +100,9 @@ p.title {
   color: #A8A8A8;
 }
 
-
+.wrapper {
+  padding: 1rem;
+}
 
 
 
@@ -268,4 +312,35 @@ p.title {
   font-family: "Font Awesome 5 Free";
   font-weight: 600;
   content: "\f106";
+}
+
+/* =============== footer =============== */
+.footer-item {
+  display: inline;
+}
+
+footer .fa-github-square {
+  font-size: 2.5rem;
+}
+
+.back-top {
+  height: 40px;
+  position: fixed;
+  right: 15px;
+  width: 40px;
+  z-index: 9999;
+  bottom: 0;
+  background-color: #404040;
+  font-size: 16px;
+  color: #fff;
+  text-align: center;
+  line-height: 1;
+  padding: 11px 0;
+  /* display: none; */
+  border-radius: 5px 5px 0 0;
+}
+
+.back-top:hover {
+  color: #fff;
+  background: rgba(64, 64, 64, .9);
 }
