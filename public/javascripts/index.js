@@ -1,10 +1,10 @@
 (function () {
   /************* products 頁面 *************/
-  $('[class=product-imgs] img:first-child').each(function () {
+  $('[class=product-img] img:first-child').each(function () {
     $(this).addClass('selected')
   })
 
-  $('#data-panel').click((event) => {
+  $('.products').click((event) => {
     if (event.target.matches('.color-option')) {
       const productSn = event.target.dataset.productSn
       const colorOption = event.target.dataset.colorOption
@@ -104,8 +104,8 @@
   /************* Functions *************/
   /** products **/
   function switchProductMainImage(productSn, colorOption) {
-    $(`.product-${productSn} .product-imgs`).find('.selected').removeClass('selected')
-    $(`.product-${productSn} .product-imgs`).find(`.color-option-${colorOption}`).addClass('selected')
+    $(`.product-${productSn} .product-img`).find('.selected').removeClass('selected')
+    $(`.product-${productSn} .product-img`).find(`.color-option-${colorOption}`).addClass('selected')
   }
 
   /** product **/

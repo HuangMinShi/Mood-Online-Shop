@@ -108,30 +108,14 @@ p.title {
 
 
 /* =============== Products =============== */
-.product {
-  padding: 0 .5rem;
-}
-
-.product-imgs img[class*="color-option"] {
+.product-img img[class*="color-option"] {
   display: none;
 }
 
-.product-imgs img.selected {
+.product-img img.selected {
   display: block;
 }
 
-.product-info {
-  text-align: center;
-}
-
-.product-name a {
-  font-size: 14px;
-  color: #5b5b5f
-}
-
-.product-price {
-  font-size: 18px;
-}
 
 /* =============== Product =============== */
 
