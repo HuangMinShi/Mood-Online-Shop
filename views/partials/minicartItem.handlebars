@@ -2,12 +2,12 @@
   <span class="text-muted pb-1 toggle" data-toggle="collapse" data-target="#minicart-expend">
     商品項目
   </span>
-  <hr>
+  <hr class="my-2">
   <div id="minicart-expend" class="collapse">
-    <div class="wrapper">
-      <ul class="pl-0">
+    <div class="wrapper p-0">
+      <ul>
         {{#each cartItems}}
-        <li class="d-flex py-3 border-bottom">
+        <li class="d-flex border-bottom pb-2 mb-2">
           <div class="item-img mt-1 mr-3">
             <a href="/products/{{this.sn}}">
               <div class="item-img-wrapper">

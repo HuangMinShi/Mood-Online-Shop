@@ -5,19 +5,8 @@ body {
   height: 100%;
 }
 
-header {
-  height: 100px;
-  background: #fff;
-}
-
-#data-panel {
-  margin: 100px 0;
-  width: 1280px;
-  max-width: 1280px;
-}
-
 a {
-  font-size: 1.3rem;
+  font-size: 1rem;
   color: #5b5b5f
 }
 
@@ -46,8 +35,33 @@ li {
   margin-right: 1.5rem;
 }
 
+.table td,
+.table th {
+  vertical-align: middle; 
+}
 
-/* =============== common =============== */
+/* header */
+header {
+  height: 100px;
+  background: #fff;
+}
+
+/* footer */
+.footer-item {
+  display: inline;
+}
+
+footer .fa-github-square {
+  font-size: 2.5rem;
+}
+
+/* =============== main =============== */
+#data-panel {
+  margin: 100px 0;
+  width: 1280px;
+  max-width: 1280px;
+}
+
 input[type="text"],
 input[type="number"] {
   background: #ffffff;
@@ -78,6 +92,7 @@ p.title {
   border-bottom: 1px solid #DEE2E6;
   /* font-size: 1.5rem; */
   font-weight: 700;
+  padding-bottom: .5rem;
 }
 
 .panel {
@@ -96,20 +111,52 @@ p.title {
   margin: .75rem 0;
 }
 
+.total.amount {
+  font-size: 1.3rem;
+}
+
 .item-img-wrapper {
   border: 1px solid rgba(204, 204, 204, 1);
   padding: 1px;
   display: block;
-  width: 165px;
-}
-
-.item-detail-name a{
-  text-decoration: none;
-  color: #A8A8A8;
+  width: 120px;
 }
 
 .wrapper {
   padding: 1rem;
+}
+
+.name {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.price {
+  font-size: 1.5rem;
+  color: rgb(168, 168, 168);
+  font-weight: 700;
+}
+
+.back-top {
+  height: 40px;
+  position: fixed;
+  right: 15px;
+  width: 40px;
+  z-index: 9999;
+  bottom: 0;
+  background-color: #404040;
+  font-size: 16px;
+  color: #fff;
+  text-align: center;
+  line-height: 1;
+  padding: 11px 0;
+  /* display: none; */
+  border-radius: 5px 5px 0 0;
+}
+
+.back-top:hover {
+  color: #fff;
+  background: rgba(64, 64, 64, .9);
 }
 
 /* =============== Products =============== */
@@ -122,19 +169,7 @@ p.title {
 }
 
 /* =============== Product =============== */
-/* info */
-.name {
-  font-size: 2rem;
-  font-weight: 700;
-}
-
-.price {
-  font-size: 1.5rem;
-  color: rgb(168, 168, 168);
-  font-weight: 700;
-}
-
-/* info attribute-options*/
+/* info attribute-options */
 .color-img-wrapper {
   display: inline-block;
   width: 25px;
@@ -218,92 +253,32 @@ p.title {
   border: 1px solid #000000;
 }
 
-
-
-
-
 /* =============== Cart =============== */
-
-.table td,
-.table th {
-  vertical-align: middle; 
-}
-
-.item-detail-name a{
-  text-decoration: none;
-  font-weight: 300;
-  font-size: 1.2rem;
-  color: #A8A8A8;
-}
-
-.quantity-field {
+.qty-field {
   width: 2.5rem;
 }
 
-.quantity-field input {
+.qty-field input {
   width: 100%;
   height: 100%;
   text-align: center;
 }
 
-.quantity-change form {
+.qty-change form {
   line-height: 0;
 }
 
-.quantity-change button {
+.qty-change button {
   padding: 0 .5rem;
   border-radius: 0;
 }
 
-/* 右側 */
-.cart .table-container {
-  padding: 2rem;
-}
-
-.cart .table-container table {
-  border-bottom: 1px solid #A8A8A8;
-}
-
+/* cart shipping-summary */
 .cart .shipping-summary {
-  padding: 2.7rem 1.2rem;
+  padding: 1rem;
   background-color: #fbfbfb;
   height: fit-content;
   border: 1px solid #A8A8A8;
-}
-
-.cart .shipping-summary .title {
-  margin-bottom: .75rem;
-}
-
-.cart .shipping-summary .info {
-  padding: .75rem 0;
-  border-top: 1px solid #DEE2E6;
-  border-bottom: 1px solid #DEE2E6;
-}
-
-.cart .shipping-summary .info .check {
-  border-bottom: 1px solid #DEE2E6;
-}
-
-.cart .shipping-summary .form-check {
-  margin: .75rem 0;
-}
-
-.cart .shipping-summary .products-amount,
-.cart .shipping-summary .shipping-fee {
-  display: flex;
-  justify-content: space-between;
-  margin: .75rem 0;
-}
-
-.cart .shipping-summary .total-amount {
-  display: flex;
-  justify-content: space-between;
-  font-size: 1.5rem;
-  font-weight: 600;
-  margin-top: .75rem;
-  padding-top: .75rem;
-  border-top: 1px solid #DEE2E6;
 }
 
 /* =============== Order =============== */
@@ -326,7 +301,6 @@ p.title {
 }
 
 /* =============== minicart =============== */
-
 #minicart .item-img-wrapper {
   width: 70px;
 }
@@ -345,35 +319,4 @@ p.title {
   font-family: "Font Awesome 5 Free";
   font-weight: 600;
   content: "\f106";
-}
-
-/* =============== footer =============== */
-.footer-item {
-  display: inline;
-}
-
-footer .fa-github-square {
-  font-size: 2.5rem;
-}
-
-.back-top {
-  height: 40px;
-  position: fixed;
-  right: 15px;
-  width: 40px;
-  z-index: 9999;
-  bottom: 0;
-  background-color: #404040;
-  font-size: 16px;
-  color: #fff;
-  text-align: center;
-  line-height: 1;
-  padding: 11px 0;
-  /* display: none; */
-  border-radius: 5px 5px 0 0;
-}
-
-.back-top:hover {
-  color: #fff;
-  background: rgba(64, 64, 64, .9);
 }

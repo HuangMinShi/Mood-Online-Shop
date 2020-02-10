@@ -1,5 +1,5 @@
 (function () {
-  /************* Products 頁面 *************/
+  /************* Products *************/
   $('[class=product-img] img:first-child').each(function () {
     $(this).addClass('selected')
   })
@@ -12,7 +12,7 @@
     }
   })
 
-  /************* Product 頁面 *************/
+  /************* Product *************/
 
   // 預設
   toSelectDefaultColor()
@@ -50,68 +50,43 @@
     if (event.target.matches('.quantity-minus')) return clacQtyWith('-')
   })
 
-
-
-
-
-  /************* cart 頁面 *************/
+  /************* Cart and Checkout *************/
   $('.cart .info').change(function (event) {
     const target = event.target
     const value = target.value
 
     if ($(target).is('#receiveCountry')) {
-      $('.quantity-change input[name="receiveCountry"]').attr('value', value)
+      $('.qty-change input[name="receiveCountry"]').attr('value', value)
     }
 
     if ($(target).is('#county')) {
-      $('.quantity-change input[name="county"]').attr('value', value)
+      $('.qty-change input[name="county"]').attr('value', value)
     }
 
     if ($(target).is('#zip')) {
-      $('.quantity-change input[name="zip"]').attr('value', value)
+      $('.qty-change input[name="zip"]').attr('value', value)
     }
 
     if ($(target).is('input[name="shippingWay"]')) {
-      const productsAmount = $('.products-amount span:last').text()
-      const shippingFee = $(this).find('input[name="shippingWay"]:checked + label span:last').text()
-      const totalAmountInNum = formatCurrencyToNumber(productsAmount) + formatCurrencyToNumber(shippingFee)
-      const totalAmount = formatNumberToCurrency(totalAmountInNum)
-
-      $('.shipping-fee span:last').replaceWith(`<span>${shippingFee}</span>`)
-      $('.total-amount span:last').replaceWith(`<span>${totalAmount}</span>`)
-
-      // 增減數量 button 綁定
-      $('.quantity-change input[name="shippingWay"]').attr('value', value)
+      $('.qty-change input[name="shippingWay"]').attr('value', value)
     }
   })
 
-
-
-
-  /************* checkout shipping *************/
   $('.shipping-methods').change(function () {
-    const itemsAmount = $('.items.amount span:last').text()
-    const shippingFee = $(this).find('input[name="shippingWay"]:checked + label span:last').text()
-    const totalAmountInNum = formatCurrencyToNumber(itemsAmount) + formatCurrencyToNumber(shippingFee)
-    const totalAmount = formatNumberToCurrency(totalAmountInNum)
-
-    $('.shipping-fee span:last').replaceWith(`<span>${shippingFee}</span>`)
-    $('.total span:last').replaceWith(`<span>${totalAmount}</span>`)
+    addShippingFeeAndDisplayTotalAmount(this)
   })
-
-
 
 
 
   /************* Functions *************/
 
-  /** products **/
+  /** Products **/
   function switchProductMainImage(productSn, colorOption) {
     $(`.product-${productSn} .product-img`).find('.selected').removeClass('selected')
     $(`.product-${productSn} .product-img`).find(`.color-option-${colorOption}`).addClass('selected')
   }
 
-  /** product **/
+  /** Product **/
   function toSelectDefaultColor() {
 
     // 預設選取第一組 color
@@ -192,14 +167,26 @@
     $('.quantity').attr('value', quantity)
   }
 
-  function formatNumberToCurrency(price) {
+  /** Cart and Checkout **/
+  function formatToCurrency(price) {
     const currency = price.toLocaleString('zh-TW', { style: 'currency', currency: 'TWD' })
     const formatedPrice = currency.replace(/[^0-9-.,]+/g, '');
     return 'NT$ ' + formatedPrice.split('.', 1)[0]
   }
 
-  function formatCurrencyToNumber(currency) {
+  function formatToNum(currency) {
     return Number(currency.replace(/[^0-9.-]+/g, ''))
+  }
+
+  function addShippingFeeAndDisplayTotalAmount(target) {
+    const itemsAmount = $('.items.amount span:last').text()
+    const shippingFee = $(target).find('input[name="shippingWay"]:checked + label span:last').text()
+
+    const totalAmountInNum = formatToNum(itemsAmount) + formatToNum(shippingFee)
+    const totalAmount = formatToCurrency(totalAmountInNum)
+
+    $('.shipping-fee.amount span:last').replaceWith(`<span>${shippingFee}</span>`)
+    $('.total.amount span:last').replaceWith(`<span>${totalAmount}</span>`)
   }
 
 })()
