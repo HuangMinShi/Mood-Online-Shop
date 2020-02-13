@@ -1,0 +1,8 @@
+/* =============== Products =============== */
+.product-img img[class*="color-option"] {
+  display: none;
+}
+
+.product-img img.selected {
+  display: block;
+}

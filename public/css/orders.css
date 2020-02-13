@@ -1,0 +1,17 @@
+#order .action span{
+  line-height: 3rem;
+}
+
+#order .action button {
+  vertical-align: baseline;
+}
+
+#order .action a,
+#order .action button{
+  color: #a8a8a8;
+}
+
+#order .action a:hover,
+#order .action button:hover{
+  color: #000000;
+}
