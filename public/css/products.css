@@ -6,3 +6,19 @@
 .product-img img.selected {
   display: block;
 }
+
+.color-img-wrapper {
+  display: inline-block;
+  width: 25px;
+  height: 25px;
+  padding: 2px;
+  border: 1px solid #cccccc;
+}
+
+.color-img-wrapper img {
+  vertical-align: top;
+}
+
+.color-img-wrapper.selected {
+  border: 1px solid #000000
+}

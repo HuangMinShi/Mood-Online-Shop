@@ -27,13 +27,14 @@
             {{#each colorImages}}
             <span>
               <a href="javascript:;">
-                <img src="{{this}}" class="color-option" alt="color-img" width="25" height="25"
-                  data-product-sn="{{../this.sn}}" data-color-option={{@key}}>
+                <div class="color-img-wrapper">
+                  <img src="{{this}}" class="color" data-color-option={{@key}} data-product-sn="{{../this.sn}}"
+                    alt="color-img" width="100%" height="auto">
+                </div>
               </a>
             </span>
             {{/each}}
           </div>
-
 
           <div class="text-right">
             <form action="">
