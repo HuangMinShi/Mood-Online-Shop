@@ -1,6 +1,6 @@
 const sizes = ['XS', 'S', 'M', 'L']
 
-const generateSku = (properties) => {
+const generateSKU = (properties) => {
   const {
     size,
     color,
@@ -23,5 +23,5 @@ const generateSku = (properties) => {
 }
 
 module.exports = {
-  generateSku
+  generateSKU
 }

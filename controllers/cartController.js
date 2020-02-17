@@ -4,7 +4,7 @@ const {
   CartProductSku
 } = require('../models')
 
-const { generateSku } = require('../libs/generateSku')
+const { generateSKU } = require('../libs/products')
 const { counties } = require('../config/geonames.json')
 const { shippingMethods } = require('../config/business.json')
 
@@ -35,7 +35,7 @@ const cartController = {
     req.session.cartId = 1
     try {
       // 依據 input 的商品資料轉成 sku
-      const sku = generateSku(req.body)
+      const sku = generateSKU(req.body)
 
       // 尋找購物車，若無則建立新購物車
       const [cart, isCreated] = await Cart.findOrCreate({
