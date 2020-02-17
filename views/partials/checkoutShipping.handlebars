@@ -1,0 +1,65 @@
+<div class="main-content">
+  <form action="/orders/checkout/shipping" method="POST">
+    <section class="row">
+      <p class="title col-12">配送地址</p>
+
+      <div class="form-group col-9 mb-5">
+        <input type="email" name="orderEmail" class="form-control mb-2" value="{{email}}" placeholder="電子郵件地址*"
+          autofocus required>
+        <span class="ml-2">您可以在結帳後加入會員。</span>
+      </div>
+      <br>
+
+      <div class="form-group col-9 mb-3">
+        <input type="text" name="receiveName" class="form-control" value="{{receiveName}}" placeholder="名字*" required>
+      </div>
+
+      <div class="form-group col-9 mb-3">
+        <select class="form-control custom-select" name="receiveCountry">
+          <option value="" disabled hidden selected>請選擇您的國家*</option>
+          <option {{#eq receiveCountry '台灣'}} selected {{/eq}}>台灣</option>
+        </select>
+      </div>
+
+      <div class="col-3"></div>
+
+      <div class="form-group col-2 mb-3">
+        <input type="text" class="form-control" name="zip" value="{{zip}}" placeholder="郵遞區號*" required>
+      </div>
+
+      <div class="form-group col-4 mb-3">
+        <select class="form-control custom-select" name="county" required>
+          <option value="" disabled hidden selected>請選擇您的縣市*</option>
+          {{#each counties}}
+          <option {{#eq ../county this}} selected {{/eq}}>{{this}}</option>
+          {{/each}}
+        </select>
+      </div>
+
+      <div class="form-group col-3 mb-3">
+        <input type="text" class="form-control" name="township" value="{{township}}" placeholder="鄉鎮市區*" required>
+      </div>
+
+      <div class="form-group col-9 mb-3">
+        <input type="text" class="form-control" name="street" value="{{street}}" placeholder="街道地址*" required>
+      </div>
+
+      <div class="form-group col-9 mb-3">
+        <input type="tel" class="form-control mb-2" name="receivePhone" value="{{receivePhone}}" pattern="[0-9]{10}"
+          placeholder="手機號碼*" required>
+        <span class="ml-2">格式：0912345678</span>
+      </div>
+    </section>
+
+    <section class="my-3">
+      <p class="title">配送方式</p>
+      {{> shippingMethods}}
+    </section>
+
+    <div class="border-top">
+      <button type="submit" class="btn btn-action w-25">
+        <span>下一步</span>
+      </button>
+    </div>
+  </form>
+</div>

@@ -76,7 +76,7 @@ const orderController = {
     const orderInfo = Object.assign({}, cartInfo, shippingInfo, { shippingFee, totalAmount })
 
     req.flash('data', orderInfo)
-    return res.render('checkoutShipping', { ...orderInfo, counties, shippingMethods, ...shippingOptions })
+    return res.render('checkout', { ...orderInfo, counties, shippingMethods, ...shippingOptions, page: 'checkout' })
   },
 
   postCheckoutShipping: (req, res) => {
