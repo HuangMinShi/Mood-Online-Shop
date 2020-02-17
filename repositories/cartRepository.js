@@ -22,13 +22,13 @@ const cartRepository = {
     }
   },
 
-  getProducts: async (whereQuery) => {
+  getProducts: async (query) => {
     try {
 
       // 查詢購物車裡 Products JOIN Color and Image 
       const products = await Product.findAll({
         attributes: ['id', 'sn', 'name', 'salePrice'],
-        where: whereQuery,
+        where: query,
         include: [
           {
             model: Color,
@@ -47,6 +47,48 @@ const cartRepository = {
     } catch (err) {
       return console.log(err)
     }
+  },
+
+  getOrCreateCart: async (query) => {
+    try {
+
+      return await Cart.findOrCreate({ where: query })
+
+    } catch (err) {
+      return console.log(err)
+    }
+  },
+
+  getProductSku: async (query) => {
+    try {
+
+      return await ProductSku.findOne({
+        attributes: ['id', 'stock'],
+        where: query
+      })
+
+    } catch (err) {
+      return console.log(err)
+    }
+  },
+
+  getOrCreateCartProductSku: async (query) => {
+    try {
+
+      const [cartProductSku] = await CartProductSku.findOrCreate({
+        where: query,
+        default: query
+      })
+
+      return cartProductSku
+
+    } catch (err) {
+      return console.log(err)
+    }
+  },
+
+  postCartProductSku: async (cartProductSku, quantity) => {
+    return await cartProductSku.update({ quantity: quantity })
   }
 }
 

@@ -1,6 +1,7 @@
-const { getShippingFee } = require('../libs/utils')
-
 const cartRepository = require('../repositories/cartRepository')
+
+const { getShippingFee } = require('../libs/utils')
+const { generateSKU } = require('../libs/products')
 
 const cartService = {
   getCart: async (req, res, cb) => {
@@ -64,6 +65,64 @@ const cartService = {
       return res.status(500).json(err.stack)
     }
   },
+
+  postCart: async (req, res, cb) => {
+
+    // 先固定 req.session.cartId 方便測試
+    req.session.cartId = 1
+
+    try {
+
+      // 尋找購物車，若無則建立
+      const queryCart = { id: req.session.cartId || 0 }
+      const [cart, isCreated] = await cartRepository.getOrCreateCart(queryCart)
+
+      // set session cartId
+      req.session.cartId = isCreated ? cart.id : req.session.cartId
+
+      // 依據 sku 尋找商品項目的庫存量
+      const queryProductSku = {
+        sku: generateSKU(req.body)
+      }
+      const productSku = await cartRepository.getProductSku(queryProductSku)
+
+      // 尋找購物車裡的商品項目，若無則建立
+      const queryCartProductSku = {
+        CartId: cart.id,
+        ProductSkuId: productSku.id
+      }
+      const cartProductSku = await cartRepository.getOrCreateCartProductSku(queryCartProductSku)
+
+      // 確認庫存數量 
+      const currentPurchasedQuantity = cartProductSku.quantity || 0
+      const customerWantPurchaseQuantity = +req.body.quantity
+      const totalPurchasedQuantity = currentPurchasedQuantity + customerWantPurchaseQuantity
+
+      if (productSku.stock < totalPurchasedQuantity) {
+        return cb({
+          status: 'failure',
+          message: `很抱歉，該商品剩 ${productSku.stock} 件，您已購買 ${currentPurchasedQuantity} 件，請確認`
+        })
+      }
+
+      // 購買數量寫入資料庫
+      await cartRepository.postCartProductSku(cartProductSku, totalPurchasedQuantity)
+
+      return cb({
+        status: 'success',
+        message: `${req.body.name} 成功加入購物車`
+      })
+
+    } catch (err) {
+      if (err.name === 'SequelizeValidationError') {
+        return cb({
+          status: 'failure',
+          message: err.errors[0].message
+        })
+      }
+      return res.status(500).json(err.stack)
+    }
+  }
 }
 
 module.exports = cartService
