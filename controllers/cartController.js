@@ -1,115 +1,33 @@
 const {
   Cart,
-  Color,
-  Image,
-  Product,
   ProductSku,
   CartProductSku
 } = require('../models')
 
-const { getShippingFee } = require('../libs/utils')
 const { generateSku } = require('../libs/generateSku')
 const { counties } = require('../config/geonames.json')
 const { shippingMethods } = require('../config/business.json')
 
+const cartService = require('../services/cartService')
+
 const cartController = {
   getCart: async (req, res) => {
-    req.session.cartId = 1
     try {
 
-      /**
-       * 查詢預先載入 Cart => ProductSku => Product => Color,Image 是一種方式
-       * 但資料包裹太多層不利維護，因此拆出分段資料整理。另外 Color 可以反正規化進入 Product
-       * 不用多合併一張表，減少效能。
-       * */
+      return await cartService.getCart(req, res, (data) => {
+        // 傳至確認頁
+        req.flash('data', data)
 
-      /** expect output:
-       * cartItem = {
-       *  mainImage: 'https://www.example.com'  // Image
-       *  name: 'FONTAWESOME T-SHIRT'           // Product
-       *  color: 'true_black'                   // Color
-       *  size: 'S                              // ProductSku
-       *  salePrice: 2450                       // Product
-       *  quantity: 1                           // CartProductSku
-       * }
-       */
-
-      // 查詢 Carts JOIN CartProductSkus and ProductSkus
-      let cart = await Cart.findByPk(req.session.cartId, {
-        include: 'cartItems'
+        return res.render('cart', {
+          ...data,
+          counties,
+          shippingMethods,
+          page: 'cart'
+        })
       })
-      cart = cart || { cartItems: [] }
-
-      // 整理
-      let cartItems = cart.cartItems.map(item => ({
-        sku: item.sku,
-        size: item.size,
-        ProductId: item.ProductId,
-        CartProductSkuId: item.CartProductSku.id,
-        quantity: item.CartProductSku.quantity,
-      }))
-
-      // 查詢 Products JOIN Color and Image
-      const products = await Product.findAll({
-        attributes: ['id', 'sn', 'name', 'salePrice'],
-        where: {
-          id: cartItems.map(item => item.ProductId)
-        },
-        include: [
-          {
-            model: Color,
-            attributes: ['type']
-          },
-          {
-            model: Image,
-            attributes: ['url'],
-            where: { isMain: true }
-          }
-        ]
-      })
-
-      // 合併
-      cartItems = cartItems.map(item => {
-        const product = products.find(product => product.id === item.ProductId)
-
-        return {
-          ...item,
-          sn: product.sn,
-          name: product.name,
-          image: product.Images[0].url,
-          color: product.Color.type.split('_').join(' ').toUpperCase(),
-          salePrice: Number(product.salePrice),
-          itemTotal: Number(product.salePrice) * Number(item.quantity)
-        }
-      })
-
-      // 計算運費及總金額
-      const shippingInfo = req.flash('shippingInfo')[0] || { shippingWay: 'inStorePickup' }
-      const shippingFee = getShippingFee(shippingInfo.shippingWay)
-      const subTotal = cartItems.length ? cartItems.map(item => item.itemTotal).reduce((a, c) => a + c) : 0
-      const totalAmount = subTotal + shippingFee
-
-      const data = {
-        ...shippingInfo,
-        cartItems,
-        subTotal
-      }
-
-      const renderParams = {
-        ...data,
-        shippingFee,
-        totalAmount,
-        counties,
-        shippingMethods
-      }
-
-      // 傳至確認頁
-      req.flash('data', data)
-
-      return res.render('cart', renderParams)
 
     } catch (err) {
-      console.log(err)
+      return res.status(500).json(err.stack)
     }
   },
 
