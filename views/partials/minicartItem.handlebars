@@ -3,7 +3,7 @@
     商品項目
   </span>
   <hr class="my-2">
-  <div id="minicart-expend" class="collapse">
+  <div id="minicart-expend" class="collapse {{#eq page 'checkoutOrder'}} show {{/eq}}">
     <div class="wrapper p-0">
       <ul>
         {{#each cartItems}}
@@ -33,16 +33,15 @@
             <div class="item-detail-price">
               <span>單價 :</span>
               <span>
-                {{#currency salePrice}}
-                {{/currency}}
+                {{currency salePrice}}
               </span>
             </div>
 
-            <span class="toggle collapsed text-muted" data-toggle="collapse" data-target="#expend-{{this.sku}}">
+            <span class="toggle text-muted" data-toggle="collapse" data-target="#expend-{{this.sku}}">
               查看詳細資訊
             </span>
 
-            <div id="expend-{{this.sku}}" class="collapse pt-1">
+            <div id="expend-{{this.sku}}" class="collapse {{#eq ../page 'checkoutOrder'}} show {{/eq}} pt-1">
               <div class="item-detail-color">
                 <span>顏色 :</span>
                 <span>{{this.color}}</span>
