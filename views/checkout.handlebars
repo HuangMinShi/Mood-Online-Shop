@@ -2,16 +2,22 @@
 
 <div class="row checkout">
   <main class="col-lg-8">
+
+    {{#if (eq page 'checkoutShipping')}}
     {{> checkoutShipping}}
+    {{/if}}
+
+    {{#if (eq page 'checkoutPayment')}}
+    {{> checkoutPayment}}
+    {{/if}}
   </main>
 
   <aside class="info col-lg-4">
-    <section class="panel">
-      <p class="title border-bottom-0 pb-0">訂單資訊</p>
-      <div>
-        {{> minicartItem}}
-        {{> expectedCost}}
-      </div>
-    </section>
+    {{> orderInfo}}
+
+    {{#if (eq page 'checkoutPayment')}}
+    {{> shippingInfo}}
+    {{/if}}
+
   </aside>
 </div>
