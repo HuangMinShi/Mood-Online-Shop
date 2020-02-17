@@ -37,7 +37,7 @@ const productService = {
           return prev
         }, [])
 
-      // 為了同時後端 render 及 API 所以用 callback 形式
+      // 為了同時後端 render 及 API 選擇用 callback 形式
       return cb(products)
 
     } catch (err) {
@@ -47,7 +47,8 @@ const productService = {
 
   getProduct: async (req, res, cb) => {
     try {
-      const productItems = await getProduct(req.params.sn)
+      const query = { sn: req.params.sn }
+      const productItems = await getProduct(query)
 
       const productItem = productItems
         .map(item => ({

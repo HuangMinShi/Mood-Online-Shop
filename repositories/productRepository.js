@@ -41,12 +41,12 @@ const productRepository = {
     }
   },
 
-  getProduct: async (sn) => {
+  getProduct: async (whereQuery) => {
     try {
 
       return await Product.findAll({
-        where: { sn: sn },
         attributes: ['id', 'sn', 'name', 'salePrice'],
+        where: whereQuery,
         include: [
           {
             model: Color,
