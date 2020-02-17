@@ -157,3 +157,24 @@ p.title {
 footer .fa-github-square {
   font-size: 2.5rem;
 }
+
+/* minicart */
+#minicart .item-img-wrapper {
+  width: 70px;
+}
+
+#minicart span.toggle:hover {
+  cursor: pointer;
+}
+
+#minicart span.toggle::after {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 600;
+  content: "\f107";
+}
+
+#minicart span.toggle.collapsed::after {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 600;
+  content: "\f106";
+}

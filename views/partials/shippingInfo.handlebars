@@ -6,7 +6,10 @@
       <li>{{receiveCountry}}</li>
       <li>{{receiveAddress}}</li>
       <li>{{receivePhone}}</li>
-      <li>{{#shippingWayToMandarin shippingWay}}{{/shippingWayToMandarin}}</li>
+      <li>{{shippingWayToMandarin shippingWay}}
+        <span> - </span>
+        <span>{{store}}</span>
+      </li>
     </ul>
   </div>
 </section>

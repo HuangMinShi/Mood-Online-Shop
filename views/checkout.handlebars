@@ -1,23 +1,33 @@
 <p class="page title border-0">確認頁</p>
 
 <div class="row checkout">
+
+  {{#eq order.status '1'}}
+  {{> successOrder}}
+  {{/eq}}
+
   <main class="col-lg-8">
 
-    {{#if (eq page 'checkoutShipping')}}
+    {{#eq page 'checkoutShipping'}}
     {{> checkoutShipping}}
-    {{/if}}
+    {{/eq}}
 
-    {{#if (eq page 'checkoutPayment')}}
+    {{#eq page 'checkoutPayment'}}
     {{> checkoutPayment}}
-    {{/if}}
+    {{/eq}}
+
+    {{#eq page 'checkoutOrder'}}
+    {{> checkoutOrder}}
+    {{/eq}}
+
   </main>
 
   <aside class="info col-lg-4">
     {{> orderInfo}}
 
-    {{#if (eq page 'checkoutPayment')}}
+    {{#eq page 'checkoutPayment'}}
     {{> shippingInfo}}
-    {{/if}}
+    {{/eq}}
 
   </aside>
 </div>

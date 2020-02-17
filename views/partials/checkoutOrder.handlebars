@@ -1,0 +1,21 @@
+<div class="main-content">
+  <form action="/orders" method="POST">
+    {{> shippingInfo}}
+    {{> paymentInfo}}
+
+    <section class="panel">
+      <p class="title border-bottom-0 pb-0">備註</p>
+      <div class="note">
+        <ul>
+          <li>{{note}}</li>
+        </ul>
+      </div>
+    </section>
+
+    <div class="border-top">
+      <button type="submit" class="btn btn-action w-25">
+        <span>成立訂單</span>
+      </button>
+    </div>
+  </form>
+</div>

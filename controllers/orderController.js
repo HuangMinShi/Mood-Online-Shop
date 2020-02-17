@@ -118,7 +118,7 @@ const orderController = {
     const orderInfo = req.flash('data')[0]
     req.flash('data', orderInfo)
 
-    return res.render('checkoutOrder', orderInfo)
+    return res.render('checkout', { ...orderInfo, page: 'checkoutOrder' })
   },
 
   postOrder: async (req, res) => {
