@@ -4,7 +4,7 @@
       <div class="col-md-5 gallery">
 
         <div class="main">
-          {{#each productImages}}
+          {{#each productItem.productImages}}
           <span class="color-{{@key}} border mx-auto">
             {{#each this}}
             <img src="{{this}}" class="img-order order-{{@key}} mx-auto" data-option="{{@key}}" width="300px"
@@ -15,7 +15,7 @@
         </div>
 
         <div class="nav-wrap text-left">
-          {{#each productImages}}
+          {{#each productItem.productImages}}
           <span class="color-{{@key}}">
             {{#each this}}
             <img src="{{this}}" class="img-order order-{{@key}}" data-option="{{@key}}" width="80px" height="auto">
@@ -28,8 +28,8 @@
 
       <div class="col-md-7 info">
         <div class="title d-flex flex-column">
-          <span class="name">{{name}}</span>
-          <span class="price my-1">{{currency salePrice}}</span>
+          <span class="name">{{productItem.name}}</span>
+          <span class="price my-1">{{currency productItem.salePrice}}</span>
           <small>有現貨</small>
         </div>
         <hr>
@@ -37,7 +37,7 @@
         <div class="attribute-options">
           <div class="color-option">
             <p>Color:</p>
-            {{#each colorImages}}
+            {{#each productItem.colorImages}}
             <a href="javascript:;">
               <div class="color-img-wrapper">
                 <img src="{{this}}" class="color" data-option={{@key}} alt="color-img" width="100%" height=" auto">
@@ -48,7 +48,7 @@
 
           <div class="size-option">
             <p class="mt-3">Size:</p>
-            {{#each productSizes}}
+            {{#each productItem.productSizes}}
             <div class="mb-3 color-{{@key}}">
               {{#each this}}
               <button type="button" class="size" data-option={{this}}>{{this}}</button>
@@ -68,8 +68,8 @@
                   -
                 </a>
 
-                <input hidden name="name" value="{{name}}">
-                <input hidden name="productSn" value="{{sn}}">
+                <input hidden name="name" value="{{productItem.name}}">
+                <input hidden name="productSn" value="{{productItem.sn}}">
                 <input hidden name="color">
                 <input hidden name="size">
                 <input type="text" name="quantity" class="quantity" value="1">
