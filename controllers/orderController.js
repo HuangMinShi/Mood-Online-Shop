@@ -75,13 +75,16 @@ const orderController = {
     const totalAmount = cartInfo.subTotal + shippingFee
     const orderInfo = Object.assign({}, cartInfo, shippingInfo, { shippingFee, totalAmount })
 
-    req.flash('data', orderInfo)
-    return res.render('checkout', { ...orderInfo, counties, shippingMethods, ...shippingOptions, page: 'checkout' })
+    req.flash('data', orderInfo)  // 暫存頁面資訊
+
+    return res.render('checkout', { ...orderInfo, counties, shippingMethods, ...shippingOptions, page: 'checkoutShipping' })
   },
 
   postCheckoutShipping: (req, res) => {
     let orderInfo = req.flash('data')[0]
-    req.flash('data', orderInfo)
+
+    req.flash('data', orderInfo)  // 再次暫存以防錯誤
+
     const shippingInfo = req.body
     const shippingFee = getShippingFee(shippingInfo.shippingWay)
     const totalAmount = orderInfo.subTotal + shippingFee
@@ -97,7 +100,7 @@ const orderController = {
     const orderInfo = req.flash('data')[0]
 
     req.flash('data', orderInfo)
-    return res.render('checkoutPayment', orderInfo)
+    return res.render('checkout', { ...orderInfo, page: 'checkoutPayment' })
   },
 
   postCheckoutPayment: (req, res) => {
