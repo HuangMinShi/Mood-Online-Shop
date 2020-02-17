@@ -16,7 +16,7 @@ module.exports = (sequelize, DataTypes) => {
         },
         max: {
           args: 3,
-          msg: '單次單項購買最多 3 件，您已購買 3 件，請確認'
+          msg: '單次單項購買最多 3 件，欲購買數量將超過 3 件，請確認'
         },
       },
     },
