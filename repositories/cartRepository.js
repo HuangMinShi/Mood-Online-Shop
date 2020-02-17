@@ -15,12 +15,20 @@ const cartRepository = {
       let cart = await Cart.findByPk(+id, { include: 'cartItems' })
       cart = cart || { cartItems: [] }
 
+      return cart
+
+    } catch (err) {
+      return console.log(err)
+    }
+  },
+
+  getProducts: async (whereQuery) => {
+    try {
+
       // 查詢購物車裡 Products JOIN Color and Image 
       const products = await Product.findAll({
         attributes: ['id', 'sn', 'name', 'salePrice'],
-        where: {
-          id: cart.cartItems.map(item => item.ProductId)
-        },
+        where: whereQuery,
         include: [
           {
             model: Color,
@@ -34,7 +42,7 @@ const cartRepository = {
         ]
       })
 
-      return { cart, products }
+      return products
 
     } catch (err) {
       return console.log(err)

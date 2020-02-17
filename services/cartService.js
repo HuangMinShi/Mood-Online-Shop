@@ -9,7 +9,9 @@ const cartService = {
     req.session.cartId = 1
 
     try {
-      let { cart, products } = await cartRepository.getCart(req.session.cartId)
+
+      // 找 cart 
+      let cart = await cartRepository.getCart(req.session.cartId)
 
       // 整理 cart
       let cartItems = cart.cartItems.map(item => ({
@@ -19,6 +21,13 @@ const cartService = {
         CartProductSkuId: item.CartProductSku.id,
         quantity: item.CartProductSku.quantity,
       }))
+
+      // 找 products
+      const query = {
+        id: cartItems.map(item => item.ProductId)
+      }
+
+      const products = await cartRepository.getProducts(query)
 
       // 合併 cart and products
       cartItems = cartItems.map(item => {
