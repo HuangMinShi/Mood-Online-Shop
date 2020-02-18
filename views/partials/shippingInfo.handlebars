@@ -9,8 +9,10 @@
       <li class="mt-1">{{receiveAddress}}</li>
       <li class="mt-1">{{receivePhone}}</li>
       <li class="mt-1">{{shippingWayToMandarin shippingWay}}
+        {{#if store}}
         <span> - </span>
         <span>{{store}}</span>
+        {{/if}}
       </li>
     </ul>
   </div>
