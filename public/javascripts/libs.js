@@ -113,7 +113,7 @@ function displayPickStores() {
   }
 
   if ($('#directDelivery').is(':checked')) {
-    $('.store').removeClass('show')
+    $('.store').removeClass('show').find('option:selected').prop('selected', false)
   }
 }
 
