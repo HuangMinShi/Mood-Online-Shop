@@ -2,11 +2,13 @@
   <p class="title border-bottom-0 pb-0">配送資訊</p>
   <div class="delivery">
     <ul>
-      <li>{{receiveName}}</li>
-      <li>{{receiveCountry}}</li>
-      <li>{{receiveAddress}}</li>
-      <li>{{receivePhone}}</li>
-      <li>{{shippingWayToMandarin shippingWay}}
+      <li>
+        <span>{{receiveName}}</span>
+        <span class="ml-3">{{receiveCountry}}</span>
+      </li>
+      <li class="mt-1">{{receiveAddress}}</li>
+      <li class="mt-1">{{receivePhone}}</li>
+      <li class="mt-1">{{shippingWayToMandarin shippingWay}}
         <span> - </span>
         <span>{{store}}</span>
       </li>
