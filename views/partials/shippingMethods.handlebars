@@ -4,10 +4,25 @@
 
     <input class="form-check-input" type="radio" name="shippingWay" value={{@key}} id={{@key}}
       {{#eq @key ../shippingWay}} checked {{/eq}}>
-    <label class="form-check-label" for="{{@key}}">
+
+    <label class="form-check-label w-75" for="{{@key}}">
       {{#each this}}
       <span>{{currency this}}</span>
       {{/each}}
+
+      {{#eq ../page 'checkoutShipping'}}
+      <!-- 到店自取才會顯示的區塊 -->
+      {{#eq @key 'inStorePickup'}}
+      <span class="form-group store mt-2">
+        <select class="form-control custom-select-sm w-25" name="store">
+          <option value="" selected>門市</option>
+          <option value="台北旗艦店">台北旗艦店</option>
+          <option value="台中旗艦店">台中旗艦店</option>
+          <option value="高雄旗艦店">高雄旗艦店</option>
+        </select>
+      </span>
+      {{/eq}}
+      {{/eq}}
     </label>
 
   </div>
