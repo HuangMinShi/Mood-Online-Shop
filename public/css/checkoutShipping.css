@@ -1,0 +1,7 @@
+.store {
+  display: none;
+}
+
+.store.show {
+  display: block;
+}

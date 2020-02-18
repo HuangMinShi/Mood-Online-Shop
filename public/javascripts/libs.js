@@ -98,7 +98,7 @@ function formatToNum(currency) {
 
 function addShippingFeeAndDisplayTotalAmount(target) {
   const itemsAmount = $('.items.amount span:last').text()
-  const shippingFee = $(target).find('input[name="shippingWay"]:checked + label span:last').text()
+  const shippingFee = $(target).find('input[name="shippingWay"]:checked + label span').eq(1).text()
 
   const totalAmountInNum = formatToNum(itemsAmount) + formatToNum(shippingFee)
   const totalAmount = formatToCurrency(totalAmountInNum)
@@ -107,16 +107,27 @@ function addShippingFeeAndDisplayTotalAmount(target) {
   $('.total.amount span:last').replaceWith(`<span>${totalAmount}</span>`)
 }
 
+function displayPickStores() {
+  if ($('#inStorePickup').is(':checked')) {
+    $('.store').addClass('show')
+  }
+
+  if ($('#directDelivery').is(':checked')) {
+    $('.store').removeClass('show')
+  }
+}
+
 export {
   clacQtyWith,
   formatToNum,
   switchSizeTo,
   switchColorTo,
   formatToCurrency,
+  displayPickStores,
   switchSizeBlockTo,
   toSelectDefaultColor,
   switchGalleryBlockTo,
   switchProductMainImage,
   switchGalleryMainImageTo,
-  addShippingFeeAndDisplayTotalAmount
+  addShippingFeeAndDisplayTotalAmount,
 }
