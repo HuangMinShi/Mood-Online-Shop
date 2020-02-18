@@ -40,7 +40,16 @@ const utils = {
   genDate: (str) => {
     const dateStr = str.slice(0, 10) + 'T' + str.slice(10)
     return new Date(dateStr)
-  }
+  },
+
+  reCalcShippingFeeAndTotalAmount: (data, shippingInfo) => {
+    const shippingFee = this.getShippingFee(shippingInfo.shippingWay)
+    const totalAmount = data.subTotal + shippingFee
+    Object.assign(data, shippingInfo, { shippingFee, totalAmount })
+    return data
+  },
 }
+
+this.getShippingFee = utils.getShippingFee  // genOrderInfo 使用
 
 module.exports = utils
