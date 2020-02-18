@@ -249,7 +249,7 @@ const orderController = {
   getSuccessOrder: (req, res) => {
     const orderInfo = req.flash('data')[0]
     const order = req.flash('order')[0]
-    return res.render('checkoutOrder', { ...orderInfo, order })
+    return res.render('checkout', { ...orderInfo, ...order, page: 'checkoutOrder' })
   },
 
   cancelOrder: (req, res) => {
