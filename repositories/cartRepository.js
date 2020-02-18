@@ -77,7 +77,7 @@ const cartRepository = {
 
       const [cartProductSku] = await CartProductSku.findOrCreate({
         where: query,
-        default: query
+        defaults: query
       })
 
       return cartProductSku
