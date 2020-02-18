@@ -2,11 +2,12 @@ html,
 body {
   margin: 0;
   height: 100%;
+  color: #5b5b5f;
 }
 
 a {
   font-size: 1rem;
-  color: #5b5b5f
+  color: #5b5b5f;
 }
 
 a:active,
@@ -69,8 +70,8 @@ input::-webkit-inner-spin-button {
   margin-top: .75rem;
   padding: .5rem;
   border: 0;
-  background-color: #ECECEC;
-  color: #535353;
+  background-color: #c5c5c5;
+  color: #000000;
 }
 
 .btn-action:hover {
@@ -83,16 +84,6 @@ p.title {
   /* font-size: 1.5rem; */
   font-weight: 700;
   padding-bottom: .5rem;
-}
-
-.panel {
-  padding: 1rem;
-  /* margin: 1rem; */
-  margin-bottom: 1rem;
-  background-color: #f5f5f5;
-  height: fit-content;
-  border: 1px solid #A8A8A8;
-  border-radius: .3rem;
 }
 
 .amount {
@@ -147,6 +138,22 @@ p.title {
 .back-top:hover {
   color: #fff;
   background: rgba(64, 64, 64, .9);
+}
+
+.panel {
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+  background-color: #f5f5f5;
+  height: fit-content;
+  border: 1px solid #A8A8A8;
+  border-radius: .3rem;
+}
+
+.main {
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+  height: fit-content;
+  border-radius: .3rem;
 }
 
 /* footer */
