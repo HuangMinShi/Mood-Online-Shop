@@ -178,3 +178,8 @@ footer .fa-github-square {
   font-weight: 600;
   content: "\f106";
 }
+
+/* custom-control */
+.custom-control.custom-radio {
+  margin-bottom: .5rem;
+}

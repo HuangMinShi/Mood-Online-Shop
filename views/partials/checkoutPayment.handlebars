@@ -1,53 +1,55 @@
 <div class="main-content">
   <form action="/orders/checkout/payment" method="POST">
     <section>
-      <p class="title">付款資訊</p>
+      <p class="title">發票資訊</p>
 
-      <div class="form-group receipt">
-        <span>發票</span>
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="receipt" id="personal-receipt" value="1" required>
-          <label class="form-check-label" for="personal-receipt">
+      <div class="receipt">
+        <div class="custom-control custom-radio">
+          <input class="custom-control-input" type="radio" name="receipt" id="personal-receipt" value="1" required>
+          <label class="custom-control-label" for="personal-receipt">
             <span>個人電子發票（中獎會主動掛號寄出）</span>
           </label>
         </div>
 
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="receipt" id="donate" value="2" required>
-          <label class="form-check-label" for="donate">
+        <div class="custom-control custom-radio">
+          <input class="custom-control-input" type="radio" name="receipt" id="donate" value="2" required>
+          <label class="custom-control-label" for="donate">
             <span>捐贈</span>
           </label>
         </div>
 
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="receipt" id="company-receipt" value="3" required>
-          <label class="form-check-label" for="company-receipt">
+        <div class="custom-control custom-radio">
+          <input class="custom-control-input" type="radio" name="receipt" id="company-receipt" value="3" required>
+          <label class="custom-control-label" for="company-receipt">
             <span>公司三聯式發票</span>
           </label>
         </div>
       </div>
-
-      <div class="form-group note">
-        <textarea name="note" rows="3" maxlength="50" placeholder="備註"></textarea>
-      </div>
     </section>
 
-    <section>
+    <section class="my-3">
       <p class="title">付款方式</p>
-      <div class="form-group payment-way">
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="payment" id="credit-card" value="1" required>
-          <label class="form-check-label" for="credit-card">
+      <div class="payment-way">
+        <div class="custom-control custom-radio">
+          <input class="custom-control-input" type="radio" name="payment" id="credit-card" value="1" required>
+          <label class="custom-control-label" for="credit-card">
             <span>信用卡付款</span>
           </label>
         </div>
 
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="payment" id="ATM" value="2" required>
-          <label class="form-check-label" for="ATM">
+        <div class="custom-control custom-radio">
+          <input class="custom-control-input" type="radio" name="payment" id="ATM" value="2" required>
+          <label class="custom-control-label" for="ATM">
             <span>ATM 轉帳付款</span>
           </label>
         </div>
+      </div>
+    </section>
+
+    <section>
+      <p class="title">訂單備註</p>
+      <div class="form-group note">
+        <textarea name="note" rows="3" cols="100" maxlength="200" placeholder="備註"></textarea>
       </div>
     </section>
 

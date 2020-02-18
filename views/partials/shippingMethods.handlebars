@@ -1,11 +1,11 @@
 <div class="shipping-methods">
   {{#each shippingMethods}}
-  <div class="form-check my-3">
+  <div class="custom-control custom-radio">
 
-    <input class="form-check-input" type="radio" name="shippingWay" value={{@key}} id={{@key}}
+    <input class="custom-control-input" type="radio" name="shippingWay" value={{@key}} id={{@key}}
       {{#eq @key ../shippingWay}} checked {{/eq}}>
 
-    <label class="form-check-label w-75" for="{{@key}}">
+    <label class="custom-control-label w-75" for="{{@key}}">
       {{#each this}}
       <span>{{currency this}}</span>
       {{/each}}
