@@ -14,10 +14,10 @@ const {
 
 const {
   genDate,
-  getShippingFee,
   formatDateToYYYYMMDD,
   generateReceiveAddress,
-  mapOrderStatusCodeToString
+  mapOrderStatusCodeToString,
+  reCalcShippingFeeAndTotalAmount,
 } = require('../libs/utils')
 
 const {
@@ -69,48 +69,49 @@ const orderController = {
   },
 
   getCheckoutShipping: (req, res) => {
-    const cartInfo = req.flash('data')[0]
+
+    // 取得 1.cart 所傳送的暫存  2.使用者的預估選擇
+    let orderInfo = req.flash('data')[0]
     const shippingInfo = req.query
-    const shippingFee = getShippingFee(shippingInfo.shippingWay)
-    const totalAmount = cartInfo.subTotal + shippingFee
-    const orderInfo = Object.assign({}, cartInfo, shippingInfo, { shippingFee, totalAmount })
 
-    req.flash('data', orderInfo)  // 暫存頁面資訊
+    // 1.計算運費  2.合併 order, shipping
+    orderInfo = reCalcShippingFeeAndTotalAmount(orderInfo, shippingInfo)
 
-    return res.render('checkout', { ...orderInfo, counties, shippingMethods, ...shippingOptions, page: 'checkoutShipping' })
+    // 暫存新資料
+    req.flash('data', orderInfo)
+
+    return res.render('checkout', { ...orderInfo, ...shippingOptions, counties, shippingMethods, page: 'checkoutShipping' })
   },
 
   postCheckoutShipping: (req, res) => {
     let orderInfo = req.flash('data')[0]
-
-    req.flash('data', orderInfo)  // 再次暫存以防錯誤
-
     const shippingInfo = req.body
-    const shippingFee = getShippingFee(shippingInfo.shippingWay)
-    const totalAmount = orderInfo.subTotal + shippingFee
 
-    Object.assign(orderInfo, shippingInfo, { shippingFee, totalAmount })
+    // 1. 計算運費並合併 order, shipping  2.產生頁面顯示的地址
+    orderInfo = reCalcShippingFeeAndTotalAmount(orderInfo, shippingInfo)
     orderInfo = generateReceiveAddress(orderInfo)
 
     req.flash('data', orderInfo)
+
     return res.redirect('/orders/checkout/payment')
   },
 
   getCheckoutPayment: (req, res) => {
-    const orderInfo = req.flash('data')[0]
-
+    let orderInfo = req.flash('data')[0]
     req.flash('data', orderInfo)
+
     return res.render('checkout', { ...orderInfo, page: 'checkoutPayment' })
   },
 
   postCheckoutPayment: (req, res) => {
-    const paymentInfo = req.body
     const orderInfo = req.flash('data')[0]
-    req.flash('data', orderInfo)
+    const paymentInfo = req.body
 
+    // 合併 order, payment
     Object.assign(orderInfo, paymentInfo)
 
     req.flash('data', orderInfo)
+
     return res.redirect('/orders/checkout/order')
   },
 
@@ -124,8 +125,7 @@ const orderController = {
   postOrder: async (req, res) => {
     try {
       const orderInfo = req.flash('data')[0]
-      // 若 err 發生，則返回上一頁能續帶上次資料
-      req.flash('data', orderInfo)
+      req.flash('data', orderInfo)  // 若 err 發生，則返回上一頁能續帶上次資料
 
       // 新增 user
       const salt = await bcrypt.genSalt(10)
