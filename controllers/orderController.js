@@ -5,11 +5,12 @@ const { shippingMethods } = require('../config/business.json')
 const { shippingOptions } = require('../config/options.json')
 
 const {
+  Cart,
   User,
   Order,
+  PaymentLog,
   ProductSku,
   OrderProductSku,
-  PaymentLog
 } = require('../models')
 
 const {
@@ -125,7 +126,47 @@ const orderController = {
   postOrder: async (req, res) => {
     try {
       const orderInfo = req.flash('data')[0]
-      req.flash('data', orderInfo)  // 若 err 發生，則返回上一頁能續帶上次資料
+
+      // 若 err 發生，則返回上一頁能續帶上次資料
+      req.flash('data', orderInfo)
+
+      // 撈資料確認庫存
+      const skus = orderInfo.cartItems.map(item => item.sku)
+      let productSkus = await ProductSku.findAll({
+        attributes: ['id', 'sku', 'stock'],
+        where: {
+          sku: skus
+        }
+      })
+
+      // 資料整理，以 sku 當 key，以利後續比對庫存
+      productSkus = productSkus
+        .map(item => {
+          const sku = item.sku
+          delete item.dataValues.sku
+          return {
+            [sku]: item.dataValues
+          }
+        })
+        .reduce((prev, curr) => Object.assign(prev, curr))
+
+
+      // 開始比對
+      const errors = []
+      orderInfo.cartItems.forEach(item => {
+        const stock = productSkus[item.sku].stock
+        if (stock < item.quantity) {
+          errors.push({
+            message: `哎呀！晚了一步，商品 ${item.name}，庫存數量為 ${item.stock}，庫存不足請確認`
+          })
+        }
+      })
+
+      // 庫存不足，返回
+      if (errors.length) {
+        req.flash('errors', errors)
+        return res.redirect('back')
+      }
 
       // 新增 user
       const salt = await bcrypt.genSalt(10)
@@ -144,43 +185,8 @@ const orderController = {
         }
       })
 
-      if (isCreated) {
-        // 寄信通知未完成註冊
-      }
-
-      // 避免併發狀況，再確認庫存
-      const skus = orderInfo.cartItems.map(item => item.sku)
-      let productSkus = await ProductSku.findAll({
-        attributes: ['id', 'sku', 'stock'],
-        where: {
-          sku: skus
-        }
-      })
-
-      productSkus = productSkus
-        .map(item => {
-          const sku = item.sku
-          delete item.dataValues.sku
-          return {
-            [sku]: item.dataValues
-          }
-        })
-        .reduce((prev, curr) => Object.assign(prev, curr))
-
-      const errors = []
-      orderInfo.cartItems.forEach(item => {
-        const stock = productSkus[item.sku].stock
-        if (stock < item.quantity) {
-          errors.push({
-            message: `哎呀！晚了一步，商品 ${item.name}，庫存數量為 ${item.stock}，庫存不足請確認`
-          })
-        }
-      })
-
-      if (errors.length) {
-        req.flash('errors', errors)
-        return res.redirect('/cart')
-      }
+      // 新用戶則寄信通知未完成註冊
+      if (isCreated) { }
 
       // 新增 order
       const order = await Order.create({
@@ -202,24 +208,31 @@ const orderController = {
 
       await Promise.all(orderItems)
 
+      /*
       // 清除購物車及商品資料
-      // await Cart.destroy({
-      //   where: {
-      //     id: req.session.cartId
-      //   }
-      // })
-      // delete req.session.cartId
+      await Cart.destroy({
+        where: {
+          id: req.session.cartId
+        }
+      })
+      delete req.session.cartId
 
       // 寄發訂單成立 mail
-      // const mail = generateMail(orderInfo, sn)
-      // const transporter = createTransport()
-      // transporter.sendMail(mail, (err, info) => {
-      //   if (err) return console.log(err);
-      //   return console.log(`Email sent：${info.response}`);
-      // })
+      const mail = generateMail(orderInfo, sn)
+      const transporter = createTransport()
+      transporter.sendMail(mail, (err, info) => {
+        if (err) return console.log(err);
+        return console.log(`Email sent：${info.response}`);
+      })
+      */
 
-      // 若成功額外帶往下一個頁面
-      req.flash('order', order)
+      // 訂單建立成功，將時間及序號帶往 success order page
+      req.flash('order', {
+        createdAt: order.createdAt,
+        sn: order.sn
+      })
+
+      // 將訂單是否為新建立的判斷帶往繼續購物 route 
       req.flash('isOrderNewCreated', true)
 
       return res.redirect('/orders/success')
