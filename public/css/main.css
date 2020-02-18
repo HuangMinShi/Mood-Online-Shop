@@ -81,9 +81,8 @@ input::-webkit-inner-spin-button {
 
 p.title {
   border-bottom: 1px solid #DEE2E6;
-  /* font-size: 1.5rem; */
   font-weight: 700;
-  padding-bottom: .5rem;
+  padding-bottom: .3rem;
 }
 
 .amount {
@@ -93,7 +92,7 @@ p.title {
 }
 
 .total.amount {
-  font-size: 1.3rem;
+  font-size: 1.2rem;
 }
 
 .item-img-wrapper {
