@@ -231,8 +231,9 @@ const orderController = {
       })
       */
 
-      // 訂單建立成功，將時間及序號帶往 success order page
+      // 訂單建立成功，將 id,datetime and sn 帶往 success order page
       req.flash('order', {
+        id: order.id,
         createdAt: order.createdAt,
         sn: order.sn
       })
