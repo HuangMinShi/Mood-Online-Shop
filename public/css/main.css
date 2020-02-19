@@ -118,7 +118,7 @@ p.title {
   font-weight: 700;
 }
 
-.back-top {
+.totop {
   height: 40px;
   position: fixed;
   right: 15px;
@@ -131,11 +131,11 @@ p.title {
   text-align: center;
   line-height: 1;
   padding: 11px 0;
-  /* display: none; */
+  display: none;
   border-radius: 5px 5px 0 0;
 }
 
-.back-top:hover {
+.totop:hover {
   color: #fff;
   background: rgba(64, 64, 64, .9);
 }
