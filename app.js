@@ -9,7 +9,7 @@ const flash = require('connect-flash')
 const methodOverride = require('method-override')
 const passport = require('./config/passport')
 const comparehelpers = require('handlebars-helpers').comparison()
-const helpers = require('./libs/handlebarsHelpers')
+const helpers = require('./libs/handlebars_helpers')
 
 const env = process.env.NODE_ENV || 'development'
 const port = process.env.PORT || 3000

@@ -1,12 +1,6 @@
-const moment = require('moment')
-
 const { shippingMethods } = require('../config/business.json')
 
 const utils = {
-  formatDateToYYYYMMDD: (date) => {
-    return moment(date).format('YYYY/MM/DD')
-  },
-
   mapOrderStatusCodeToString: (statusNum) => {
     const orderStatusCodesList = {
       '0': '取消',

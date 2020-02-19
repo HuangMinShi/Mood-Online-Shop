@@ -15,7 +15,6 @@ const {
 
 const {
   genDate,
-  formatDateToYYYYMMDD,
   generateReceiveAddress,
   mapOrderStatusCodeToString,
   reCalcShippingFeeAndTotalAmount,
@@ -57,7 +56,7 @@ const orderController = {
     orders = orders.map(order => {
       return {
         ...order.dataValues,
-        createdAt: formatDateToYYYYMMDD(order.createdAt),
+        createdAt: order.createdAt,
         status: mapOrderStatusCodeToString(order.status)
       }
     })

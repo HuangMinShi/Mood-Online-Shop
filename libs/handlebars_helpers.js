@@ -1,3 +1,5 @@
+const moment = require('moment')
+
 const {
   shippingMethods,
   receiptMethods,
@@ -25,5 +27,9 @@ module.exports = {
 
   paymentToMandarin: (index) => {
     return paymentMethods[index]
+  },
+
+  displayDate: (datetime) => {
+    return moment(datetime).format('YYYY/MM/DD')
   },
 }
