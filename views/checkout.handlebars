@@ -2,9 +2,9 @@
 
 <div class="row checkout">
 
-  {{#eq order.status '1'}}
-  {{> successOrder}}
-  {{/eq}}
+  {{#isTruthy sn}}
+  {{> orderSuccess}}
+  {{/isTruthy}}
 
   <main class="main col-lg-8">
 

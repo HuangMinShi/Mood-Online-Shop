@@ -1,0 +1,13 @@
+<div class="col-12 ml-2">
+  <div class="panel order-success mr-2 text-center">
+    <h3>
+      <p>訂單已成功建立</p>
+      <p>訂單編號為 {{sn}}，訂單成立日期 {{displayDate createdAt}}</p>
+      <p>我們已將訂單內容發送至你的信箱: {{orderEmail}}，敬請查收。</p>
+    </h3>
+    <div class="w-25 mx-auto">
+      <a href="/products" class="btn btn-action">繼續購物</a>
+      <a href="/orders/{{order.id}}/payment" class="btn btn-action">立即付款</a>
+    </div>
+  </div>
+</div>
