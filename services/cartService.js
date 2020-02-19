@@ -108,7 +108,8 @@ const cartService = {
       }
 
       // 購買數量寫入資料庫
-      await cartRepository.postCartProductSku(cartProductSku, totalPurchasedQuantity)
+      const queryToUpdateCartProductSku = { quantity: totalPurchasedQuantity }
+      await cartRepository.updateCartProductSku(cartProductSku, queryToUpdateCartProductSku)
 
       return cb({
         status: 'success',

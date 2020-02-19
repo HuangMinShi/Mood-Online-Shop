@@ -87,8 +87,8 @@ const cartRepository = {
     }
   },
 
-  postCartProductSku: async (cartProductSku, quantity) => {
-    return await cartProductSku.update({ quantity: quantity })
+  updateCartProductSku: async (cartProductSku, query) => {
+    return await cartProductSku.update(query)
   }
 }
 
