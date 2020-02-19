@@ -70,11 +70,17 @@ const orderController = {
 
   getCheckoutShipping: (req, res) => {
 
-    // 取得 1.cart 所傳送的暫存  2.使用者的預估選擇
+    // 取得 cart 所傳送的暫存及使用者的預估選擇
     let orderInfo = req.flash('data')[0]
     const shippingInfo = req.query
 
-    // 1.計算運費  2.合併 order, shipping
+    // 無商品進入
+    if (!orderInfo.itemsCount) {
+      req.flash('errorMessage', '購物車目前沒有任何商品唷。')
+      return res.redirect('back')
+    }
+
+    // 計算運費並合併 order, shipping
     orderInfo = reCalcShippingFeeAndTotalAmount(orderInfo, shippingInfo)
 
     // 暫存新資料

@@ -57,7 +57,8 @@ const cartService = {
         totalAmount,
         shippingFee,
         cartItems,
-        subTotal
+        subTotal,
+        itemsCount: cartItems.length
       }
 
       return cb(data)
