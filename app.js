@@ -10,13 +10,13 @@ const methodOverride = require('method-override')
 const passport = require('./config/passport')
 const comparehelpers = require('handlebars-helpers').comparison()
 const helpers = require('./libs/handlebars_helpers')
+const getCartItemQty = require('./middlewares/cartItemQty')
 
 const env = process.env.NODE_ENV || 'development'
 const port = process.env.PORT || 3000
 
 const app = express()
 const hbs = exphbs.create({
-  defaultLayout: 'main',
   helpers: {
     ...helpers,
     comparehelpers
@@ -47,6 +47,9 @@ app.use((req, res, next) => {
   res.locals.errors = req.flash('errors')
   next()
 })
+
+// 計算購物車數量
+app.use(getCartItemQty)
 
 if (env !== 'test') {
   app.listen(port, () => {

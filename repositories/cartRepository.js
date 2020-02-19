@@ -89,6 +89,10 @@ const cartRepository = {
 
   updateCartProductSku: async (cartProductSku, query) => {
     return await cartProductSku.update(query)
+  },
+
+  sumCartProductSkuQty: async (query) => {
+    return await CartProductSku.sum('quantity', { where: query })
   }
 }
 
