@@ -34,12 +34,6 @@
           <ul class="d-flex flex-column flex-md-row">
             <li><a href="/users/signin">登入</a></li>
             <li><a href="/users/signup">註冊</a></li>
-            <li>
-              <a href="/cart">
-                <i class="fa fa-shopping-cart"></i>
-                <span class="badge badge-danger">{{itemQty}}</span>
-              </a>
-            </li>
           </ul>
         </div>
       </div>
@@ -47,10 +41,20 @@
 
     <main>
       <div id="data-panel">
+
+        <div class="cart text-right pr-2">
+          <a href="/cart">
+            <i class="fa fa-shopping-cart"></i>
+            <span class="badge badge-danger item-qty">{{itemQty}}</span>
+          </a>
+        </div>
+
         <div class="messages my-3">
           {{> messages}}
         </div>
+
         {{{body}}}
+
       </div>
     </main>
 
