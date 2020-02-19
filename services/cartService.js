@@ -7,7 +7,7 @@ const cartService = {
   getCart: async (req, res, cb) => {
 
     // 先固定 req.session.cartId 方便測試
-    // req.session.cartId = 1
+    req.session.cartId = 1
 
     try {
 
@@ -71,7 +71,7 @@ const cartService = {
   postCart: async (req, res, cb) => {
 
     // 先固定 req.session.cartId 方便測試
-    // req.session.cartId = 1
+    req.session.cartId = 1
 
     try {
 

@@ -166,11 +166,11 @@ footer .fa-github-square {
 }
 
 /* cart-icon */
-.cart a {
+.cart-icon a {
   font-size: 2rem;
 }
 
-.cart .item-qty {
+.cart-icon .item-qty {
   font-size: 1.3rem;
   margin-right: 1px;
   /* border-radius: 1px; */
