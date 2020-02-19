@@ -7,12 +7,13 @@ const cartService = {
   getCart: async (req, res, cb) => {
 
     // 先固定 req.session.cartId 方便測試
-    req.session.cartId = 1
+    // req.session.cartId = 1
 
     try {
 
       // 找 cart 
-      let cart = await cartRepository.getCart(req.session.cartId)
+      const cartId = req.session.cartId ? req.session.cartId : 0
+      let cart = await cartRepository.getCart(cartId)
 
       // 整理 cart
       let cartItems = cart.cartItems.map(item => ({
@@ -69,7 +70,7 @@ const cartService = {
   postCart: async (req, res, cb) => {
 
     // 先固定 req.session.cartId 方便測試
-    req.session.cartId = 1
+    // req.session.cartId = 1
 
     try {
 
