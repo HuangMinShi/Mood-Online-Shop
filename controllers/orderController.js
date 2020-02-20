@@ -8,6 +8,7 @@ const {
   Cart,
   User,
   Order,
+  sequelize,
   PaymentLog,
   ProductSku,
   OrderProductSku,
@@ -135,7 +136,7 @@ const orderController = {
       // 若 err 發生，則返回上一頁能續帶上次資料
       req.flash('data', orderInfo)
 
-      // 撈資料確認庫存
+      // 查詢庫存資料
       const skus = orderInfo.cartItems.map(item => item.sku)
       let productSkus = await ProductSku.findAll({
         attributes: ['id', 'sku', 'stock'],
@@ -144,7 +145,7 @@ const orderController = {
         }
       })
 
-      // 資料整理，以 sku 當 key，以利後續比對庫存
+      // 資料整理成以 sku 當 key
       productSkus = productSkus
         .map(item => {
           const sku = item.sku
@@ -156,7 +157,7 @@ const orderController = {
         .reduce((prev, curr) => Object.assign(prev, curr))
 
 
-      // 開始比對
+      // 比對庫存是否足夠
       const errors = []
       orderInfo.cartItems.forEach(item => {
         const stock = productSkus[item.sku].stock
@@ -173,63 +174,75 @@ const orderController = {
         return res.redirect('back')
       }
 
-      // 新增 user
-      const salt = await bcrypt.genSalt(10)
-      const passwordInHash = await bcrypt.hash('HelloKitty24', salt)
-      const [user, isCreated] = await User.findOrCreate({
-        where: {
-          email: orderInfo.orderEmail
-        },
-        defaults: {
-          email: orderInfo.orderEmail,
-          password: passwordInHash,
-          name: orderInfo.receiveName,
-          address: orderInfo.receiveAddress,
-          tel: orderInfo.receivePhone,
-          role: 'visitor'
-        }
+      // 準備成立訂單，使用 transaction
+      const {
+        order,
+        isUserCreated
+      } = await sequelize.transaction(async (transaction) => {
+
+        // 新增 user
+        const salt = await bcrypt.genSalt(10)
+        const passwordInHash = await bcrypt.hash('HelloKitty24', salt)
+        const [user, isUserCreated] = await User.findOrCreate({
+          where: {
+            email: orderInfo.orderEmail
+          },
+          defaults: {
+            email: orderInfo.orderEmail,
+            password: passwordInHash,
+            name: orderInfo.receiveName,
+            address: orderInfo.receiveAddress,
+            tel: orderInfo.receivePhone,
+            role: 'visitor'
+          },
+          transaction
+        })
+
+        // 新增 order
+        const order = await Order.create({
+          ...orderInfo,
+          UserId: user.id
+        }, { transaction })
+
+        // 更新 order sn
+        const sn = '000000' + order.id
+        await order.update({ sn }, { transaction })
+
+        // 新增 orderItems
+        const orderItems = orderInfo.cartItems.map(item => {
+          return OrderProductSku.create({
+            quantity: item.quantity,
+            OrderId: order.id,
+            ProductSkuId: productSkus[item.sku].id
+          }, { transaction })
+        })
+        await Promise.all(orderItems)
+
+        // 清除 cart ( Model, DB 2 層均設置 cascade delete )
+        const cart = await Cart.findByPk(req.session.cartId, { transaction })
+        await cart.destroy({ transaction })
+
+        return { isUserCreated, order }
       })
+
 
       // 新用戶則寄信通知未完成註冊
-      if (isCreated) { }
-
-      // 新增 order
-      const order = await Order.create({
-        ...orderInfo,
-        UserId: user.id
-      })
-
-      const sn = '000000' + order.id
-      await order.update({ sn })
-
-      // 新增 orderItems
-      const orderItems = orderInfo.cartItems.map(item => {
-        return OrderProductSku.create({
-          quantity: item.quantity,
-          OrderId: order.id,
-          ProductSkuId: productSkus[item.sku].id
-        })
-      })
-
-      await Promise.all(orderItems)
+      if (isUserCreated) {
+        console.log('sent 訪客通知會員權益 mail');
+      }
 
       /*
-      // 清除購物車及商品資料
-      await Cart.destroy({
-        where: {
-          id: req.session.cartId
-        }
-      })
-      delete req.session.cartId
-
       // 寄發訂單成立 mail
-      const mail = generateMail(orderInfo, sn)
+      const mail = generateMail(orderInfo, order.sn)
       const transporter = createTransport()
       transporter.sendMail(mail, (err, info) => {
         if (err) return console.log(err);
         return console.log(`Email sent：${info.response}`);
       })
       */
+
+      // 移除 session.cartId
+      delete req.session.cartId
 
       // 訂單建立成功，將 id,datetime and sn 帶往 success order page
       req.flash('order', {
@@ -238,7 +251,7 @@ const orderController = {
         sn: order.sn
       })
 
-      // 將訂單是否為新建立的判斷帶往繼續購物 route 
+      // 新建立訂單與否帶往付款，讓付款 action 查詢訂單
       req.flash('isOrderNewCreated', true)
 
       return res.redirect('/orders/success')
@@ -248,7 +261,7 @@ const orderController = {
         req.flash('errorMessage', err.errors[0].message)
         return res.redirect('back')
       }
-      return console.log(err);
+      return res.status(500).json(err.stack)
     }
   },
 
