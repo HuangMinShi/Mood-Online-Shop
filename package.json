@@ -9,7 +9,7 @@
     "dev": "nodemon app.js",
     "test": "set NODE_ENV=test& mocha tests/*/*.js --exit --recursive --timeout 5000",
     "test-migrate": "set NODE_ENV=test& npx sequelize db:migrate",
-    "dev-migrate": "set NODE_ENV=development& npx sequelize db:migrate",
+    "migrate": "set NODE_ENV=development& npx sequelize db:migrate& npx sequelize db:seed:all",
     "dev-seed": "set NODE_ENV=development& npx sequelize db:seed:all",
     "dev-seed-undo": "set NODE_ENV=development& npx sequelize db:seed:undo:all"
   },
