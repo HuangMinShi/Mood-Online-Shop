@@ -8,6 +8,7 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: 'CartId',
       as: 'cartItems'
     })
+    Cart.hasMany(models.CartProductSku, { onDelete: 'cascade', hooks: true })
   };
   return Cart;
 };

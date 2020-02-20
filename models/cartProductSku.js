@@ -25,7 +25,9 @@ module.exports = (sequelize, DataTypes) => {
       references: {
         model: 'Carts',
         key: 'id'
-      }
+      },
+      onUpdate: 'cascade',
+      onDelete: 'cascade'
     },
     ProductSkuId: {
       type: DataTypes.INTEGER,
@@ -37,6 +39,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   CartProductSku.associate = function (models) {
     CartProductSku.belongsTo(models.ProductSku)
+    CartProductSku.belongsTo(models.Cart)
   };
   return CartProductSku;
 };
