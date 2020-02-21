@@ -205,7 +205,7 @@ const orderController = {
         }, { transaction })
 
         // 更新 order sn
-        const sn = '000000' + order.id
+        const sn = Math.floor(Math.random() * 100) + '000000' + order.id
         await order.update({ sn }, { transaction })
 
         // 新增 orderItems
