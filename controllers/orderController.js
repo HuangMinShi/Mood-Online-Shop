@@ -311,7 +311,7 @@ const orderController = {
 
       if (fromURL === 'NotifyURL') {
         const sn = tradeInfo.Result.MerchantOrderNo
-        const order = await Order.findOne({ whehe: { sn } })
+        const order = await Order.findOne({ where: { sn } })
 
         const [paymentLog, isNewCreated] = await PaymentLog.findOrCreate({
           where: {
@@ -357,6 +357,7 @@ const orderController = {
 
       req.flash('errorMessage', '不合法的訪問')
       return res.redirect('/products')
+
     } catch (err) {
       return console.log(err)
     }
