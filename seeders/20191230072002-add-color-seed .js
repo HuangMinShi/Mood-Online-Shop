@@ -1,24 +1,7 @@
 'use strict';
 
 const { sequelize } = require('../models')
-const colors = [
-  {
-    type: 'true_black',
-    url: '../images/colors/true_black.jpg'
-  },
-  {
-    type: 'gray_heather',
-    url: '../images/colors/gray_heather.jpg'
-  },
-  {
-    type: 'slate_pop_floral',
-    url: '../images/colors/slate_pop_floral.jpg'
-  },
-  {
-    type: 'outland',
-    url: '../images/colors/outland.jpg'
-  },
-]
+const colors = require('../config/seeders/colors.json')
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
