@@ -1,15 +1,11 @@
-const { shippingMethods } = require('../config/business.json')
+const {
+  orderStatus,
+  shippingMethods
+} = require('../config/business.json')
 
 const utils = {
   mapOrderStatusCodeToString: (statusNum) => {
-    const orderStatusCodesList = {
-      '0': '取消',
-      '1': '待付款',
-      '2': '待出貨',
-      '3': '待收貨',
-      '4': '完成'
-    }
-    return orderStatusCodesList[statusNum.toString()]
+    return orderStatus[statusNum.toString()]
   },
 
   getShippingFee: (shippingWay) => {
