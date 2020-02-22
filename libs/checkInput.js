@@ -41,8 +41,8 @@ const checkInput = {
     if (routePath === '/users/signup') return checkOptions.signUp
     if (routePath === '/users/signin') return checkOptions.signIn
     if (routePath === '/cart') return checkOptions.cart
-    if (routePath === '/orders/checkout/shipping') return checkOptions.checkoutShipping
-    if (routePath === '/orders/checkout/payment') return checkOptions.checkoutPayment
+    if (routePath === '/checkout/shipping') return checkOptions.checkoutShipping
+    if (routePath === '/checkout/payment') return checkOptions.checkoutPayment
   },
 
   getErrorMessage: (key, input) => {
