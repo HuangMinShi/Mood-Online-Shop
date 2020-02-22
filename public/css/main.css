@@ -52,6 +52,7 @@ header {
   margin: 100px 0;
   width: 1280px;
   max-width: 1280px;
+  min-height: 400px;
 }
 
 input[type="text"],
