@@ -23,10 +23,15 @@
       <div class="wrapper d-flex border-bottom justify-content-around">
         <nav class="mr-md-auto ml-5">
           <ul class="d-flex flex-column flex-md-row">
-            <li><a href="/">主頁</a></li>
             <li><a href="/products">商品頁</a></li>
             <li><a href="/cart">購物車</a></li>
-            <li><a href="/orders">訂單總覽</a></li>
+            <li>
+              {{#if user}}
+              <a href="/orders">訂單總覽</a>
+              {{else}}
+              <a href="/orders/check">訪客訂單查詢</a>
+              {{/if}}
+            </li>
           </ul>
         </nav>
 
