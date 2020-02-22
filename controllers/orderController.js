@@ -252,7 +252,7 @@ const orderController = {
       })
 
       // 新建立訂單與否帶往付款，讓付款 action 查詢訂單
-      req.flash('isOrderNewCreated', true)
+      req.flash('isOrderCreated', true)
 
       return res.redirect('/orders/success')
 
@@ -277,11 +277,11 @@ const orderController = {
 
   getPayment: async (req, res) => {
     try {
-      const isOrderNewCreated = req.flash('isOrderNewCreated')[0]
+      const isOrderCreated = req.flash('isOrderCreated')[0]
       const orderId = req.params.id
       let order = null
 
-      if (isOrderNewCreated) {
+      if (isOrderCreated) {
         order = await Order.findByPk(orderId, {
           attributes: ['id', 'sn', 'totalAmount', 'note', 'orderEmail']
         })
