@@ -245,10 +245,10 @@ const orderController = {
       const fromURL = req.query.from
       const tradeResult = req.body
       const tradeInfo = JSON.parse(decrypt(tradeResult.TradeInfo))
+      const sn = tradeInfo.Result.MerchantOrderNo
       const isTradeSuccess = (tradeInfo.Status === 'SUCCESS') ? true : false
 
       if (fromURL === 'NotifyURL') {
-        const sn = tradeInfo.Result.MerchantOrderNo
         const order = await Order.findOne({ where: { sn } })
 
         const [paymentLog, isNewCreated] = await PaymentLog.findOrCreate({
@@ -285,8 +285,8 @@ const orderController = {
         // 已存在相同的商店訂單編號
         const isDoublePayment = (tradeInfo.Status === 'MPG03008') ? true : false
 
-        return res.render('test', {
-          fromURL,
+        return res.render('paymentSuccess', {
+          sn,
           isTradeSuccess,
           isDoublePayment
         })

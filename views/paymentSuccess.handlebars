@@ -1,0 +1,15 @@
+<div class="col-12 ml-2">
+  <div class="panel payment-success mr-2 text-center">
+    {{#if isTradeSuccess}}
+      <h3>訂單編號 {{sn}} 付款成功，已為您安排出貨。</h3>
+    {{else}}
+      {{#if isDoublePayment}}
+        <h3>訂單編號 {{sn}} ，重複付款。</h3>
+      {{/if}}
+    {{/if}}
+    <div class="w-25 mx-auto">
+      <a href="/products" class="btn btn-action">繼續購物</a>
+      <a href="/orders/check" class="btn btn-action">查詢出貨狀態</a>
+    </div>
+  </div>
+</div>
