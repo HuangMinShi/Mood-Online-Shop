@@ -6,4 +6,17 @@
       <li>{{paymentToMandarin payment}}</li>
     </ul>
   </div>
+
+  <p class="title mt-3">備註</p>
+  <div class="note">
+    <ul>
+      <li>
+        {{#if note}}
+          {{note}}
+        {{else}}
+          無
+        {{/if}}
+      </li>
+    </ul>
+  </div>
 </section>

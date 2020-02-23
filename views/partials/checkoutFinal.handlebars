@@ -3,15 +3,6 @@
     {{> shippingInfo}}
     {{> paymentInfo}}
 
-    <section class="panel">
-      <p class="title">備註</p>
-      <div class="note">
-        <ul>
-          <li>{{note}}</li>
-        </ul>
-      </div>
-    </section>
-
     {{#isFalsey sn}}
       <div class="border-top">
         <button type="submit" class="btn btn-action w-25">
