@@ -199,10 +199,18 @@ const orderController = {
     }
   },
 
-  getSuccessOrder: (req, res) => {
+  getOrderSuccess: (req, res) => {
     const orderInfo = req.flash('data')[0]
     const order = req.flash('order')[0]
-    return res.render('checkout', { ...orderInfo, ...order, page: 'checkoutOrder' })
+    return res.render('checkout', { ...orderInfo, ...order, page: 'checkoutFinal' })
+  },
+
+  getOrderCheck: (req, res) => {
+    return res.send('getOrderCheck')
+  },
+
+  postOrderCheck: (req, res) => {
+    return res.send('postOrderCheck')
   },
 
   getPayment: async (req, res) => {

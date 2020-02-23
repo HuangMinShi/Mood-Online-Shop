@@ -3,57 +3,57 @@
     商品項目
   </span>
   <hr class="my-2">
-  <div id="minicart-expend" class="collapse {{#eq page 'checkoutOrder'}} show {{/eq}}">
+  <div id="minicart-expend" class="collapse {{#eq page 'checkoutFinal'}} show {{/eq}}">
     <div class="wrapper p-0">
       <ul>
         {{#each cartItems}}
-        <li class="d-flex border-bottom pb-2 mb-2">
-          <div class="item-img mt-1 mr-3">
-            <a href="/products/{{this.sn}}">
-              <div class="item-img-wrapper">
-                <img src="{{this.image}}" width="100%">
+          <li class="d-flex border-bottom pb-2 mb-2">
+            <div class="item-img mt-1 mr-3">
+              <a href="/products/{{this.sn}}">
+                <div class="item-img-wrapper">
+                  <img src="{{this.image}}" width="100%">
+                </div>
+              </a>
+            </div>
+
+            <div class="item-detail">
+              <div class="item-detail-name">
+                <strong>
+                  <a href="/products/{{this.sn}}">
+                    {{this.name}}
+                  </a>
+                </strong>
               </div>
-            </a>
-          </div>
 
-          <div class="item-detail">
-            <div class="item-detail-name">
-              <strong>
-                <a href="/products/{{this.sn}}">
-                  {{this.name}}
-                </a>
-              </strong>
-            </div>
+              <div class="item-detail-qty">
+                <span>數量 :</span>
+                <span>{{this.quantity}}</span>
+              </div>
 
-            <div class="item-detail-qty">
-              <span>數量 :</span>
-              <span>{{this.quantity}}</span>
-            </div>
+              <div class="item-detail-price">
+                <span>單價 :</span>
+                <span>
+                  {{currency salePrice}}
+                </span>
+              </div>
 
-            <div class="item-detail-price">
-              <span>單價 :</span>
-              <span>
-                {{currency salePrice}}
+              <span class="toggle text-muted" data-toggle="collapse" data-target="#expend-{{this.sku}}">
+                查看詳細資訊
               </span>
-            </div>
 
-            <span class="toggle text-muted" data-toggle="collapse" data-target="#expend-{{this.sku}}">
-              查看詳細資訊
-            </span>
+              <div id="expend-{{this.sku}}" class="collapse {{#eq ../page 'checkoutFinal'}} show {{/eq}} pt-1">
+                <div class="item-detail-color">
+                  <span>顏色 :</span>
+                  <span>{{this.color}}</span>
+                </div>
 
-            <div id="expend-{{this.sku}}" class="collapse {{#eq ../page 'checkoutOrder'}} show {{/eq}} pt-1">
-              <div class="item-detail-color">
-                <span>顏色 :</span>
-                <span>{{this.color}}</span>
-              </div>
-
-              <div class="item-detail-size">
-                <span>尺寸 :</span>
-                <span> {{this.size}}</span>
+                <div class="item-detail-size">
+                  <span>尺寸 :</span>
+                  <span> {{this.size}}</span>
+                </div>
               </div>
             </div>
-          </div>
-        </li>
+          </li>
         {{/each}}
       </ul>
     </div>

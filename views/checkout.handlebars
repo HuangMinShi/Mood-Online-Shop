@@ -3,21 +3,21 @@
 <div class="row checkout">
 
   {{#isTruthy sn}}
-  {{> orderSuccess}}
+    {{> orderSuccess}}
   {{/isTruthy}}
 
   <main class="main col-lg-8">
 
     {{#eq page 'checkoutShipping'}}
-    {{> checkoutShipping}}
+      {{> checkoutShipping}}
     {{/eq}}
 
     {{#eq page 'checkoutPayment'}}
-    {{> checkoutPayment}}
+      {{> checkoutPayment}}
     {{/eq}}
 
-    {{#eq page 'checkoutOrder'}}
-    {{> checkoutOrder}}
+    {{#eq page 'checkoutFinal'}}
+      {{> checkoutFinal}}
     {{/eq}}
 
   </main>
@@ -26,7 +26,7 @@
     {{> orderInfo}}
 
     {{#eq page 'checkoutPayment'}}
-    {{> shippingInfo}}
+      {{> shippingInfo}}
     {{/eq}}
 
   </aside>

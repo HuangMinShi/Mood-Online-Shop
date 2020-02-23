@@ -4,7 +4,7 @@ const orderController = require('../controllers/orderController')
 // 訂單
 router.get('/', orderController.getOrders)
 router.post('/', orderController.postOrder)
-router.get('/success', orderController.getSuccessOrder)
+router.get('/success', orderController.getOrderSuccess)
 
 // 查看單一訂單
 router.get('/:id', orderController.getOrder)

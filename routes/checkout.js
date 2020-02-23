@@ -12,6 +12,6 @@ router.get('/payment', checkoutController.getPayment)
 router.post('/payment', vaildateInput, checkoutController.postPayment)
 
 // 訂單確認
-router.get('/order', checkoutController.getOrder)
+router.get('/final', checkoutController.getFinalCheck)
 
 module.exports = router

@@ -58,14 +58,14 @@ const checkoutController = {
 
     req.flash('data', orderInfo)
 
-    return res.redirect('/checkout/order')
+    return res.redirect('/checkout/final')
   },
 
-  getOrder: (req, res) => {
+  getFinalCheck: (req, res) => {
     const orderInfo = req.flash('data')[0]
     req.flash('data', orderInfo)
 
-    return res.render('checkout', { ...orderInfo, page: 'checkoutOrder' })
+    return res.render('checkout', { ...orderInfo, page: 'checkoutFinal' })
   }
 }
 
