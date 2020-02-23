@@ -4,6 +4,7 @@ const {
   Cart,
   User,
   Order,
+  Product,
   sequelize,
   PaymentLog,
   ProductSku,
@@ -220,11 +221,30 @@ const orderController = {
       let order = null
 
       if (isOrderCreated) {
+
+        // 只是為了 itemDesc 就要 join 到 product，未來得試著再反正規化
         order = await Order.findByPk(orderId, {
-          attributes: ['id', 'sn', 'totalAmount', 'note', 'orderEmail']
+          attributes: ['id', 'sn', 'totalAmount', 'note', 'orderEmail'],
+          include: [{
+            model: ProductSku,
+            attributes: ['id'],
+            include: [{
+              model: Product,
+              attributes: ['id', 'name']
+            }],
+            as: 'orderItems'
+          }]
         })
       } else {
         // 訪客查詢訂單
+      }
+
+      const tradeParams = {
+        sn: order.sn,
+        totalAmount: order.totalAmount,
+        note: order.note,
+        orderEmail: order.orderEmail,
+        itemDesc: `${order.orderItems[0].Product.name} 等 ${order.orderItems.length} 件`
       }
 
       if (!order) {
@@ -232,7 +252,7 @@ const orderController = {
         return res.redirect('/products')
       }
 
-      const tradeInfo = genTradeInfo(order.dataValues)
+      const tradeInfo = genTradeInfo(tradeParams)
 
       return res.render('payment', { tradeInfo })
     } catch (err) {

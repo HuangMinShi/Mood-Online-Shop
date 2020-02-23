@@ -47,7 +47,7 @@ const genHash = (encryptedData, hashKey, hashIv) => {
 }
 
 const genTradeInfo = (order) => {
-  const { sn, totalAmount, note, orderEmail } = order
+  const { sn, totalAmount, note, orderEmail, itemDesc } = order
 
   const tradeParams = {
     MerchantID: merchantID,
@@ -58,7 +58,7 @@ const genTradeInfo = (order) => {
     LoginType: 0,
     Amt: totalAmount,
     Email: orderEmail,
-    ItemDesc: note || '',
+    ItemDesc: itemDesc,
     OrderComment: note || '',
     ReturnURL: returnURL,
     NotifyURL: notifyURL,
