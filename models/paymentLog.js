@@ -8,7 +8,7 @@ module.exports = (sequelize, DataTypes) => {
       defaultValue: false
     },
     payTime: DataTypes.DATE,
-    amt: DataTypes.FLOAT,
+    amt: DataTypes.INTEGER,
     OrderId: {
       type: DataTypes.INTEGER,
       references: {

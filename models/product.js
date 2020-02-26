@@ -4,9 +4,9 @@ module.exports = (sequelize, DataTypes) => {
     sn: DataTypes.STRING,
     name: DataTypes.STRING,
     description: DataTypes.STRING,
-    retailPrice: DataTypes.FLOAT,
-    salePrice: DataTypes.FLOAT,
-    cost: DataTypes.FLOAT,
+    retailPrice: DataTypes.INTEGER,
+    salePrice: DataTypes.INTEGER,
+    cost: DataTypes.INTEGER,
     ColorId: {
       type: DataTypes.INTEGER,
       references: {
