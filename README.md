@@ -24,7 +24,7 @@
 * [動線 - 待補](#)
 
 ## 實體關聯模型
-* [ERD](https://www.lucidchart.com/invitations/accept/5cb19c28-f028-41e9-a3db-5a12faa7d4b8)
+* ![ERD](./public/images/ec_web_Ethan_20191220)
 
 ## 使用者故事
 
