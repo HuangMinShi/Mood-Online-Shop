@@ -21,6 +21,7 @@ const associations = [
 
 describe('# Color Model', () => {
   compareModelName(ColorModel, name)
+  checkModelProperties(ColorModel, properties)
   checkModelAssociations(ColorModel, associations)
   checkModelCRUD(Color)
 })

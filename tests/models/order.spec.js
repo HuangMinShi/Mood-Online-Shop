@@ -15,6 +15,7 @@ const properties = [
   'sn',
   'status',
   'totalAmount',
+  'payment',
   'receipt',
   'note',
   'receiveName',
