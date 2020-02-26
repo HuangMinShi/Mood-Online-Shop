@@ -1,5 +1,5 @@
 # Moody Online Shop
-為滿足消費者不想登入購買的需求，於是以訪客消費的方式求，建立起 Moody Online Shop。
+為滿足消費者不想登入購買的需求，於是以訪客消費的方式，建立起 Moody Online Shop。
 
 ## 目錄
 - [下一階段目標](#下一階段目標)
@@ -20,16 +20,15 @@
   * deploy 至 heroku，使用 clearDB
 
 ## 原型
-[Wireframe 參考網站](https://klf-shopping.com/burton/men/apparel-accessories/jackets-outerwear.html)
-
-[動線 待補](#)
+* [Wireframe - 參考網站](https://klf-shopping.com/burton/men/apparel-accessories/jackets-outerwear.html)
+* [動線 - 待補](#)
 
 ## 實體關聯模型
 * [ERD](https://www.lucidchart.com/invitations/accept/5cb19c28-f028-41e9-a3db-5a12faa7d4b8)
 
 ## 使用者故事
 
-* [詳細清單](https://docs.google.com/spreadsheets/d/17A2yMwOYG7XeAdrV8trydgnE32LchVNWxaAVCoWyoOw/edit?usp=sharing)
+* [細節清單](https://docs.google.com/spreadsheets/d/17A2yMwOYG7XeAdrV8trydgnE32LchVNWxaAVCoWyoOw/edit?usp=sharing)
 
 ### 註冊／登入／登出
 * [✔] 訪客可以使用 Email 註冊會員
@@ -73,7 +72,7 @@
   * Framwork: Express.js
 
 ## 使用方式
-* Clone 專案，請於 `Console` 輸入指令
+1. Clone 專案，請於 `Console` 輸入指令
   * Clone 至本地端
     ```
     https://github.com/HuangMinShi/Moody-Online-Shop.git
@@ -91,7 +90,7 @@
     code .
     ``` 
     
-* 新增環境設定檔，請參考 `.env.example` 於專案根目錄新增 `.env` 檔，其內容如下 
+2. 新增環境設定檔，請參考 `.env.example` 於專案根目錄新增 `.env` 檔，其內容如下 
 
 ```
 GMAIL_USER=gmail_user
@@ -103,7 +102,7 @@ HASH_KEY=newebpay_key
 HASH_IV=newebpay_iv
 ```
 
-* 修改資料庫 config
+3. 修改資料庫 config
   * 路徑：./config/config.json
   * 修改內容：development 中的 password
 
@@ -111,12 +110,12 @@ HASH_IV=newebpay_iv
   "development": {
     "username": "root",
     "password": "password",
-    ...
+    "..."
   },
   ```
 
 
-* 資料庫設定
+4. 資料庫設定
   * 新增資料庫，於 MySQL Workbench 輸入指令
   ```SQL
   DROP DATABASE IF EXISTS ec_web;
@@ -129,13 +128,13 @@ HASH_IV=newebpay_iv
   npx run migrate
   ```
 
-* 啟動
+5. 啟動
   * 啟動專案，請在 `Console` 輸入下方指令
   ```
   npm run dev
   ```
 
-* 本地端啟動程式
+6. 本地端啟動程式
   * IP Address
     * http://localhost:3000/
   * User Account / Password
