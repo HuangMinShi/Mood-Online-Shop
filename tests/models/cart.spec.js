@@ -2,7 +2,6 @@ process.env.NODE_ENV = 'test'
 
 const {
   checkModelAssociations,
-  checkModelProperties,
   compareModelName,
   checkModelCRUD
 } = require('./libs/conTestFuncs')
@@ -12,7 +11,8 @@ const CartModel = require('../../models/cart')
 
 const name = 'Cart'
 const associations = [
-  ['belongsToMany', 'ProductSku']
+  ['belongsToMany', 'ProductSku'],
+  ['hasMany', 'CartProductSku']
 ]
 
 describe('# Cart Model', () => {

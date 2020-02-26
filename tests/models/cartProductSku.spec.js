@@ -16,9 +16,13 @@ const properties = [
   'CartId',
   'ProductSkuId'
 ]
+const associations = [
+  ['belongsTo', 'Cart']
+]
 
 describe('# CartProductSku Model', () => {
   compareModelName(CartProductSkuModel, name)
   checkModelProperties(CartProductSkuModel, properties)
+  checkModelAssociations(CartProductSkuModel, associations)
   checkModelCRUD(CartProductSku)
 })
