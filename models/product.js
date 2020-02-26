@@ -19,17 +19,15 @@ module.exports = (sequelize, DataTypes) => {
       references: {
         model: 'Categories',
         key: 'id'
-      },
-      // What should happen when the referenced key is updated.
-      onUpdate: 'cascade'
+      }
     }
   }, {});
 
   Product.associate = function (models) {
     Product.belongsTo(models.Category)
     Product.belongsTo(models.Color)
-    Product.hasMany(models.ProductSku, { onDelete: 'cascade', hooks: true })
-    Product.hasMany(models.Image, { onDelete: 'cascade', hooks: true })
+    Product.hasMany(models.ProductSku)
+    Product.hasMany(models.Image)
   };
   return Product;
 };

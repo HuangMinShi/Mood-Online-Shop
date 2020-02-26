@@ -19,9 +19,7 @@ module.exports = {
         references: {
           model: 'Categories',
           key: 'id'
-        },
-        // What should happen when the referenced key is updated.
-        onUpdate: 'cascade'
+        }
       },
       created_at: {
         allowNull: false,

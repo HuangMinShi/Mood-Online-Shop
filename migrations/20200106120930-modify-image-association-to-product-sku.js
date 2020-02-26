@@ -11,9 +11,7 @@ module.exports = {
         references: {
           model: 'Product_skus',
           key: 'id'
-        },
-        onUpdate: 'cascade',
-        onDelete: 'cascade'
+        }
       })
     } catch (err) {
       console.log(err)
@@ -30,9 +28,7 @@ module.exports = {
         references: {
           model: 'Products',
           key: 'id'
-        },
-        onUpdate: 'cascade',
-        onDelete: 'cascade'
+        }
       })
 
     } catch (err) {

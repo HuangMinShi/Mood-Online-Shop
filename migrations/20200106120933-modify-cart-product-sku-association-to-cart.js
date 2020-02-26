@@ -29,9 +29,7 @@ module.exports = {
         references: {
           model: 'Users',
           key: 'id'
-        },
-        onUpdate: 'cascade',
-        onDelete: 'cascade'
+        }
       })
     } catch (err) {
       console.log(err)

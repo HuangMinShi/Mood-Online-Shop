@@ -9,9 +9,7 @@ module.exports = (sequelize, DataTypes) => {
       references: {
         model: 'Products',
         key: 'id'
-      },
-      onUpdate: 'cascade',
-      onDelete: 'cascade'
+      }
     }
   }, {});
 

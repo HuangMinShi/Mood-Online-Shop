@@ -10,9 +10,7 @@ module.exports = {
           references: {
             model: 'Colors',
             key: 'id'
-          },
-          onUpdate: 'cascade',
-          onDelete: 'cascade'
+          }
         }),
       ])
     } catch (err) {
