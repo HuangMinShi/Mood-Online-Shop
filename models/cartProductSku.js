@@ -39,6 +39,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   CartProductSku.associate = function (models) {
     // For cascade delete
+    CartProductSku.belongsTo(models.ProductSku)
     CartProductSku.belongsTo(models.Cart)
   };
   return CartProductSku;

@@ -17,6 +17,7 @@ const properties = [
   'ProductSkuId'
 ]
 const associations = [
+  ['belongsTo', 'ProductSku'],
   ['belongsTo', 'Cart']
 ]
 
