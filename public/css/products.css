@@ -22,3 +22,67 @@
 .color-img-wrapper.selected {
   border: 1px solid #000000
 }
+
+/* =============== Products banner =============== */
+.slideshow-container {
+  max-width: 1280px;
+  height: 300px;
+  position: relative;
+  margin: 100px auto;
+}
+
+.slides {
+  display: none;
+  height: 100%;
+}
+
+.numbertext {
+  color: #f2f2f2;
+  font-size: 12px;
+  padding: 8px 12px;
+  position: absolute;
+  top: 0;
+}
+
+.indicator {
+  width: 100%;
+  text-align: center;
+  position: absolute;
+  bottom: -10%;
+}
+
+.dot {
+  cursor: pointer;
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: #bbbbbe;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.5s ease;
+}
+
+.dot.active, .dot:hover {
+  background-color: #717171;
+}
+
+.prev, .next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  margin-top: -22px;
+  padding: 16px;
+  color: white;
+  font-weight: 900;
+  font-size: 20px;
+  transition: 0.2s linear;
+  border-radius: 5px;
+}
+
+.next {
+  right: 0;
+}
+
+.prev:hover, .next:hover {
+  background-color: #000000;
+}
