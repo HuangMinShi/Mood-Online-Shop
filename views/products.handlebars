@@ -1,4 +1,31 @@
 <div class="row">
+  <!-- banner -->
+  <div class="slideshow-container">
+    <div class="slides slides-1">
+      <div class="numbertext">1 / 3</div>
+      <img src="https://i.picsum.photos/id/1041/5184/2916.jpg" width="100%" height="100%">
+    </div>
+
+    <div class="slides slides-2">
+      <div class="numbertext">2 / 3</div>
+      <img src="https://picsum.photos/id/1044/4032/2268.jpg" width="100%" height="100%">
+    </div>
+
+    <div class="slides slides-3">
+      <div class="numbertext">3 / 3</div>
+      <img src="https://picsum.photos/id/1067/5760/3840.jpg" width="100%" height="100%">
+    </div>
+
+    <span class="prev">&#10094;</span>
+    <span class="next">&#10095;</span>
+
+    <div class="indicator">
+      <span class="dot dots-1" data-order="1"></span>
+      <span class="dot dots-2" data-order="2"></span>
+      <span class="dot dots-3" data-order="3"></span>
+    </div>
+  </div>
+
   <!-- 篩選 -->
   <aside class="col-md-3 border">
   </aside>
@@ -6,45 +33,46 @@
   <!-- 主內容 -->
   <main class="row col-md-9 mx-auto products">
     {{#each products}}
-    <div class="col-md-4 product px-2">
-      <div class="card mb-4 h-100 shadow-sm product-{{this.sn}}">
-        <div class="product-img">
-          {{#each productImages}}
-          <img class="bd-placeholder-img card-img-top color-option-{{@key}}" width="100%" height="auto" src="{{this}}">
-          {{/each}}
-        </div>
-
-        <div class="card-body text-center d-flex flex-column justify-content-between">
-          <p class="card-text">
-            <span class="product-name">
-              <a href="/products/{{this.sn}}">{{this.name}}</a>
-            </span>
-            <br>
-            <span class="product-price">NT$ {{this.salePrice}}</span>
-          </p>
-
-          <div class="switch-attribute-option mb-3">
-            {{#each colorImages}}
-            <span>
-              <a href="javascript:;">
-                <div class="color-img-wrapper">
-                  <img src="{{this}}" class="color" data-color-option={{@key}} data-product-sn="{{../this.sn}}"
-                    alt="color-img" width="100%" height="auto">
-                </div>
-              </a>
-            </span>
+      <div class="col-md-4 product px-2">
+        <div class="card mb-4 h-100 shadow-sm product-{{this.sn}}">
+          <div class="product-img">
+            {{#each productImages}}
+              <img class="bd-placeholder-img card-img-top color-option-{{@key}}" width="100%" height="auto"
+                src="{{this}}">
             {{/each}}
           </div>
 
-          <div class="text-right">
-            <form action="">
-              <button class="btn btn-sm btn-outline-secondary">Love</button>
-            </form>
-          </div>
+          <div class="card-body text-center d-flex flex-column justify-content-between">
+            <p class="card-text">
+              <span class="product-name">
+                <a href="/products/{{this.sn}}">{{this.name}}</a>
+              </span>
+              <br>
+              <span class="product-price">NT$ {{this.salePrice}}</span>
+            </p>
 
+            <div class="switch-attribute-option mb-3">
+              {{#each colorImages}}
+                <span>
+                  <a href="javascript:;">
+                    <div class="color-img-wrapper">
+                      <img src="{{this}}" class="color" data-color-option={{@key}} data-product-sn="{{../this.sn}}"
+                        alt="color-img" width="100%" height="auto">
+                    </div>
+                  </a>
+                </span>
+              {{/each}}
+            </div>
+
+            <div class="text-right">
+              <form action="">
+                <button class="btn btn-sm btn-outline-secondary">Love</button>
+              </form>
+            </div>
+
+          </div>
         </div>
       </div>
-    </div>
     {{/each}}
   </main>
 </div>
