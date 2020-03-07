@@ -4,6 +4,38 @@ function switchProductMainImage(productSn, colorOption) {
   $(`.product-${productSn} .product-img`).find(`.color-option-${colorOption}`).addClass('selected')
 }
 
+function currentSlide(n) {
+  const length = $('.slides').length
+  let slideIndex = n
+
+  if (n < 1) {
+    slideIndex = length
+  }
+
+  if (n > length) {
+    slideIndex = 1
+  }
+
+  showSlides(slideIndex);
+}
+
+function plusSlides(n) {
+  let currentSlideIndex = $('.dot.active').attr('data-order')
+  const targetSlideIndex = Number(currentSlideIndex) + n
+
+  currentSlide(targetSlideIndex)
+}
+
+function showSlides(slideIndex) {
+  // 關閉舊的圖片
+  const currentSlideIndex = $('.dot.active').removeClass('active').attr('data-order')
+  $(`.slides-${currentSlideIndex}`).css('display', 'none')
+
+  // 滑至新的圖片
+  $(`.slides-${slideIndex}`).css('display', 'block')
+  $(`.dots-${slideIndex}`).addClass('active')
+}
+
 /** Product **/
 function toSelectDefaultColor() {
 
@@ -118,8 +150,11 @@ function displayPickStores() {
 }
 
 export {
+  plusSlides,
+  showSlides,
   clacQtyWith,
   formatToNum,
+  currentSlide,
   switchSizeTo,
   switchColorTo,
   formatToCurrency,

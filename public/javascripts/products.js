@@ -1,4 +1,9 @@
-import { switchProductMainImage } from './libs.js'
+import {
+  switchProductMainImage,
+  currentSlide,
+  plusSlides,
+  showSlides
+} from './libs.js'
 
 (function () {
   // 預設
@@ -23,38 +28,20 @@ import { switchProductMainImage } from './libs.js'
   // banner 預設
   showSlides(1);
 
-  // 指示器點選事件
-  $('.indicator').click(function (event) {
+  // click event
+  $('.slideshow-container .action').click(function (event) {
     if (event.target.matches('.dot')) {
       const targetSlideIndex = event.target.dataset.order
       currentSlide(targetSlideIndex)
     }
+
+    if (event.target.matches('.prev')) {
+      plusSlides(-1)
+    }
+
+    if (event.target.matches('.next')) {
+      plusSlides(1)
+    }
   })
-
-  // 控制指示器
-  function currentSlide(n) {
-    const length = $('.slides').length
-    let slideIndex = n
-
-    if (n < 1) {
-      slideIndex = length
-    }
-
-    if (n > length) {
-      slideIndex = 1
-    }
-
-    showSlides(slideIndex);
-  }
-
-  function showSlides(slideIndex) {
-    // 關閉舊的圖片
-    const prevSlideIndex = $('.dot.active').removeClass('active').attr('data-order')
-    $(`.slides-${prevSlideIndex}`).css('display', 'none')
-
-    // 滑至新的圖片
-    $(`.slides-${slideIndex}`).css('display', 'block')
-    $(`.dots-${slideIndex}`).addClass('active')
-  }
 
 })()
