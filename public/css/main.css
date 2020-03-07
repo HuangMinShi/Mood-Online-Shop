@@ -2,7 +2,7 @@
   box-sizing: border-box;
 }
 
-html, 
+html,
 body {
   margin: 0;
   height: 100%;
@@ -45,18 +45,38 @@ li {
   vertical-align: middle; 
 }
 
+/* header + main + footer */
+.wrapper {
+  min-height: 100%;
+}
+
 /* header */
 header {
-  height: 100px;
   background: #fff;
 }
 
 /* main */
+main {
+  width: 100%;
+}
+
 #data-panel {
-  margin: 100px 0;
   width: 1280px;
   max-width: 1280px;
-  min-height: 400px;
+  margin: 70px auto;
+}
+
+/* footer */
+footer {
+  margin-top: 70px;
+}
+
+.footer-item {
+  display: inline;
+}
+
+footer .fa-github-square {
+  font-size: 2.5rem;
 }
 
 input[type="text"],
@@ -108,10 +128,6 @@ p.title {
   width: 120px;
 }
 
-.wrapper {
-  padding: 1rem;
-}
-
 .name {
   font-size: 1.5rem;
   font-weight: 700;
@@ -159,15 +175,6 @@ p.title {
   margin-bottom: 1rem;
   height: fit-content;
   border-radius: .3rem;
-}
-
-/* footer */
-.footer-item {
-  display: inline;
-}
-
-footer .fa-github-square {
-  font-size: 2.5rem;
 }
 
 /* cart-icon */
