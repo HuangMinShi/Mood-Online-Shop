@@ -13,23 +13,23 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <link rel="stylesheet" href="/css/main.css">
   {{#if page}}
-  <link rel="stylesheet" href="/css/{{page}}.css">
+    <link rel="stylesheet" href="/css/{{page}}.css">
   {{/if}}
 </head>
 
 <body>
   <div class="wrapper d-flex flex-column align-items-center">
     <header class="fixed-top">
-      <div class="wrapper d-flex border-bottom justify-content-around">
+      <div class="wrapper d-flex border-bottom justify-content-around p-3">
         <nav class="mr-md-auto ml-5">
           <ul class="d-flex flex-column flex-md-row">
             <li><a href="/products">商品頁</a></li>
             <li><a href="/cart">購物車</a></li>
             <li>
               {{#if user}}
-              <a href="/orders">訂單總覽</a>
+                <a href="/orders">訂單總覽</a>
               {{else}}
-              <a href="/orders/check">訪客訂單查詢</a>
+                <a href="/orders/check">訪客訂單查詢</a>
               {{/if}}
             </li>
           </ul>
@@ -44,9 +44,41 @@
       </div>
     </header>
 
-    <main>
-      <div id="data-panel">
+    <main class="flex-fill">
+      <!-- banner -->
+      {{#eq page 'products'}}
+        <div class="slideshow-container">
+          <div class="slides slides-1">
+            <div class="numbertext">1 / 3</div>
+            <img src="https://i.picsum.photos/id/1041/5184/2916.jpg" width="100%" height="100%">
+          </div>
 
+          <div class="slides slides-2">
+            <div class="numbertext">2 / 3</div>
+            <img src="https://picsum.photos/id/1044/4032/2268.jpg" width="100%" height="100%">
+          </div>
+
+          <div class="slides slides-3">
+            <div class="numbertext">3 / 3</div>
+            <img src="https://picsum.photos/id/1067/5760/3840.jpg" width="100%" height="100%">
+          </div>
+
+          <div class="action">
+            <span class="prev">&#10094;</span>
+            <span class="next">&#10095;</span>
+
+            <div class="indicator">
+              <span class="dot dots-1" data-order="1"></span>
+              <span class="dot dots-2" data-order="2"></span>
+              <span class="dot dots-3" data-order="3"></span>
+            </div>
+          </div>
+
+        </div>
+      {{/eq}}
+
+      <!-- data -->
+      <div id="data-panel">
         <div class="cart-icon text-right pr-2">
           <a href="/cart">
             <i class="fa fa-shopping-cart"></i>
@@ -59,7 +91,6 @@
         </div>
 
         {{{body}}}
-
       </div>
     </main>
 
@@ -69,7 +100,7 @@
       </a>
 
       <div class="wrapper">
-        <ul class="mx-auto footer-nav">
+        <ul class="mx-auto footer-nav py-3">
           <li class="footer-item"><a href="#">關於我們</a></li>
           <li class="footer-item"><a href="#">店鋪資訊</a></li>
           <li class="footer-item"><a href="#">聯絡我們</a></li>
@@ -98,7 +129,7 @@
   <script src="https://kit.fontawesome.com/869dba54fe.js" crossorigin="anonymous"></script>
   <script src="/javascripts/main.js"></script>
   {{#if page}}
-  <script src="/javascripts/{{page}}.js" type="module"></script>
+    <script src="/javascripts/{{page}}.js" type="module"></script>
   {{/if}}
 </body>
 
