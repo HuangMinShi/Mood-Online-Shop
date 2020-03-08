@@ -8,12 +8,12 @@ function currentSlide(n) {
   const length = $('.slides').length
   let slideIndex = n
 
-  if (n < 1) {
-    slideIndex = length
+  if (n < 0) {
+    slideIndex = length - 1
   }
 
-  if (n > length) {
-    slideIndex = 1
+  if (n > length - 1) {
+    slideIndex = 0
   }
 
   showSlides(slideIndex);

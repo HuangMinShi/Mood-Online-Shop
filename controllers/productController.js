@@ -1,3 +1,5 @@
+const { banners } = require('../config/business.json')
+
 const {
   getProduct,
   getProducts
@@ -10,6 +12,7 @@ const productController = {
       return await getProducts(req, res, (data) => {
         return res.render('products', {
           products: data,
+          banners: banners,
           page: 'products'
         })
       })

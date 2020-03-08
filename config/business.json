@@ -24,5 +24,10 @@
     "2": "待出貨",
     "3": "待收貨",
     "4": "完成"
-  }
+  },
+  "banners": [
+    "https://i.imgur.com/hpCt0ty.jpg",
+    "https://i.imgur.com/SkZ8vb0.png",
+    "https://i.imgur.com/OF9Juk6.png"
+  ]
 }

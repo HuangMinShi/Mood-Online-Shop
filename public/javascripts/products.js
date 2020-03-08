@@ -26,7 +26,7 @@ import {
   })
 
   // banner 預設
-  showSlides(1);
+  showSlides(0);
 
   // click event
   $('.slideshow-container .action').click(function (event) {
