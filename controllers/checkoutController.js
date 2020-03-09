@@ -27,7 +27,7 @@ const checkoutController = {
   postShipping: (req, res) => {
 
     // 合併
-    const purchasedInfo = Object.assign({}, req.session.purchasedInfo, req.body) // 合併
+    const purchasedInfo = Object.assign({}, req.session.purchasedInfo, req.body)
 
     // 重新計算運費
     reCalcShippingFeeAndTotalAmount(purchasedInfo)
@@ -42,29 +42,18 @@ const checkoutController = {
   },
 
   getPayment: (req, res) => {
-    let orderInfo = req.flash('data')[0]
-    req.flash('data', orderInfo)
-
-    return res.render('checkout', { ...orderInfo, page: 'checkoutPayment' })
+    const purchasedInfo = Object.assign({}, req.session.purchasedInfo)
+    return res.render('checkout', { ...purchasedInfo, page: 'checkoutPayment' })
   },
 
   postPayment: (req, res) => {
-    const orderInfo = req.flash('data')[0]
-    const paymentInfo = req.body
-
-    // 合併 order, payment
-    Object.assign(orderInfo, paymentInfo)
-
-    req.flash('data', orderInfo)
-
+    Object.assign(req.session.purchasedInfo, req.body)
     return res.redirect('/checkout/final')
   },
 
   getFinalCheck: (req, res) => {
-    const orderInfo = req.flash('data')[0]
-    req.flash('data', orderInfo)
-
-    return res.render('checkout', { ...orderInfo, page: 'checkoutFinal' })
+    const purchasedInfo = Object.assign({}, req.session.purchasedInfo)
+    return res.render('checkout', { ...purchasedInfo, page: 'checkoutFinal' })
   }
 }
 
