@@ -13,11 +13,11 @@
 ## 下一階段目標
 * 完成使用者故事
   * 訪客可以輸入訂單編號及 Email 查詢訂單進度
-  * 訪客在完成商品訂購後，可以收到訪客購買的通知信
-  * 訪客依據訪客購買的通知信，可以修改密碼成為會員
 * 開發
   * 持續將 Controllers 重構成 Repositories and Services
   * deploy 至 heroku，使用 clearDB
+* Bugs
+  * 若 delete cartItem 之前修改地址等欄位，將無法帶回上一次地址等資料
 
 ## 原型
 * [Wireframe - 參考網站](https://klf-shopping.com/burton/men/apparel-accessories/jackets-outerwear.html)

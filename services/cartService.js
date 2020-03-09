@@ -43,19 +43,20 @@ const cartService = {
       })
 
       // 計算運費及總金額
-      const shippingInfo = req.flash('shippingInfo')[0] || { shippingWay: 'inStorePickup' }
+      const shippingInfo = req.session.purchasedInfo || { shippingWay: 'inStorePickup' }
       const shippingFee = getShippingFee(shippingInfo.shippingWay)
       const subTotal = cartItems.length ? cartItems.map(item => item.itemTotal).reduce((a, c) => a + c) : 0
       const totalAmount = subTotal + shippingFee
 
-      const data = {
+      const data = Object.create(null)
+      Object.assign(data, {
         ...shippingInfo,
         totalAmount,
         shippingFee,
         cartItems,
         subTotal,
         itemsCount: cartItems.length
-      }
+      })
 
       return cb(data)
 

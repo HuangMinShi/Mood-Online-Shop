@@ -13,8 +13,10 @@ const cartController = {
     try {
 
       return await cartService.getCart(req, res, (data) => {
+
         // 傳至確認頁
-        req.flash('data', data)
+        req.session.purchasedInfo = req.session.purchasedInfo || {}
+        Object.assign(req.session.purchasedInfo, data)
 
         return res.render('cart', {
           ...data,
@@ -50,9 +52,8 @@ const cartController = {
   addCartItemQuantity: async (req, res) => {
     try {
 
-      // 紀錄訪客估算運費資訊 && 重置 req.flash('data)
-      req.flash('shippingInfo', req.body)
-      req.flash('data')
+      // 紀錄訪客估算運費資訊
+      Object.assign(req.session.purchasedInfo, req.body)
 
       const cartItem = await CartProductSku.findOne({
         where: {
@@ -101,9 +102,8 @@ const cartController = {
   subCartItemQuantity: async (req, res) => {
     try {
 
-      // 紀錄訪客估算運費資訊 && 重置 req.flash('data)
-      req.flash('shippingInfo', req.body)
-      req.flash('data')
+      // 紀錄訪客估算運費資訊
+      Object.assign(req.session.purchasedInfo, req.body)
 
       const cartItem = await CartProductSku.findOne({
         where: {
