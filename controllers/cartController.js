@@ -14,7 +14,7 @@ const cartController = {
 
       return await cartService.getCart(req, res, (data) => {
 
-        // 傳至確認頁
+        // session data 等待傳至確認頁
         req.session.purchasedInfo = req.session.purchasedInfo || {}
         Object.assign(req.session.purchasedInfo, data)
 

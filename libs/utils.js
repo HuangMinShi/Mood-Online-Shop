@@ -14,17 +14,17 @@ const utils = {
     return fee || 0
   },
 
-  generateReceiveAddress: (orderInfo) => {
+  formatReceiveAddress: (data) => {
     const addressRequiredElements = ['zip', 'county', 'township', 'street']
-    const { zip, county, township, street } = orderInfo
+    const { zip, county, township, street } = data
 
-    orderInfo.receiveAddress = `${zip}  ${county}${township}${street}`
+    data.receiveAddress = `${zip}  ${county}${township}${street}`
 
     addressRequiredElements.forEach(element => {
-      delete orderInfo[element]
+      delete data[element]
     })
 
-    return orderInfo
+    return
   },
 
   genDate: (str) => {
@@ -32,11 +32,10 @@ const utils = {
     return new Date(dateStr)
   },
 
-  reCalcShippingFeeAndTotalAmount: (data, shippingInfo) => {
-    const shippingFee = this.getShippingFee(shippingInfo.shippingWay)
-    const totalAmount = data.subTotal + shippingFee
-    Object.assign(data, shippingInfo, { shippingFee, totalAmount })
-    return data
+  reCalcShippingFeeAndTotalAmount: (data) => {
+    data.shippingFee = this.getShippingFee(data.shippingWay)
+    data.totalAmount = data.subTotal + data.shippingFee
+    return
   },
 }
 
