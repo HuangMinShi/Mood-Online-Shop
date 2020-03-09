@@ -5,10 +5,6 @@ const { generateSKU } = require('../libs/products')
 
 const cartService = {
   getCart: async (req, res, cb) => {
-
-    // 先固定 req.session.cartId 方便測試
-    req.session.cartId = 1
-
     try {
 
       // 找 cart 
@@ -69,9 +65,6 @@ const cartService = {
   },
 
   postCart: async (req, res, cb) => {
-
-    // 先固定 req.session.cartId 方便測試
-    req.session.cartId = 1
 
     try {
 

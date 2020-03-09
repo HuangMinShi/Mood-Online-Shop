@@ -29,18 +29,6 @@ const {
 const orderController = {
   getOrders: async (req, res) => {
 
-    /** expected output
-     * 
-     * orders = {
-     *  sn: '456789987',
-     *  createdAt: 2010/02/10,
-     *  receiveAddress: '台北市中正區1號',
-     *  order: 2980,
-     *  status: '待付款'
-     * }
-     * 
-     */
-
     let orders = await Order.findAll({
       where: {
         UserId: 1

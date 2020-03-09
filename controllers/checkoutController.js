@@ -1,6 +1,5 @@
 const { counties } = require('../config/geonames.json')
 const { shippingMethods } = require('../config/business.json')
-const { shippingOptions } = require('../config/options.json')
 
 const {
   generateReceiveAddress,
@@ -26,7 +25,7 @@ const checkoutController = {
     // 暫存新資料
     req.flash('data', orderInfo)
 
-    return res.render('checkout', { ...orderInfo, ...shippingOptions, counties, shippingMethods, page: 'checkoutShipping' })
+    return res.render('checkout', { ...orderInfo, counties, shippingMethods, page: 'checkoutShipping' })
   },
 
   postShipping: (req, res) => {
