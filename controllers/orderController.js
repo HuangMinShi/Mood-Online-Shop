@@ -140,7 +140,7 @@ const orderController = {
 
         // 清除 cart ( Model, DB 2 層均設置 cascade delete )
         const cart = await Cart.findByPk(req.session.cartId, { transaction })
-        // await cart.destroy({ transaction })
+        await cart.destroy({ transaction })
 
         // 更新庫存
         const updatedProductSkusStock = productSkus.map(productSku => {
@@ -166,10 +166,6 @@ const orderController = {
         if (err) return console.log(err);
         return console.log(`Email sent：${info.response}`);
       })
-      */
-
-      // 移除 session.cartId
-      delete req.session.cartId
 
       // 訂單建立成功，將 id,datetime and sn 帶往 success order page
       req.flash('order', {
@@ -180,6 +176,10 @@ const orderController = {
 
       // 新建立訂單與否帶往付款，讓付款 action 查詢訂單
       req.flash('isOrderCreated', true)
+
+      // 移除 session data
+      delete req.session.cartId
+      delete req.session.purchasedInfo
 
       return res.redirect('/orders/success')
 
