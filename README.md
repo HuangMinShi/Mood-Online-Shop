@@ -2,7 +2,7 @@
 為滿足消費者不想登入購買的需求，於是以訪客消費的方式，建立起 Mood Online Shop。
 
 ## 目錄
-- [下一階段目標](#下一階段目標)
+- [目標](#目標)
 - [原型](#原型)
 - [實體關聯模型](#實體關聯模型)
 - [使用者故事](#使用者故事)
@@ -10,7 +10,10 @@
 - [使用方式](#使用方式)
 - [製作者](#製作者)
 
-## 下一階段目標
+## 預覽
+<img src="./public/img/preview.png" alt="preview" width="500px" target="_blank">
+
+## 目標
 * 完成使用者故事
   * 訪客可以輸入訂單編號及 Email 查詢訂單進度
 * 開發
@@ -21,7 +24,7 @@
 
 ## 原型
 * [Wireframe - 參考網站](https://klf-shopping.com/burton/men/apparel-accessories/jackets-outerwear.html)
-* [動線 - 待補](#)
+* [Flow Chart - 待補](https://www.lucidchart.com/invitations/accept/ec23c936-5ac6-438d-bae5-b4c6f6927594)
 
 ## 實體關聯模型
 * [ERD](https://www.lucidchart.com/invitations/accept/5cb19c28-f028-41e9-a3db-5a12faa7d4b8)
@@ -40,6 +43,7 @@
 * 訪客可以查看單一商品
 * 訪客在商品列表頁可以查看不同顏色的商品照片
 * 訪客在單一商品頁可以查看不同顏色的商品照片
+* 訪客可以切換 banner
 
 ### 購物車
 * 訪客可以將商品放入購物車
