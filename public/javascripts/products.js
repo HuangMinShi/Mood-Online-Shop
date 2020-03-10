@@ -44,4 +44,9 @@ import {
     }
   })
 
+  // Change image every 5 seconds
+  setInterval(function () {
+    plusSlides(1)
+  }, 5000)
+
 })()
