@@ -54,18 +54,15 @@ const orderController = {
 
   postOrder: async (req, res) => {
     try {
-      const orderInfo = req.flash('data')[0]
-
-      // 若 err 發生，則返回上一頁能續帶上次資料
-      req.flash('data', orderInfo)
+      const purchasedInfo = Object.assign({}, req.session.purchasedInfo)
 
       // 查詢庫存資料
-      const skus = orderInfo.cartItems.map(item => item.sku)
+      const skus = purchasedInfo.cartItems.map(item => item.sku)
       let productSkus = await ProductSku.findAll({
         attributes: ['id', 'sku', 'stock'],
         where: {
           sku: skus
-        }
+        },
       })
 
       // 資料整理成以 sku 當 key
@@ -82,8 +79,9 @@ const orderController = {
 
       // 比對庫存是否足夠
       const errors = []
-      orderInfo.cartItems.forEach(item => {
-        const stock = productSkus[item.sku].stock
+      purchasedInfo.cartItems.forEach(item => {
+        const stock = formattedProductSkus[item.sku].stock
+
         if (stock < item.quantity) {
           errors.push({
             message: `哎呀！晚了一步，商品 ${item.name}，庫存數量為 ${item.stock}，庫存不足請確認`
@@ -108,14 +106,14 @@ const orderController = {
         const passwordInHash = await bcrypt.hash('HelloKitty24', salt)
         const [user, isUserCreated] = await User.findOrCreate({
           where: {
-            email: orderInfo.orderEmail
+            email: purchasedInfo.orderEmail
           },
           defaults: {
-            email: orderInfo.orderEmail,
+            email: purchasedInfo.orderEmail,
             password: passwordInHash,
-            name: orderInfo.receiveName,
-            address: orderInfo.receiveAddress,
-            tel: orderInfo.receivePhone,
+            name: purchasedInfo.receiveName,
+            address: purchasedInfo.receiveAddress,
+            tel: purchasedInfo.receivePhone,
             role: 'visitor'
           },
           transaction
@@ -123,7 +121,7 @@ const orderController = {
 
         // 新增 order
         const order = await Order.create({
-          ...orderInfo,
+          ...purchasedInfo,
           UserId: user.id
         }, { transaction })
 
@@ -132,11 +130,11 @@ const orderController = {
         await order.update({ sn }, { transaction })
 
         // 新增 orderItems
-        const orderItems = orderInfo.cartItems.map(item => {
+        const orderItems = purchasedInfo.cartItems.map(item => {
           return OrderProductSku.create({
             quantity: item.quantity,
             OrderId: order.id,
-            ProductSkuId: productSkus[item.sku].id
+            ProductSkuId: formattedProductSkus[item.sku].id
           }, { transaction })
         })
         await Promise.all(orderItems)
@@ -154,9 +152,8 @@ const orderController = {
         console.log('sent 訪客通知會員權益 mail');
       }
 
-      /*
       // 寄發訂單成立 mail
-      const mail = generateMail(orderInfo, order.sn)
+      const mail = generateMail(purchasedInfo, order.sn)
       const transporter = createTransport()
       transporter.sendMail(mail, (err, info) => {
         if (err) return console.log(err);
