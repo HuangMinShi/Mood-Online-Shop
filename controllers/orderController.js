@@ -65,17 +65,15 @@ const orderController = {
         },
       })
 
-      // 資料整理成以 sku 當 key
-      productSkus = productSkus
-        .map(item => {
-          const sku = item.sku
-          delete item.dataValues.sku
-          return {
-            [sku]: item.dataValues
-          }
-        })
-        .reduce((prev, curr) => Object.assign(prev, curr))
-
+      // 資料整理成以 sku 當 key 的 object
+      let formattedProductSkus = productSkus.map(item => ({ ...item.dataValues })) // deep copy
+      formattedProductSkus = formattedProductSkus.map(item => {
+        const sku = item.sku
+        delete item.sku
+        return {
+          [sku]: item
+        }
+      }).reduce((prev, curr) => Object.assign(prev, curr))
 
       // 比對庫存是否足夠
       const errors = []
@@ -87,12 +85,13 @@ const orderController = {
             message: `哎呀！晚了一步，商品 ${item.name}，庫存數量為 ${item.stock}，庫存不足請確認`
           })
         }
+
       })
 
-      // 庫存不足，返回
+      // 發現庫存不足，返回
       if (errors.length) {
         req.flash('errors', errors)
-        return res.redirect('back')
+        return res.redirect('/cart')
       }
 
       // 準備成立訂單，使用 transaction
@@ -143,9 +142,17 @@ const orderController = {
         const cart = await Cart.findByPk(req.session.cartId, { transaction })
         // await cart.destroy({ transaction })
 
+        // 更新庫存
+        const updatedProductSkusStock = productSkus.map(productSku => {
+          const qty = purchasedInfo.cartItems.find(item => item.sku === productSku.sku).quantity
+          const remainedQty = productSku.stock - qty
+
+          return productSku.update({ stock: remainedQty }, { transaction })
+        })
+        await Promise.all(updatedProductSkusStock)
+
         return { isUserCreated, order }
       })
-
 
       // 新用戶則寄信通知未完成註冊
       if (isUserCreated) {
