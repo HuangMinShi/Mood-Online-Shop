@@ -167,12 +167,14 @@ const orderController = {
         return console.log(`Email sent：${info.response}`);
       })
 
-      // 訂單建立成功，將 id,datetime and sn 帶往 success order page
-      req.flash('order', {
+      // 訂單建立成功，將 order 資訊帶往 success order page
+      const orderContent = {
         id: order.id,
         createdAt: order.createdAt,
         sn: order.sn
-      })
+      }
+      Object.assign(orderContent, req.session.purchasedInfo)
+      req.flash('order', orderContent)
 
       // 新建立訂單與否帶往付款，讓付款 action 查詢訂單
       req.flash('isOrderCreated', true)
@@ -193,17 +195,8 @@ const orderController = {
   },
 
   getOrderSuccess: (req, res) => {
-    const orderInfo = req.flash('data')[0]
     const order = req.flash('order')[0]
-    return res.render('checkout', { ...orderInfo, ...order, page: 'checkoutFinal' })
-  },
-
-  getOrderCheck: (req, res) => {
-    return res.send('getOrderCheck')
-  },
-
-  postOrderCheck: (req, res) => {
-    return res.send('postOrderCheck')
+    return res.render('checkout', { ...order, page: 'checkoutFinal' })
   },
 
   getPayment: async (req, res) => {
@@ -311,7 +304,15 @@ const orderController = {
     } catch (err) {
       return console.log(err)
     }
-  }
+  },
+
+  getOrderCheck: (req, res) => {
+    return res.send('getOrderCheck')
+  },
+
+  postOrderCheck: (req, res) => {
+    return res.send('postOrderCheck')
+  },
 }
 
 module.exports = orderController
