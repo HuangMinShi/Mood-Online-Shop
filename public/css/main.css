@@ -55,6 +55,19 @@ header {
   background: #fff;
 }
 
+#website-name {
+  font-size: 1.8rem;
+  font-weight: 700;
+}
+
+#menu {
+  line-height: 43px;
+}
+
+#menu li a{
+  font-size: 1.3rem;
+}
+
 /* main */
 main {
   width: 100%;
@@ -63,12 +76,12 @@ main {
 #data-panel {
   width: 1280px;
   max-width: 1280px;
-  margin: 70px auto;
+  margin: 100px auto;
 }
 
 /* footer */
 footer {
-  margin-top: 70px;
+  margin-top: 20px;
 }
 
 .footer-item {
