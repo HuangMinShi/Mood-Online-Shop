@@ -33,7 +33,7 @@ app.use(methodOverride('_method'))
 
 app.use(session({
   secret: 'HelloKitty',
-  cookie: { maxAge: 80000 },
+  cookie: { maxAge: 600000 },
   resave: false,
   saveUninitialized: true
 }))
