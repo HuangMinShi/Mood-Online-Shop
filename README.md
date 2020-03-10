@@ -25,7 +25,7 @@
 
 ## 原型
 * [Wireframe - 參考網站](https://klf-shopping.com/burton/men/apparel-accessories/jackets-outerwear.html)
-* [Flow Chart - 待補](https://www.lucidchart.com/invitations/accept/ec23c936-5ac6-438d-bae5-b4c6f6927594)
+* [Flow Chart](https://www.lucidchart.com/invitations/accept/ec23c936-5ac6-438d-bae5-b4c6f6927594)
 
 ## 實體關聯模型
 * [ERD](https://www.lucidchart.com/invitations/accept/5cb19c28-f028-41e9-a3db-5a12faa7d4b8)
