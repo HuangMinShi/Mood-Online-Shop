@@ -11,7 +11,7 @@
 - [製作者](#製作者)
 
 ## 預覽
-<img src="./public/img/preview.png" alt="preview" width="500px" target="_blank">
+<img src="./public/imgs/preview.png" alt="preview" width="500px" target="_blank">
 
 ## 目標
 * 完成使用者故事
